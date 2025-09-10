@@ -26,8 +26,11 @@ app.use(router)
 const userStore = useUserStore()
 userStore.initializeAuth()
 // 로그인 상태라면 사용자 정보를 가져옴
-if (userStore.isLoggedIn) {
-  await userStore.getMyInfo()
+async function bootstrap() {
+  if (userStore.isLoggedIn) {
+    await userStore.getMyInfo()
+  }
+  app.mount('#app')
 }
 
-app.mount('#app')
+void bootstrap()
