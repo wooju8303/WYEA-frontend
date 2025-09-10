@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth-store'
-import { useUserStore } from '@/stores/user-store'
-import type { LoginRequest } from '@/interface/user-interface'
+import { useAuthStore } from '@/stores/auth-store.js'
+import { useUserStore } from '@/stores/user-store.js'
+import type { LoginRequest } from '@/interface/user-interface.js'
 
 //ref - 사용하면 값이 자동으로 반응함 = 동기화 .value 반드씨 써야댐
 const loginid = ref<string>('')

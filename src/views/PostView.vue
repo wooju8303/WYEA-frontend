@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { usePostStore } from '@/stores/post-store'
-import { useUserStore } from '@/stores/user-store'
-import type { PostRequest } from '@/interface/post-interface'
+import { usePostStore } from '@/stores/post-store.js'
+import { useUserStore } from '@/stores/user-store.js'
+import type { PostRequest } from '@/interface/post-interface.js'
 
 const title = ref<string>('')
 const contents = ref<string>('')

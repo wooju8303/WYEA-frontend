@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth-store'
-import type { RegisterRequest } from '@/interface/user-interface'
+import { useAuthStore } from '@/stores/auth-store.js'
+import type { RegisterRequest } from '@/interface/user-interface.js'
 
 const authStore = useAuthStore()
 const router = useRouter()
