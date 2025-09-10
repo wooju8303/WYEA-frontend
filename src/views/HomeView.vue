@@ -165,7 +165,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .home-hero {
   position: relative;
-  display: column;
+  display: flex;
+  flex-direction: column;
   place-items: center;
   justify-content: center; /* 가로 중앙 */
   align-items: center;     /* 세로 중앙 */
