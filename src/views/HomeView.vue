@@ -19,6 +19,15 @@ import bill from '@/assets/image/bill.png'
 import map from '@/assets/image/map.png'
 import LogoMarquee from '@/components/LogoMarquee.vue'
 
+import busan from '@/assets/image/busan.svg'
+import kyungnam from '@/assets/image/kyungnam.svg'
+import inje from '@/assets/image/inje.svg'
+import gyeongsang from '@/assets/image/gyeongsang.svg'
+import yonsei from '@/assets/image/yonsei.svg'
+import kyunghee from '@/assets/image/kyunghee.svg'
+import woosongcollege from '@/assets/image/woosongcollege.svg'
+import seoul from '@/assets/image/seoul.webp'
+
 const decorItems: DecorItem[] = [
   { src: coin, from: 'right', right: '0px', top: '30%', width: 140, rotZ:70, delay: .25 },
   { src: carrier, from: 'top-right', right: '-250px', top: '-30%', width: 700, rotZ:70, delay: .25 },
@@ -40,12 +49,14 @@ const decorItems: DecorItem[] = [
 ]
 
 const logos = [
-  { src: coin, alt: 'Axis' },
-  { src: backpack, alt: 'Raposa Coffee' },
-  { src: camera, alt: 'Superteam' },
-  { src: pens, alt: 'OpenZeppelin' },
-  { src: headphones, alt: 'Forma' },
-  { src: mobile, alt: 'WONDERSTRUCK' },
+  { src: busan },
+  { src: kyungnam },
+  { src: inje },
+  { src: gyeongsang },
+  { src: yonsei },
+  { src: kyunghee },
+  { src: woosongcollege },
+  { src: seoul },
 ]
 
 /**
@@ -110,16 +121,21 @@ onBeforeUnmount(() => {
   <section class="home-hero" ref="heroRef">
     <div class="center">
       <img src="@/assets/image/wyea-logo.png" width="300">
-      <h3>Young World<br> Exchange Association</h3>
+      <h3>World Youth<br> Exchange Association</h3>
       <br>
       <p>세계 청년 교류회</p>
       <button>가입하러 가기</button>
     </div>
     <div class="logo-bar">
-      <p class="eyebrow">지부와 협력 대학</p>
+      <p class="eyebrow">협력 대학</p>
       <!-- 4세트(기본값)로 사용 -->
-      <LogoMarquee :logos="logos" :duration="18" :gap="56" :repeat="4" :logoHeight="28"
+      <LogoMarquee :logos="logos" :duration="18" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
+    </div>
+    <div class="down">
+      <p>
+        스크롤 해서 계속 보기 ↓
+      </p>
     </div>
   </section>
   <FloatingDecor :items="decorItems" :hidden="decorHidden"/>
@@ -168,7 +184,7 @@ onBeforeUnmount(() => {
   animation-delay: .10s;
 }
 .center h3 {
-  animation-delay: .12s;
+  animation-delay:  .12s;
   font-weight: 700;
 }
 .center p {
@@ -193,11 +209,19 @@ onBeforeUnmount(() => {
 
 .logo-bar { margin-top: 60px; }
 
+.logo-bar > * {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
 .eyebrow {
   color:#7a7a7a;
   font-weight: 700;
   font-size:16px;
   margin-bottom: 8px; }
+
+.down { margin-top: 80px; }
 
 .about {
   position: relative;
