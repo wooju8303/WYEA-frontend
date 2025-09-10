@@ -50,9 +50,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-html, body {
-  background: #fff !important;
-}
 /* 전역 기본값: 커스텀 변수 미리 정의(경고 방지) */
 :global(:root){
   --header-h: 64px;
