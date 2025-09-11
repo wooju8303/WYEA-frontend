@@ -124,7 +124,9 @@ onBeforeUnmount(() => {
       <h3>World Youth<br> Exchange Association</h3>
       <br>
       <p>세계 청년 교류회</p>
-      <button>가입하러 가기</button>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSddVMd4CovJdhX6IbOXtXcjhXRsrSNJkXXqRtY3RuvOF-HrWA/viewform?pli=1" target="_blank" rel="noopener noreferrer">
+        <button>가입하러 가기</button>
+      </a>
     </div>
 
     <div class="logo-bar">
