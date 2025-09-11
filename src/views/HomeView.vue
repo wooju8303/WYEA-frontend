@@ -126,19 +126,22 @@ onBeforeUnmount(() => {
       <p>세계 청년 교류회</p>
       <button>가입하러 가기</button>
     </div>
+
     <div class="logo-bar">
       <p class="eyebrow">협력 대학</p>
-      <!-- 4세트(기본값)로 사용 -->
       <LogoMarquee :logos="logos" :duration="18" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
+
     <div class="down">
       <p>스크롤 해서 계속 보기 ↓</p>
     </div>
+
   </section>
   <FloatingDecor :items="decorItems" :hidden="decorHidden"/>
 
   <!-- 데코는 컴포넌트로 분리 -->
+  <hr class="divider">
 
   <section id="about" class="about">
     <div class="container">
@@ -163,7 +166,7 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-  <section id="picture" class="picture">
+  <section id="test" class="test">
     <div class="container">
       <h3>활동사진 활동사진</h3>
       <p>사진</p>
@@ -202,8 +205,7 @@ onBeforeUnmount(() => {
 <style scoped>
 
 * {
-  user-select: none;       /* 텍스트 긁기 방지 */
-  -webkit-user-drag: none; /* 이미지 드래그 방지 */
+  box-sizing: border-box;
 }
 
 .home-hero {
@@ -265,10 +267,14 @@ onBeforeUnmount(() => {
   font-size:16px;
   margin-bottom: 8px; }
 
-
+.divider {
+  border: none;
+  border-top: 1px solid #ccc;  /* 두께/색상 */
+  width: 70%;
+  margin: 40px auto;              /* 위아래 여백 */
+}
 
 .about {
-  background-color: #e9ecef;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -322,7 +328,10 @@ onBeforeUnmount(() => {
   margin-bottom: 16px;
 }
 
+
+
 .picture {
+  background-color: #e9ecef;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -334,6 +343,18 @@ onBeforeUnmount(() => {
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
 
+.test {
+  background-color: #FFFFFF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
+  text-align: center;
+  min-height: calc(100vh - var(--header-h, 64px));
+  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
+}
 
 /**
 푸터 스타일
