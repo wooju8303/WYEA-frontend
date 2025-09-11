@@ -37,6 +37,10 @@ const routerInstance = createRouter({
       component: () => import('../views/PostView.vue'),
     },
   ],
+  scrollBehavior() {
+    // 항상 맨 위로 스크롤
+    return { top: 0 }
+  }
 })
 
 routerInstance.beforeEach((to, from, next) => {

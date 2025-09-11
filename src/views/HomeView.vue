@@ -133,9 +133,7 @@ onBeforeUnmount(() => {
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="down">
-      <p>
-        스크롤 해서 계속 보기 ↓
-      </p>
+      <p>스크롤 해서 계속 보기 ↓</p>
     </div>
   </section>
   <FloatingDecor :items="decorItems" :hidden="decorHidden"/>
@@ -145,24 +143,69 @@ onBeforeUnmount(() => {
   <section id="about" class="about">
     <div class="container">
       <h3>우리는 무엇을 하나요?</h3>
-      <br>
-      <h3>
-        여기에 소개/미션/프로그램 등 내용을 작성하세요.
-      </h3>
-      <br>
-      <h3>
-        작성
-      </h3>
-      <br>
-      <h3>
-        작성
-      </h3>
-      <br>
+      <div class="card-grid">
+        <div class="card">
+          <h4>설립 배경</h4>
+          <p>어떻게 설립하게 되었는가</p>
+        </div>
+        <div class="card">
+          <h4>주요 활동</h4>
+          <p>무슨 활동을 하는가</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <section id="picture" class="picture">
+    <div class="container">
+      <h3>활동사진 활동사진</h3>
+      <p>사진</p>
+    </div>
+  </section>
+
+  <section id="picture" class="picture">
+    <div class="container">
+      <h3>활동사진 활동사진</h3>
+      <p>사진</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+
+      <p>주소</p>
+      <p>
+        회장 이창현 010-1234-1234
+      </p>
+    </div>
+
+    <div class="footer-middle">
+      <p>
+        Copyright © 2025.WYEA.All rights reserved.
+      </p>
+    </div>
+
+    <div class="footer-bottom">
+      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/image/instaricon.png" class="footer-logo" alt="instagram"/>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/image/mailicon.png" class="footer-logo" alt="maili"/>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/image/kakaoicon.png" class="footer-logo" alt="kakao"/>
+      </a>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
+
+* {
+  user-select: none;       /* 텍스트 긁기 방지 */
+  -webkit-user-drag: none; /* 이미지 드래그 방지 */
+}
+
 .home-hero {
   position: relative;
   display: flex;
@@ -222,11 +265,13 @@ onBeforeUnmount(() => {
   font-size:16px;
   margin-bottom: 8px; }
 
-.down { margin-top: 80px; }
+
 
 .about {
+  background-color: #e9ecef;
   position: relative;
   display: flex;
+  flex-direction: column;
   place-items: center;
   justify-content: center; /* 가로 중앙 */
   align-items: center;     /* 세로 중앙 */
@@ -234,4 +279,98 @@ onBeforeUnmount(() => {
   min-height: calc(100vh - var(--header-h, 64px));
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
+
+.about h3 {
+  font-weight: 700;
+}
+
+.about h4 {
+  font-weight: 700;
+}
+
+.about p {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.card-grid {
+  display: flex;              /* 카드들을 가로로 나란히 */
+  justify-content: center;
+  gap: 50px;                  /* 카드 사이 간격 */
+  margin-top: 40px;
+  flex-wrap: wrap;            /* 작은 화면에서는 자동 줄바꿈 */
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  max-width: 320px;
+  flex: 1 1 280px;            /* 반응형 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.card .icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+}
+
+.picture {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
+  text-align: center;
+  min-height: calc(100vh - var(--header-h, 64px));
+  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
+}
+
+
+/**
+푸터 스타일
+ */
+.site-footer {
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000;
+}
+
+.site-footer .footer-top p {
+  margin: 2px 0;
+  font-weight: bold;
+}
+
+.site-footer .footer-middle {
+  margin: 12px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+.site-footer .footer-bottom {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.site-footer .footer-logo {
+  height: 30px; /* 로고 크기 조절 */
+  filter: grayscale(100%);  /* 흑백 변환 */
+  opacity: 0.9; /* 투명도 */
+}
+
 </style>
