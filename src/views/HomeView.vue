@@ -51,6 +51,17 @@ const decorItems: DecorItem[] = [
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
 
+const decorMoblieItems: DecorItem[] = [
+  { src: carrier, from: 'top-right', right: '-140px', top: '-15%', width: 300, rotZ:70, delay: .25 },
+  { src: map, from: 'up',  right: '-100px', top: '10%',  width: 200, rotZ:-30, delay: .25 },
+  { src: coin, from: 'right', right: '0px', top: '25%', width: 80, rotZ:70, delay: .25 },
+  { src: bill, from: 'right',  right: '-90px', top: '30%',  width: 150, rotZ:-20, delay: .25 },
+  { src: passport, from: 'right',  right: '-80px', top: '50%',  width: 150, rotZ:-60, delay: .25 },
+
+  { src: backpack, from: 'top-left',  left: '-100px', top: '-10%',  width: 300, rotZ:30, delay: .25 },
+  { src: camera, from: 'down',  left: '-90px', top: '20%',  width: 220, rotZ:0, delay: .25 },
+  { src: wallet, from: 'left',  left: '-50px', top: '50%',  width: 150, rotZ:-10, delay: .27 },
+]
 /**
  * 협력 대학 이미지 컴포넌트
  */
@@ -122,6 +133,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
+  <FloatingDecor class="mobliedecor" :items="decorMoblieItems" :hidden="decorHidden"/>
   <section class="section1" ref="section1Ref">
     <div class="section1-div1">
       <img src="@/assets/image/wyea-logo.png" width="300">
@@ -142,7 +155,7 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-  <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
+
 
   <hr class="hr1">
 
@@ -210,11 +223,26 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
 }
 
+/* 1000px 이하 → 모바일 */
 @media (max-width: 1000px) {
   .decor {
     display: none !important;
   }
+  .mobliedecor {
+    display: block !important;
+  }
 }
+
+/* 1000px 이상 → PC */
+@media (min-width: 1001px) {
+  .decor {
+    display: block !important;
+  }
+  .mobliedecor {
+    display: none !important;
+  }
+}
+
 
 @keyframes slidePop {
   0%   { opacity:0; transform: translateY(24px) scale(0.98); }
