@@ -28,6 +28,9 @@ import kyunghee from '@/assets/image/kyunghee.svg'
 import woosongcollege from '@/assets/image/woosongcollege.svg'
 import seoul from '@/assets/image/seoul.webp'
 
+/**
+ * 홈 메인 이미지 컴포넌트
+ */
 const decorItems: DecorItem[] = [
   { src: coin, from: 'right', right: '0px', top: '30%', width: 140, rotZ:70, delay: .25 },
   { src: carrier, from: 'top-right', right: '-250px', top: '-30%', width: 700, rotZ:70, delay: .25 },
@@ -48,6 +51,9 @@ const decorItems: DecorItem[] = [
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
 
+/**
+ * 협력 대학 이미지 컴포넌트
+ */
 const logos = [
   { src: busan },
   { src: kyungnam },
@@ -60,9 +66,9 @@ const logos = [
 ]
 
 /**
- * 히어로 가시성 → 데코 숨김 여부
+ * 홈 메인 이미지 컴포넌트 스크롤시 숨기기
  */
-const heroRef = ref<HTMLElement | null>(null)
+const section1Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
 
 let io: IntersectionObserver | null = null
@@ -106,20 +112,18 @@ onMounted(() => {
     }
   )
 
-  if (heroRef.value) io.observe(heroRef.value)
+  if (section1Ref.value) io.observe(section1Ref.value)
 })
 
 onBeforeUnmount(() => {
   io?.disconnect()
   io = null
 })
-
-
 </script>
 
 <template>
-  <section class="home-hero" ref="heroRef">
-    <div class="center">
+  <section class="section1" ref="section1Ref">
+    <div class="section1-div1">
       <img src="@/assets/image/wyea-logo.png" width="300">
       <h3>World Youth<br> Exchange Association</h3>
       <br>
@@ -128,32 +132,29 @@ onBeforeUnmount(() => {
         <button>가입하러 가기</button>
       </a>
     </div>
-
-    <div class="logo-bar">
-      <p class="eyebrow">협력 대학</p>
+    <div class="section1-div2">
+      <p>협력 대학</p>
       <LogoMarquee :logos="logos" :duration="18" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
-
-    <div class="down">
+    <div class="section1-div3">
       <p>스크롤 해서 계속 보기 ↓</p>
     </div>
-
   </section>
-  <FloatingDecor :items="decorItems" :hidden="decorHidden"/>
 
-  <!-- 데코는 컴포넌트로 분리 -->
-  <hr class="divider">
+  <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
 
-  <section id="about" class="about">
-    <div class="container">
+  <hr class="hr1">
+
+  <section class="section2">
+    <div>
       <h3>우리는 무엇을 하나요?</h3>
-      <div class="card-grid">
-        <div class="card">
+      <div class="section2-div1">
+        <div class="section2-card1">
           <h4>설립 배경</h4>
           <p>어떻게 설립하게 되었는가</p>
         </div>
-        <div class="card">
+        <div class="section2-card1">
           <h4>주요 활동</h4>
           <p>무슨 활동을 하는가</p>
         </div>
@@ -161,23 +162,22 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-  <section id="picture" class="picture">
-    <div class="container">
+  <section class="section3">
+    <div>
       <h3>활동사진 활동사진</h3>
       <p>사진</p>
     </div>
   </section>
 
-  <section id="test" class="test">
-    <div class="container">
+  <section class="section4">
+    <div>
       <h3>활동사진 활동사진</h3>
       <p>사진</p>
     </div>
   </section>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="footer-top">
-
       <p>주소</p>
       <p>
         회장 이창현 010-1234-1234
@@ -194,7 +194,7 @@ onBeforeUnmount(() => {
       <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/instaricon.png" class="footer-logo" alt="instagram"/>
       </a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <a href="mailto:wyea@wyea.info" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/mailicon.png" class="footer-logo" alt="maili"/>
       </a>
       <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
@@ -210,43 +210,10 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
 }
 
-.home-hero {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  justify-content: center; /* 가로 중앙 */
-  align-items: center;     /* 세로 중앙 */
-  text-align: center;
-  min-height: calc(100vh - var(--header-h, 64px));
-  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
-}
-
-/* 중앙 카피 애니메이션 (슬라이드 튀어나옴) */
-.center > * {
-  opacity: 0;
-  transform: translateY(24px) scale(0.98);
-  animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
-}
-.center img {
-  animation-delay: .10s;
-}
-.center h3 {
-  animation-delay:  .12s;
-  font-weight: 700;
-}
-.center p {
-  animation-delay: .24s;
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-.center button {
-  animation-delay: .36s;
-  pointer-events: auto;
-  background:#000; color:#fff;
-  padding:12px 20px; border-radius:999px;
-  font-weight:700; border:none; cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
+@media (max-width: 768px) {
+  .decor {
+    display: none !important;
+  }
 }
 
 @keyframes slidePop {
@@ -255,28 +222,96 @@ onBeforeUnmount(() => {
   100% { opacity:1; transform: translateY(0) scale(1); }
 }
 
-.logo-bar { margin-top: 60px; }
+.section1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
+  text-align: center;
+  min-height: calc(100vh - var(--header-h, 64px));
+  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
+  padding: 16px;
+  overflow-x: clip; /* 섹션 안에서 넘침 차단 */
+}
 
-.logo-bar > * {
+/* 중앙 카피 애니메이션 (슬라이드 튀어나옴) */
+.section1-div1 > * {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.section1-div1 img {
+  animation-delay: .10s;
+}
+.section1-div1 h3 {
+  animation-delay:  .12s;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .section1-div1 h3 {
+    font-size: 30px; /* 모바일에서 다른 크기 */
+  }
+}
+.section1-div1 p {
+  animation-delay: .24s;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+@media (max-width: 768px) {
+  .section1-div1 p {
+    font-size: 20px; /* 모바일에서 다른 크기 */
+  }
+}
+.section1-div1 button {
+  animation-delay: .36s;
+  pointer-events: auto;
+  background:#000; color:#fff;
+  padding:12px 20px; border-radius:999px;
+  font-weight:700; border:none; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+
+.section1-div2 {
+  margin-top: 60px;
+}
+
+.section1-div2 > * {
   opacity: 0;
   transform: translateY(24px) scale(0.98);
   animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
 }
 
-.eyebrow {
+.section1-div2 p {
   color:#7a7a7a;
   font-weight: 700;
   font-size:16px;
-  margin-bottom: 8px; }
-
-.divider {
-  border: none;
-  border-top: 1px solid #ccc;  /* 두께/색상 */
-  width: 70%;
-  margin: 40px auto;              /* 위아래 여백 */
+  margin-bottom: 8px;
+}
+@media (max-width: 768px) {
+  .section1-div2 p {
+    font-size: 15px; /* 모바일에서 다른 크기 */
+  }
+}
+.section1-div3 {
+  margin-top: 60px;
 }
 
-.about {
+.section1-div3 p{
+  color: #afafaf;
+  font-weight: 500;
+  font-size:12px;
+}
+
+.hr1 {
+  border: none;
+  border-top: 1px solid #ccc;   /* 두께/색상 */
+  width: 70%;
+  margin: 40px auto;  /* 위아래 여백 */
+}
+
+.section2 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -288,20 +323,25 @@ onBeforeUnmount(() => {
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
 
-.about h3 {
+.section2 h3 {
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .section2 h3 {
+    font-size: 20px; /* 모바일에서 다른 크기 */
+  }
+}
+
+.section2 h4 {
   font-weight: 700;
 }
 
-.about h4 {
-  font-weight: 700;
-}
-
-.about p {
+.section2 p {
   font-weight: bold;
   font-size: 1.1rem;
 }
 
-.card-grid {
+.section2-div1 {
   display: flex;              /* 카드들을 가로로 나란히 */
   justify-content: center;
   gap: 50px;                  /* 카드 사이 간격 */
@@ -309,7 +349,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;            /* 작은 화면에서는 자동 줄바꿈 */
 }
 
-.card {
+.section2-card1 {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -319,25 +359,21 @@ onBeforeUnmount(() => {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card:hover {
+.section2-card1:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
-.card .icon {
+.section2-card1 .icon {
   width: 64px;
   height: 64px;
   margin-bottom: 16px;
 }
 
-
-
-.picture {
+.section3 {
   background-color: #e9ecef;
   position: relative;
   display: flex;
-  flex-direction: column;
-  place-items: center;
   justify-content: center; /* 가로 중앙 */
   align-items: center;     /* 세로 중앙 */
   text-align: center;
@@ -345,7 +381,7 @@ onBeforeUnmount(() => {
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
 
-.test {
+.section4 {
   background-color: #FFFFFF;
   position: relative;
   display: flex;
@@ -358,10 +394,7 @@ onBeforeUnmount(() => {
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
 
-/**
-푸터 스타일
- */
-.site-footer {
+.footer {
   background: #fff;
   padding: 20px;
   text-align: center;
@@ -371,18 +404,18 @@ onBeforeUnmount(() => {
   color: #000;
 }
 
-.site-footer .footer-top p {
+.footer .footer-top p {
   margin: 2px 0;
   font-weight: bold;
 }
 
-.site-footer .footer-middle {
+.footer .footer-middle {
   margin: 12px 0;
   font-size: 13px;
   color: #333;
 }
 
-.site-footer .footer-bottom {
+.footer .footer-bottom {
   margin-top: 16px;
   display: flex;
   justify-content: center;
@@ -390,7 +423,7 @@ onBeforeUnmount(() => {
   gap: 32px;
 }
 
-.site-footer .footer-logo {
+.footer .footer-logo {
   height: 30px; /* 로고 크기 조절 */
   filter: grayscale(100%);  /* 흑백 변환 */
   opacity: 0.9; /* 투명도 */
