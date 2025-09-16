@@ -145,8 +145,6 @@ onBeforeUnmount(() => {
 
   <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
 
-  <hr class="hr1">
-
   <section class="section2">
     <div>
       <h3>우리는 무엇을 하나요?</h3>

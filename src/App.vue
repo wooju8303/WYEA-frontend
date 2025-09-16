@@ -9,8 +9,8 @@
 <!--        <RouterLink to="/register">Register</RouterLink>-->
 <!--      </nav>-->
 <!--    </header>-->
-    <!-- 라우터 페이지 내용 -->
-    <main class="page">
+    <!-- 라우터 페이지 내용 class="page"-->
+    <main >
       <RouterView />
     </main>
   </div>
