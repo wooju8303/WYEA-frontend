@@ -51,17 +51,6 @@ const decorItems: DecorItem[] = [
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
 
-const decorMoblieItems: DecorItem[] = [
-  { src: carrier, from: 'top-right', right: '-140px', top: '-15%', width: 300, rotZ:70, delay: .25 },
-  { src: map, from: 'up',  right: '-100px', top: '10%',  width: 200, rotZ:-30, delay: .25 },
-  { src: coin, from: 'right', right: '0px', top: '25%', width: 80, rotZ:70, delay: .25 },
-  { src: bill, from: 'right',  right: '-90px', top: '30%',  width: 150, rotZ:-20, delay: .25 },
-  { src: passport, from: 'right',  right: '-80px', top: '50%',  width: 150, rotZ:-60, delay: .25 },
-
-  { src: backpack, from: 'top-left',  left: '-100px', top: '-10%',  width: 300, rotZ:30, delay: .25 },
-  { src: camera, from: 'down',  left: '-90px', top: '20%',  width: 220, rotZ:0, delay: .25 },
-  { src: wallet, from: 'left',  left: '-50px', top: '50%',  width: 150, rotZ:-10, delay: .27 },
-]
 /**
  * 협력 대학 이미지 컴포넌트
  */
@@ -90,8 +79,8 @@ onMounted(() => {
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
-  const HIDE_AT = 0.90  // 이 이하로 보이면 숨김(= 스크롤 ~10% 이상)
-  const SHOW_AT = 0.95  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
+  const HIDE_AT = 0.8  // 이 이하로 보이면 숨김(= 스크롤 ~10% 이상)
+  const SHOW_AT = 0.9  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
 
   // 혹시 기존 io가 있으면 정리
   io?.disconnect()
@@ -118,7 +107,7 @@ onMounted(() => {
       }
     },
     {
-      threshold: [0, 0.5, 0.9, 0.95, 1], // 우리가 쓰는 경계 포함
+      threshold: [0, 0.5, 0.8, 0.9, 1], // 우리가 쓰는 경계 포함
       rootMargin: `-${headerH}px 0px 0px 0px`,
     }
   )
@@ -133,8 +122,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
-  <FloatingDecor class="mobliedecor" :items="decorMoblieItems" :hidden="decorHidden"/>
+
   <section class="section1" ref="section1Ref">
     <div class="section1-div1">
       <img src="@/assets/image/wyea-logo.png" width="300">
@@ -155,7 +143,7 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-
+  <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
 
   <hr class="hr1">
 
@@ -218,31 +206,20 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+body {
+  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 50%, #f9fcff 100%);
+}
 
 * {
   box-sizing: border-box;
 }
 
-/* 1000px 이하 → 모바일 */
-@media (max-width: 1000px) {
+/* 1024px 이하 → 모바일 */
+@media (max-width: 1024px) {
   .decor {
     display: none !important;
   }
-  .mobliedecor {
-    display: block !important;
-  }
 }
-
-/* 1000px 이상 → PC */
-@media (min-width: 1001px) {
-  .decor {
-    display: block !important;
-  }
-  .mobliedecor {
-    display: none !important;
-  }
-}
-
 
 @keyframes slidePop {
   0%   { opacity:0; transform: translateY(24px) scale(0.98); }
@@ -251,6 +228,7 @@ onBeforeUnmount(() => {
 }
 
 .section1 {
+  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 50%, #f9fcff 100%);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -277,7 +255,7 @@ onBeforeUnmount(() => {
   animation-delay:  .12s;
   font-weight: 700;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .section1-div1 h3 {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
@@ -287,7 +265,7 @@ onBeforeUnmount(() => {
   font-weight: 700;
   font-size: 1.25rem;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .section1-div1 p {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
@@ -317,7 +295,7 @@ onBeforeUnmount(() => {
   font-size:16px;
   margin-bottom: 8px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .section1-div2 p {
     font-size: 15px; /* 모바일에서 다른 크기 */
   }
@@ -354,7 +332,7 @@ onBeforeUnmount(() => {
 .section2 h3 {
   font-weight: 700;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .section2 h3 {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
