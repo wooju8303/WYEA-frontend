@@ -210,7 +210,7 @@ onBeforeUnmount(() => {
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .decor {
     display: none !important;
   }
@@ -249,7 +249,7 @@ onBeforeUnmount(() => {
   animation-delay:  .12s;
   font-weight: 700;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .section1-div1 h3 {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
@@ -259,7 +259,7 @@ onBeforeUnmount(() => {
   font-weight: 700;
   font-size: 1.25rem;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .section1-div1 p {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
@@ -289,7 +289,7 @@ onBeforeUnmount(() => {
   font-size:16px;
   margin-bottom: 8px;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .section1-div2 p {
     font-size: 15px; /* 모바일에서 다른 크기 */
   }
@@ -326,7 +326,7 @@ onBeforeUnmount(() => {
 .section2 h3 {
   font-weight: 700;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .section2 h3 {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
