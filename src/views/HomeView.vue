@@ -187,19 +187,23 @@ onBeforeUnmount(() => {
 
     <div class="footer-middle">
       <p>
-        Copyright © 2025.WYEA.All rights reserved.
+        Copyright © 2025.WYEA.All rights reserved.<br>
+        Icons made by Freepik from www.flaticon.com
       </p>
     </div>
 
     <div class="footer-bottom">
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/wyea_official/" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/instaricon.png" class="footer-logo" alt="instagram"/>
       </a>
       <a href="mailto:wyea@wyea.info" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/mailicon.png" class="footer-logo" alt="maili"/>
       </a>
-      <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://open.kakao.com/o/sFkgaWQh" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/kakaoicon.png" class="footer-logo" alt="kakao"/>
+      </a>
+      <a href="https://x.com/wyea_official" target="_blank" rel="noopener noreferrer">
+        <img src="@/assets/image/twitter.png" class="footer-logo" alt="kakao"/>
       </a>
     </div>
   </footer>
@@ -231,14 +235,14 @@ body {
   background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 50%, #f9fcff 100%);
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 아이템을 세로 방향으로 쌓음 */
   place-items: center;
-  justify-content: center; /* 가로 중앙 */
-  align-items: center;     /* 세로 중앙 */
-  text-align: center;
-  min-height: calc(100vh - var(--header-h, 64px));
+  justify-content: center;  /* 가로 중앙 */
+  align-items: center;  /* 세로 중앙 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  min-height: calc(100vh - var(--header-h, 64px));  /* 최소 높이를 화면 높이에서 헤더 높이를 뺀 값으로 설정 (화면 꽉 차게) */
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
-  padding: 16px;
+  padding: 16px;  /* 안쪽 여백 (상하좌우 16px) */
   overflow-x: clip; /* 섹션 안에서 넘침 차단 */
 }
 
@@ -273,9 +277,13 @@ body {
 .section1-div1 button {
   animation-delay: .36s;
   pointer-events: auto;
-  background:#000; color:#fff;
-  padding:12px 20px; border-radius:999px;
-  font-weight:700; border:none; cursor:pointer;
+  background:#000;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:999px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,.12);
 }
 
