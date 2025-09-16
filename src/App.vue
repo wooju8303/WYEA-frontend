@@ -9,8 +9,8 @@
 <!--        <RouterLink to="/register">Register</RouterLink>-->
 <!--      </nav>-->
 <!--    </header>-->
-    <!-- 라우터 페이지 내용 class="page"-->
-    <main >
+    <!-- 라우터 페이지 내용 -->
+    <main class="page" >
       <RouterView />
     </main>
   </div>
@@ -72,10 +72,11 @@ onBeforeUnmount(() => {
 .nav { display: flex; gap: 20px; }
 .nav a { text-decoration: none; color: #333; font-weight: 500; }
 
-/* 페이지 컨텐츠 (헤더만큼 아래에서 시작) */
+/* 페이지 컨텐츠 (헤더만큼 아래에서 시작)
 .page {
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
   padding-top: var(--header-h);
   min-height: calc(100vh - var(--header-h));
-}
+}*/
 </style>

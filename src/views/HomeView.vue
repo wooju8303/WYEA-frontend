@@ -79,7 +79,7 @@ onMounted(() => {
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
-  const HIDE_AT = 0.8  // 이 이하로 보이면 숨김(= 스크롤 ~10% 이상)
+  const HIDE_AT = 0.8  // 이 이하로 보이면 숨김(= 스크롤 ~20% 이상)
   const SHOW_AT = 0.9  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
 
   // 혹시 기존 io가 있으면 정리
@@ -147,11 +147,12 @@ onBeforeUnmount(() => {
 
   <section class="section2">
     <div>
-      <h3>우리는 무엇을 하나요?</h3>
+      <h3>WYEA는 무엇을 하나요?</h3>
       <div class="section2-div1">
         <div class="section2-card1">
           <h4>설립 배경</h4>
-          <p>어떻게 설립하게 되었는가</p>
+          <p>현 21세기는 IT의 빠른 발달로 인해<br/>
+            국가내에서 개인간 이어지던 소통을 전세계인을 대상으로 확대시켰습니다. <br/>연락을 쉽게 나눌 수 있지만, 언어 장벽, 물리적으로 만나기 어렵다는 한계를 느꼈습니다. <br/>이런 글로벌 시대에 알맞은 단체가 필요하다고 생각했고, 세계청년교류연합을 설립하게 되었습니다.</p>
         </div>
         <div class="section2-card1">
           <h4>주요 활동</h4>
@@ -162,9 +163,66 @@ onBeforeUnmount(() => {
   </section>
 
   <section class="section3">
-    <div>
-      <h3>활동사진 활동사진</h3>
-      <p>사진</p>
+    <div class="section3-div1">
+      <h1>설립 역사</h1>
+    </div>
+    <div class="section3-divcontainer">
+      <div class="section3-div2">
+        <ul class="section3-div2-ul">
+          <li>
+            <span class="date">2025년 6월 25일</span>
+            <span class="event">세계 청년 교류회 결성</span>
+          </li>
+          <li>
+            <span class="date">2025년 6월 26일</span>
+            <span class="event">경상국립대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 6월 30일</span>
+            <span class="event">인제대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 2일</span>
+            <span class="event">미국 유학생과 협력 체결</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 3일</span>
+            <span class="event">경희대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 5일</span>
+            <span class="event">서울대학교 지부 설립</span>
+          </li>
+        </ul>
+      </div>
+      <div class="section3-div3-ul">
+        <ul>
+          <li>
+            <span class="date">2025년 7월 7일</span>
+            <span class="event">연세대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 14일</span>
+            <span class="event">재일한국청년동맹과 세계청년교류연합 협력 관계 체결</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 17일</span>
+            <span class="event">경남대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 25일</span>
+            <span class="event">부산대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 8월 2일</span>
+            <span class="event">국립창원대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 9월 2일</span>
+            <span class="event">우송정보대학교 지부 설립</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -322,17 +380,12 @@ body {
   width: 70%;
   margin: 40px auto;  /* 위아래 여백 */
 }
-
+/*-------------------------------section2---------------------------------*/
 .section2 {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  justify-content: center; /* 가로 중앙 */
-  align-items: center;     /* 세로 중앙 */
+
+  display: block;
   text-align: center;
   min-height: calc(100vh - var(--header-h, 64px));
-  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
 
 .section2 h3 {
@@ -354,45 +407,123 @@ body {
 }
 
 .section2-div1 {
-  display: flex;              /* 카드들을 가로로 나란히 */
-  justify-content: center;
-  gap: 50px;                  /* 카드 사이 간격 */
-  margin-top: 40px;
-  flex-wrap: wrap;            /* 작은 화면에서는 자동 줄바꿈 */
-}
-
-.section2-card1 {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 32px 24px;
-  max-width: 320px;
-  flex: 1 1 280px;            /* 반응형 */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.section2-card1:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-}
-
-.section2-card1 .icon {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
-}
-
-.section3 {
-  background-color: #e9ecef;
-  position: relative;
   display: flex;
-  justify-content: center; /* 가로 중앙 */
-  align-items: center;     /* 세로 중앙 */
-  text-align: center;
-  min-height: calc(100vh - var(--header-h, 64px));
-  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
+  justify-content: center; /* 가운데 정렬 */
+  gap: 20px;               /* 카드 사이 간격 */
+  flex-wrap: wrap;         /* 화면이 좁으면 줄바꿈 */
 }
 
+/*-------------------------------section3---------------------------------*/
+.section3 {
+  background: #e3f2fd;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section3-div1 h1{
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #0d47a1;
+}
+
+.section3-divcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.section3-div2 {
+
+  padding-right: clamp(16px, 6vw, 200px); /* 오른쪽 여백 */
+}
+
+.section3-div2 h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #0d47a1;
+}
+
+.section3-div3 {
+
+
+}
+
+.section3 ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 600px;
+  text-align: left;
+  position: relative;
+}
+
+.section3 ul::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d0e2f7;
+}
+
+.section3 ul li {
+  margin-bottom: 30px;
+  padding-left: 50px;
+  position: relative;
+}
+
+.section3 ul li::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background: #0d47a1;
+  border-radius: 50%;
+}
+
+.section3-div2-ul li:nth-child(1)::before { background: #0d47a1; }  /* 진한 남색 */
+.section3-div2-ul li:nth-child(2)::before { background: #1565c0; }
+.section3-div2-ul li:nth-child(3)::before { background: #1976d2; }
+.section3-div2-ul li:nth-child(4)::before { background: #1e88e5; }
+.section3-div2-ul li:nth-child(5)::before { background: #42a5f5; }
+.section3-div2-ul li:nth-child(6)::before { background: #64b5f6; }  /* 옅은 하늘색 */
+
+.section3-div3-ul li:nth-child(1)::before { background: #64b5f6; }  /* 옅은 하늘색 */
+.section3-div3-ul li:nth-child(2)::before { background: #42a5f5; }
+.section3-div3-ul li:nth-child(3)::before { background: #1e88e5; }
+.section3-div3-ul li:nth-child(4)::before { background: #1976d2; }
+.section3-div3-ul li:nth-child(5)::before { background: #1565c0; }
+.section3-div3-ul li:nth-child(6)::before { background: #0d47a1; }  /* 진한 남색 */
+
+
+
+.section3 ul .date {
+  display: block;
+  font-weight: 600;
+  color: #0d47a1;
+  margin-bottom: 4px;
+}
+
+.section3 ul .event {
+  color: #333;
+  line-height: 1.4;
+}
+
+.section3 ul span {
+  text-align:left;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/*-------------------------------section4---------------------------------*/
 .section4 {
   background-color: #FFFFFF;
   position: relative;
@@ -405,7 +536,7 @@ body {
   min-height: calc(100vh - var(--header-h, 64px));
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
-
+/*-------------------------------footer---------------------------------*/
 .footer {
   background: #fff;
   padding: 20px;
