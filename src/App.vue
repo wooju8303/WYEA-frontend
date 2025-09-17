@@ -56,7 +56,12 @@ onBeforeUnmount(() => {
 }
 
 /* 레이아웃 기본 */
-.app { min-height: 100vh; display: flex; flex-direction: column; }
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ee0000;
+}
 :global(html), :global(body), :global(#app) { height: 100%; }
 :global(body) { margin: 0; }
 * { box-sizing: border-box; }
@@ -79,4 +84,19 @@ onBeforeUnmount(() => {
   padding-top: var(--header-h);
   min-height: calc(100vh - var(--header-h));
 }*/
+
+/* 라우터 뷰가 나오는 메인 영역 */
+.page {
+  position: relative;
+  z-index: 0;
+  min-height: 120vh; /* 충분히 길게 */
+  background: linear-gradient(
+    180deg,
+    #1b4332 0%,   /* 진한 초록 */
+    #2d6a4f 30%,  /* 중간 초록 */
+    #95d5b2 100%  /* 밝은 연초록 */
+  );
+
+}
+
 </style>

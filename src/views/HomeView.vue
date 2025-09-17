@@ -27,6 +27,7 @@ import yonsei from '@/assets/image/yonsei.svg'
 import kyunghee from '@/assets/image/kyunghee.svg'
 import woosongcollege from '@/assets/image/woosongcollege.svg'
 import seoul from '@/assets/image/seoul.webp'
+import HomeViewPhoto from '@/components/HomeViewPhoto.vue'
 
 /**
  * 홈 메인 이미지 컴포넌트
@@ -75,12 +76,27 @@ let io: IntersectionObserver | null = null
 let prevHidden = decorHidden.value
 let initialized = false // 초기 1회 콜백 무시
 
+const footerVisible = ref(false)
+const onScroll = () => {
+  const scrollTop = window.scrollY
+  const windowHeight = window.innerHeight
+  const docHeight = document.documentElement.scrollHeight
+
+  // 전체 스크롤 가능 높이
+  const scrollable = docHeight - windowHeight
+  // 스크롤 진행률 (0~1)
+  const progress = scrollTop / scrollable
+
+  // 90% 이상 내려오면 footer 보이기
+  footerVisible.value = progress >= 0.95
+}
+
 onMounted(() => {
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
   const HIDE_AT = 0.8  // 이 이하로 보이면 숨김(= 스크롤 ~20% 이상)
-  const SHOW_AT = 0.9  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
+  const SHOW_AT = 0.8  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
 
   // 혹시 기존 io가 있으면 정리
   io?.disconnect()
@@ -113,16 +129,18 @@ onMounted(() => {
   )
 
   if (section1Ref.value) io.observe(section1Ref.value)
+  window.addEventListener('scroll', onScroll, { passive: true })
 })
 
 onBeforeUnmount(() => {
   io?.disconnect()
   io = null
+  window.removeEventListener('scroll', onScroll)
 })
 </script>
 
 <template>
-
+  <HomeViewPhoto/>
   <section class="section1" ref="section1Ref">
     <div class="section1-div1">
       <img src="@/assets/image/wyea-logo.png" width="300">
@@ -146,18 +164,24 @@ onBeforeUnmount(() => {
   <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
 
   <section class="section2">
-    <div>
+    <div class="section2-div1">
       <h3>WYEA는 무엇을 하나요?</h3>
-      <div class="section2-div1">
-        <div class="section2-card1">
-          <h4>설립 배경</h4>
-          <p>현 21세기는 IT의 빠른 발달로 인해<br/>
-            국가내에서 개인간 이어지던 소통을 전세계인을 대상으로 확대시켰습니다. <br/>연락을 쉽게 나눌 수 있지만, 언어 장벽, 물리적으로 만나기 어렵다는 한계를 느꼈습니다. <br/>이런 글로벌 시대에 알맞은 단체가 필요하다고 생각했고, 세계청년교류연합을 설립하게 되었습니다.</p>
-        </div>
-        <div class="section2-card1">
-          <h4>주요 활동</h4>
-          <p>무슨 활동을 하는가</p>
-        </div>
+    </div>
+    <div class="section2-div2">
+      <div class="section2-card1">
+        <h4>설립 배경</h4>
+        <p>현 21세기는 IT의 빠른 발달로 인해<br/>
+          국가내에서 개인간 이어지던 소통을 <br/>
+          전세계인을 대상으로 확대시켰습니다.<br/>
+          연락을 쉽게 나눌 수 있지만, 언어 장벽,<br/>
+          물리적으로 만나기 어렵다는 한계를 느꼈습니다.<br/>
+          이런 글로벌 시대에 알맞은 단체가 필요하다고 생각했고,<br/>
+          세계청년교류연합을 설립하게 되었습니다.
+        </p>
+      </div>
+      <div class="section2-card1">
+        <h4>주요 활동</h4>
+        <p>무슨 활동을 하는가</p>
       </div>
     </div>
   </section>
@@ -227,13 +251,10 @@ onBeforeUnmount(() => {
   </section>
 
   <section class="section4">
-    <div>
-      <h3>활동사진 활동사진</h3>
-      <p>사진</p>
-    </div>
+
   </section>
 
-  <footer class="footer">
+  <footer class="footer" :class="{ show: footerVisible }">
     <div class="footer-top">
       <p>주소</p>
       <p>
@@ -263,9 +284,12 @@ onBeforeUnmount(() => {
       </a>
     </div>
   </footer>
+
+
 </template>
 
 <style scoped>
+
 body {
   background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 50%, #f9fcff 100%);
 }
@@ -366,6 +390,7 @@ body {
 }
 .section1-div3 {
   margin-top: 60px;
+  margin-bottom: 160px;
 }
 
 .section1-div3 p{
@@ -382,42 +407,64 @@ body {
 }
 /*-------------------------------section2---------------------------------*/
 .section2 {
-
+  background: linear-gradient(180deg, #f9fcff 0%, #ffffff 30%, #f0f7ff 100%);
   display: block;
   text-align: center;
   min-height: calc(100vh - var(--header-h, 64px));
+  gap: 4rem;        /* 카드 사이 간격 더 넓게 */
+  padding: 4rem;    /* 화면 테두리와 카드 사이 여백 */
 }
 
-.section2 h3 {
+.section2-div1 {
+
+}
+
+.section2-div1 h3 {
   font-weight: 700;
+  margin-bottom: 60px;
 }
 @media (max-width: 1024px) {
-  .section2 h3 {
+  .section2-div1 h3 {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
 }
 
-.section2 h4 {
-  font-weight: 700;
-}
-
-.section2 p {
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.section2-div1 {
+.section2-div2 {
   display: flex;
   justify-content: center; /* 가운데 정렬 */
   gap: 20px;               /* 카드 사이 간격 */
   flex-wrap: wrap;         /* 화면이 좁으면 줄바꿈 */
 }
 
+.section2-card1 {
+  flex: 1 1 450px;            /* 최소 300px, 공간 있으면 늘어남 */
+  max-width: 550px;           /* 카드 최대 폭 */
+  min-height: 400px; /* 세로 최소 높이 */
+  background: #ffffff;        /* 카드 배경색 */
+  border-radius: 12px;        /* 모서리 둥글게 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+  padding: 2rem;  /* 내부 여백 */
+  text-align: center;         /* 가운데 정렬 (원하면 left로 변경) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.section2-div2 h4 {
+  font-weight: 700;
+}
+
+.section2-div2 p {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
 /*-------------------------------section3---------------------------------*/
 .section3 {
-  background: #e3f2fd;
+  background: #f0f7ff;
   padding: 60px 20px;
   text-align: center;
+  border-bottom-left-radius: 20px;   /* ⬅️ 왼쪽 아래만 둥글게 */
+  border-bottom-right-radius: 20px;  /* ⬅️ 오른쪽 아래만 둥글게 */
 }
 
 .section3-div1 h1{
@@ -525,7 +572,6 @@ body {
 
 /*-------------------------------section4---------------------------------*/
 .section4 {
-  background-color: #FFFFFF;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -536,6 +582,7 @@ body {
   min-height: calc(100vh - var(--header-h, 64px));
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
 }
+
 /*-------------------------------footer---------------------------------*/
 .footer {
   background: #fff;
@@ -545,6 +592,16 @@ body {
   font-size: 14px;
   line-height: 1.6;
   color: #000;
+
+  position: fixed;
+  bottom: -200px;        /* footer 높이보다 더 아래 */
+  left: 0;
+  width: 100%;
+  transition: bottom 0.6s ease;  /* 애니메이션 */
+}
+
+.footer.show {
+  bottom: 0;              /* show 클래스가 붙으면 나타남 */
 }
 
 .footer .footer-top p {

@@ -97,7 +97,6 @@ defineProps<{
 .hero-decor{
   position: fixed;
   inset: var(--header-h, 64px) 0 0 0;
-  overflow: hidden;
   z-index: 0;
   pointer-events: none;
   perspective: 1000px; /* 3D 틸트 깊이감 (rotX/rotY 쓸 때 유효) */
