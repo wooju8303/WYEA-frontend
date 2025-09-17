@@ -27,7 +27,10 @@ import yonsei from '@/assets/image/yonsei.svg'
 import kyunghee from '@/assets/image/kyunghee.svg'
 import woosongcollege from '@/assets/image/woosongcollege.svg'
 import seoul from '@/assets/image/seoul.webp'
+import masan from '@/assets/image/masan.png'
+
 import HomeViewPhoto from '@/components/HomeViewPhoto.vue'
+
 
 /**
  * 홈 메인 이미지 컴포넌트
@@ -38,7 +41,7 @@ const decorItems: DecorItem[] = [
   { src: passport, from: 'right',  right: '0px', top: '60%',  width: 200, rotZ:-60, delay: .25 },
   { src: charger, from: 'right',  right: '-40px', top: '34%', width: 300, rotZ:30, delay: .30 },
   { src: compass, from: 'down',  right: '350px', top: '0%',  width: 150, rotZ:30, delay: .25 },
-  { src: bill, from: 'right',  right: '-120px', top: '70%',  width: 200, rotZ:-20, delay: .25 },
+  { src: bill, from: 'bottom-right',  right: '-120px', top: '70%',  width: 200, rotZ:-20, delay: .25 },
   { src: map, from: 'up',  right: '-80px', top: '60%',  width: 700, rotZ:100, delay: .25 },
 
   { src: coin, from: 'left', left: '0px', top: '50%', width: 100, rotZ:170, delay: .30 },
@@ -47,7 +50,7 @@ const decorItems: DecorItem[] = [
   { src: pens, from: 'left',  left: '100px', top: '55%',  width: 150, rotZ:0, delay: .23 },
   { src: headphones, from: 'left',  left: '0px', top: '30%',  width: 250, rotZ:-50, delay: .27 },
   { src: mobile, from: 'left',  left: '-80px', top: '55%',  width: 200, rotZ:45, delay: .25 },
-  { src: wallet, from: 'left',  left: '0px', top: '80%',  width: 150, rotZ:-10, delay: .27 },
+  { src: wallet, from: 'bottom-left',  left: '0px', top: '80%',  width: 150, rotZ:-10, delay: .27 },
   { src: sunglasses, from: 'left',  left: '10px', top: '65%',  width: 200, rotZ:-10, delay: .23 },
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
@@ -64,6 +67,7 @@ const logos = [
   { src: kyunghee },
   { src: woosongcollege },
   { src: seoul },
+  { src: masan },
 ]
 
 /**
@@ -75,8 +79,11 @@ const decorHidden = ref(false)
 let io: IntersectionObserver | null = null
 let prevHidden = decorHidden.value
 let initialized = false // 초기 1회 콜백 무시
-
+//ref(false)
 const footerVisible = ref(false)
+
+const year = new Date().getFullYear()
+
 const onScroll = () => {
   const scrollTop = window.scrollY
   const windowHeight = window.innerHeight
@@ -181,7 +188,8 @@ onBeforeUnmount(() => {
       </div>
       <div class="section2-card1">
         <h4>주요 활동</h4>
-        <p>무슨 활동을 하는가</p>
+        <p>WYEA강연회를 하드 <br/>
+        </p>
       </div>
     </div>
   </section>
@@ -192,7 +200,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="section3-divcontainer">
       <div class="section3-div2">
-        <ul class="section3-div2-ul">
+        <ul>
           <li>
             <span class="date">2025년 6월 25일</span>
             <span class="event">세계 청년 교류회 결성</span>
@@ -207,19 +215,24 @@ onBeforeUnmount(() => {
           </li>
           <li>
             <span class="date">2025년 7월 2일</span>
-            <span class="event">미국 유학생과 협력 체결</span>
+            <span class="event">미국 유학생 네트워크와 협력 체결</span>
           </li>
           <li>
             <span class="date">2025년 7월 3일</span>
+            <span class="event">Kent Universtiy 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 7월 4일</span>
             <span class="event">경희대학교 지부 설립</span>
           </li>
           <li>
             <span class="date">2025년 7월 5일</span>
             <span class="event">서울대학교 지부 설립</span>
           </li>
+
         </ul>
       </div>
-      <div class="section3-div3-ul">
+      <div class="section3-div3">
         <ul>
           <li>
             <span class="date">2025년 7월 7일</span>
@@ -227,7 +240,7 @@ onBeforeUnmount(() => {
           </li>
           <li>
             <span class="date">2025년 7월 14일</span>
-            <span class="event">재일한국청년동맹과 세계청년교류연합 협력 관계 체결</span>
+            <span class="event">재일한국청년동맹과 협력 관계 체결</span>
           </li>
           <li>
             <span class="date">2025년 7월 17일</span>
@@ -244,6 +257,10 @@ onBeforeUnmount(() => {
           <li>
             <span class="date">2025년 9월 2일</span>
             <span class="event">우송정보대학교 지부 설립</span>
+          </li>
+          <li>
+            <span class="date">2025년 9월 17일</span>
+            <span class="event">마산대학교 지부 설립</span>
           </li>
         </ul>
       </div>
@@ -264,8 +281,8 @@ onBeforeUnmount(() => {
 
     <div class="footer-middle">
       <p>
-        Copyright © 2025.WYEA.All rights reserved.<br>
-        Icons made by Freepik from www.flaticon.com
+        © {{ year }} WYEA · Icons by Freepik (flaticon.com)<br>
+        대학 로고와 명칭은 각 대학의 자산이며, 식별 목적에 한해 사용됩니다.
       </p>
     </div>
 
@@ -460,11 +477,12 @@ body {
 
 /*-------------------------------section3---------------------------------*/
 .section3 {
-  background: #f0f7ff;
+  background: linear-gradient(180deg, #f9fcff 0%, #ffffff 30%, #f0f7ff 100%);
   padding: 60px 20px;
   text-align: center;
   border-bottom-left-radius: 20px;   /* ⬅️ 왼쪽 아래만 둥글게 */
   border-bottom-right-radius: 20px;  /* ⬅️ 오른쪽 아래만 둥글게 */
+  box-shadow: 0 18px 32px rgba(0,0,0,.18);
 }
 
 .section3-div1 h1{
@@ -484,7 +502,7 @@ body {
 }
 
 .section3-div2 {
-
+  align-items: center;  /* 세로 중앙 */
   padding-right: clamp(16px, 6vw, 200px); /* 오른쪽 여백 */
 }
 
@@ -496,8 +514,8 @@ body {
 }
 
 .section3-div3 {
-
-
+  display: flex;
+  align-items: center;  /* 세로 중앙 */
 }
 
 .section3 ul {
@@ -536,20 +554,21 @@ body {
   border-radius: 50%;
 }
 
-.section3-div2-ul li:nth-child(1)::before { background: #0d47a1; }  /* 진한 남색 */
-.section3-div2-ul li:nth-child(2)::before { background: #1565c0; }
-.section3-div2-ul li:nth-child(3)::before { background: #1976d2; }
-.section3-div2-ul li:nth-child(4)::before { background: #1e88e5; }
-.section3-div2-ul li:nth-child(5)::before { background: #42a5f5; }
-.section3-div2-ul li:nth-child(6)::before { background: #64b5f6; }  /* 옅은 하늘색 */
+.section3-div2 ul li:nth-child(1)::before { background: #0d47a1; }
+.section3-div2 ul li:nth-child(2)::before { background: #1c59af; }
+.section3-div2 ul li:nth-child(3)::before { background: #2a6cbd; }
+.section3-div2 ul li:nth-child(4)::before { background: #387ecc; }
+.section3-div2 ul li:nth-child(5)::before { background: #4790da; }
+.section3-div2 ul li:nth-child(6)::before { background: #56a3e8; }
+.section3-div2 ul li:nth-child(7)::before { background: #64b5f6; }
 
-.section3-div3-ul li:nth-child(1)::before { background: #64b5f6; }  /* 옅은 하늘색 */
-.section3-div3-ul li:nth-child(2)::before { background: #42a5f5; }
-.section3-div3-ul li:nth-child(3)::before { background: #1e88e5; }
-.section3-div3-ul li:nth-child(4)::before { background: #1976d2; }
-.section3-div3-ul li:nth-child(5)::before { background: #1565c0; }
-.section3-div3-ul li:nth-child(6)::before { background: #0d47a1; }  /* 진한 남색 */
-
+.section3-div3 ul li:nth-child(1)::before { background: #64b5f6; }
+.section3-div3 ul li:nth-child(2)::before { background: #56a3e8; }
+.section3-div3 ul li:nth-child(3)::before { background: #4790da; }
+.section3-div3 ul li:nth-child(4)::before { background: #387ecc; }
+.section3-div3 ul li:nth-child(5)::before { background: #2a6cbd; }
+.section3-div3 ul li:nth-child(6)::before { background: #1c59af; }
+.section3-div3 ul li:nth-child(7)::before { background: #0d47a1; }
 
 
 .section3 ul .date {
@@ -571,16 +590,11 @@ body {
 }
 
 /*-------------------------------section4---------------------------------*/
+
 .section4 {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  justify-content: center; /* 가로 중앙 */
-  align-items: center;     /* 세로 중앙 */
-  text-align: center;
   min-height: calc(100vh - var(--header-h, 64px));
-  pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
+  pointer-events: none;
 }
 
 /*-------------------------------footer---------------------------------*/
@@ -597,7 +611,12 @@ body {
   bottom: -200px;        /* footer 높이보다 더 아래 */
   left: 0;
   width: 100%;
-  transition: bottom 0.6s ease;  /* 애니메이션 */
+  transition: bottom 0.4s ease;  /* 애니메이션 */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  clip-path: inset(0 700px 0 700px round 64px 64px 0 0);
+
+  filter: drop-shadow(0 -18px 32px rgba(0,0,0,.18));
 }
 
 .footer.show {
@@ -612,7 +631,8 @@ body {
 .footer .footer-middle {
   margin: 12px 0;
   font-size: 13px;
-  color: #333;
+  color: #666;
+  line-height:1.6;
 }
 
 .footer .footer-bottom {

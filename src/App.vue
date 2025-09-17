@@ -90,13 +90,7 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 0;
   min-height: 120vh; /* 충분히 길게 */
-  background: linear-gradient(
-    180deg,
-    #1b4332 0%,   /* 진한 초록 */
-    #2d6a4f 30%,  /* 중간 초록 */
-    #95d5b2 100%  /* 밝은 연초록 */
-  );
-
+  background: #2d6a4f;
 }
 
 </style>
