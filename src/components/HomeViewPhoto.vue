@@ -90,6 +90,12 @@ defineProps<{
   display: inline-block;/* 텍스트 길이에 맞게 박스 */
 }
 
+@media (max-width: 1024px) {
+  .section1 h1 {
+    font-size: 30px;
+  }
+}
+
 .section2 h1 {
   margin-top: 70px;
   font-weight: 600;
@@ -99,6 +105,11 @@ defineProps<{
   background: #2d6a4f;
   padding: 0.5em 1em;   /* 배경이 글자보다 약간 크게 */
   display: inline-block;/* 텍스트 길이에 맞게 박스 */
+}
+@media (max-width: 1024px) {
+  .section2 h1 {
+    font-size: 40px;
+  }
 }
 
 </style>
