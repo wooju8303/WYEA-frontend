@@ -442,7 +442,7 @@ body {
 }
 @media (max-width: 1024px) {
   .section2-div1 h3 {
-    font-size: 20px; /* 모바일에서 다른 크기 */
+    font-size: 28px; /* 모바일에서 다른 크기 */
   }
 }
 
@@ -465,14 +465,31 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+@media (max-width: 1024px) {
+  .section2-card1 {
+    min-height: 300px; /* 세로 최소 높이 */
+  }
+}
 
 .section2-div2 h4 {
   font-weight: 700;
 }
 
+@media (max-width: 1024px) {
+  .section2-div2 h4 {
+    font-size: 28px; /* 모바일에서 다른 크기 */
+  }
+}
+
 .section2-div2 p {
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .section2-div2 p {
+    font-size: 14px; /* 모바일에서 다른 크기 */
+  }
 }
 
 /*-------------------------------section3---------------------------------*/
@@ -492,6 +509,11 @@ body {
   color: #0d47a1;
 }
 
+@media (max-width: 1024px) {
+  .section3-div1 h1 {
+    font-size: 30px; /* 모바일에서 다른 크기 */
+  }
+}
 .section3-divcontainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -501,7 +523,14 @@ body {
   text-align: left;
 }
 
+@media (max-width: 1024px) {
+  .section3-divcontainer {
+    grid-template-columns: 1fr;
+  }
+}
+
 .section3-div2 {
+  display: flex;
   align-items: center;  /* 세로 중앙 */
   padding-right: clamp(16px, 6vw, 200px); /* 오른쪽 여백 */
 }
@@ -516,6 +545,12 @@ body {
 .section3-div3 {
   display: flex;
   align-items: center;  /* 세로 중앙 */
+}
+
+@media (max-width: 1024px) {
+  .section3-div3 {
+    padding-right: clamp(16px, 3vw, 200px); /* 오른쪽 여백 */
+  }
 }
 
 .section3 ul {
@@ -617,6 +652,12 @@ body {
   clip-path: inset(0 700px 0 700px round 64px 64px 0 0);
 
   filter: drop-shadow(0 -18px 32px rgba(0,0,0,.18));
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    clip-path: inset(0 0px 0 0px round 0px 0px 0 0);
+  }
 }
 
 .footer.show {
