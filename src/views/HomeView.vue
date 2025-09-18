@@ -374,6 +374,7 @@ body {
   animation-delay: .10s;
 }
 .section1-div1 h3 {
+  line-height: 1.5;
   animation-delay:  .12s;
   font-weight: 700;
 }
@@ -426,7 +427,7 @@ body {
     font-size: 15px; /* 모바일에서 다른 크기 */
   }
 }
-/* 로고 추가되면 60px으로 */
+
 .section1-div3 {
   margin-top: 60px;
   margin-bottom: 160px;
@@ -508,6 +509,7 @@ body {
   margin-top: 25px;
   font-weight: 400;
   font-size: 1.1rem;
+  line-height: 1.8;
 }
 
 @media (max-width: 1024px) {
@@ -698,7 +700,6 @@ body {
   border-top: 1px solid #ddd;
   font-size: 14px;
   line-height: 1.6;
-  color: #000;
 
   position: fixed;
   bottom: -200px;        /* footer 높이보다 더 아래 */
@@ -708,8 +709,6 @@ body {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   clip-path: inset(0 700px 0 700px round 64px 64px 0 0);
-
-  filter: drop-shadow(0 -18px 32px rgba(0,0,0,.18));
 }
 
 @media (max-width: 1024px) {
@@ -723,6 +722,7 @@ body {
 }
 
 .footer .footer-top p {
+  color: #000;
   margin: 2px 0;
   font-weight: bold;
 }

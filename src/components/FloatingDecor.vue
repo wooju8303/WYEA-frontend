@@ -125,7 +125,7 @@ defineProps<{
     rotateZ(var(--rotZ))
     rotateX(var(--rotX))
     rotateY(var(--rotY));
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,.15)) blur(var(--blurStart));
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.15)) drop-shadow(0 14px 28px rgba(0,0,0,.22)) blur(var(--blurStart));
   will-change: transform, filter, opacity;
 }
 

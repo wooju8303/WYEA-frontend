@@ -56,7 +56,7 @@ defineProps<{
     calc(var(--cell) * 5) calc(var(--cell) * 5),
     calc(var(--cell) * 5) calc(var(--cell) * 5);
 
-  opacity: .7;                   /* 전체 격자 투명도 */
+  opacity: .9;                   /* 전체 격자 투명도 */
   mix-blend-mode: overlay;       /* 배경과 자연스럽게 섞임 (필요 없으면 지워도 됨) */
 
 }
@@ -80,12 +80,13 @@ defineProps<{
   font-family: 'PretendardFont', sans-serif;
 }
 .section1 h1{
-  margin-top: 50px;
+  margin-top: 20px;
   font-weight: 600;
   font-size: 60px;
   position: relative;
   z-index: 0;           /* 격자보다 위 */
   background: #2d6a4f;
+  box-shadow: 0 0 30px 15px #2d6a4f;
   padding: 0.5em 1em;   /* 배경이 글자보다 약간 크게 */
   display: inline-block;/* 텍스트 길이에 맞게 박스 */
 }
@@ -103,6 +104,7 @@ defineProps<{
   position: relative;
   z-index: 0;           /* 격자보다 위 */
   background: #2d6a4f;
+  box-shadow: 0 0 30px 15px #2d6a4f;
   padding: 0.5em 1em;   /* 배경이 글자보다 약간 크게 */
   display: inline-block;/* 텍스트 길이에 맞게 박스 */
 }
