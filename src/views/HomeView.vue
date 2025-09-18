@@ -165,7 +165,6 @@ onBeforeUnmount(() => {
 })
 </script>
 
-
 <template>
   <HomeViewPhoto/>
   <section class="section1" ref="section1Ref">
@@ -179,8 +178,8 @@ onBeforeUnmount(() => {
       </a>
     </div>
     <div class="section1-div2">
-      <p>협력 대학</p>
-      <LogoMarquee :logos="logos" :duration="18" :gap="56" :repeat="4" :logoHeight="60"
+      <p>연합 지부</p>
+      <LogoMarquee :logos="logos" :duration="15" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="section1-div3">
@@ -198,6 +197,7 @@ onBeforeUnmount(() => {
       <div class="section2-card1">
         <h4>설립 배경</h4>
         <p>현 21세기는 IT의 빠른 발달로 인해<br/>
+
           국가내에서 개인간 이어지던 소통을 <br/>
           전세계인을 대상으로 확대시켰습니다.<br/>
           연락을 쉽게 나눌 수 있지만, 언어 장벽,<br/>
@@ -361,6 +361,7 @@ body {
   pointer-events: none; /* 버튼만 클릭 가능하게 다시 켜줘도 됨 */
   padding: 16px;  /* 안쪽 여백 (상하좌우 16px) */
   overflow-x: clip; /* 섹션 안에서 넘침 차단 */
+  font-family: 'PretendardFont', sans-serif;
 }
 
 /* 중앙 카피 애니메이션 (슬라이드 튀어나옴) */
@@ -425,6 +426,7 @@ body {
     font-size: 15px; /* 모바일에서 다른 크기 */
   }
 }
+/* 로고 추가되면 60px으로 */
 .section1-div3 {
   margin-top: 60px;
   margin-bottom: 160px;
@@ -450,6 +452,7 @@ body {
   min-height: calc(100vh - var(--header-h, 64px));
   gap: 4rem;        /* 카드 사이 간격 더 넓게 */
   padding: 4rem;    /* 화면 테두리와 카드 사이 여백 */
+  font-family: 'PretendardFont', sans-serif;
 }
 
 .section2-div1 {
@@ -525,6 +528,7 @@ body {
   border-bottom-left-radius: 20px;   /* ⬅️ 왼쪽 아래만 둥글게 */
   border-bottom-right-radius: 20px;  /* ⬅️ 오른쪽 아래만 둥글게 */
   box-shadow: 0 18px 32px rgba(0,0,0,.18);
+  font-family: 'PretendardFont', sans-serif;
 }
 
 .section3-div1 h1{
@@ -591,7 +595,7 @@ body {
     opacity .6s ease,
     transform .6s ease,
     filter .6s ease;
-  transition-delay: calc(var(--d, 0ms) + 800ms);
+  transition-delay: calc(var(--d, 0ms) + 800ms);  /* 늦게 작동 */
 }
 
 @media (max-width: 1024px) {
