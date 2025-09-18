@@ -555,8 +555,19 @@ body {
 
 .section3-div2 {
   display: flex;
-  align-items: center;  /* 세로 중앙 */
+  align-items: center; /* 세로 중앙 */
   padding-right: clamp(16px, 6vw, 200px); /* 오른쪽 여백 */
+}
+
+.section3-div2 ul li {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(2px);
+  transition:
+    opacity .6s ease,
+    transform .6s ease,
+    filter .6s ease;
+  transition-delay: var(--d, 0ms);
 }
 
 .section3-div2 h1 {
@@ -569,6 +580,17 @@ body {
 .section3-div3 {
   display: flex;
   align-items: center;  /* 세로 중앙 */
+}
+
+.section3-div3 ul li {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(2px);
+  transition:
+    opacity .6s ease,
+    transform .6s ease,
+    filter .6s ease;
+  transition-delay: calc(var(--d, 0ms) + 800ms);
 }
 
 @media (max-width: 1024px) {
@@ -600,15 +622,6 @@ body {
   margin-bottom: 30px;
   padding-left: 50px;
   position: relative;
-
-  opacity: 0;
-  transform: translateY(22px);
-  filter: blur(2px);
-  transition:
-    opacity .6s ease,
-    transform .6s ease,
-    filter .6s ease;
-  transition-delay: var(--d, 0ms);
 }
 
 /* 트리거 후: 자연스럽게 나타남 */
