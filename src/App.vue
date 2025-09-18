@@ -60,7 +60,7 @@ onBeforeUnmount(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #ee0000;
+  background: #fff;
 }
 :global(html), :global(body), :global(#app) { height: 100%; }
 :global(body) { margin: 0; }

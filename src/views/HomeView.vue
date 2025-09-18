@@ -75,73 +75,92 @@ const logos = [
  */
 const section1Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
+const footerVisible = ref(false)
+const year = new Date().getFullYear()
 
-let io: IntersectionObserver | null = null
+let heroIO: IntersectionObserver | null = null
 let prevHidden = decorHidden.value
 let initialized = false // 초기 1회 콜백 무시
 //ref(false)
-const footerVisible = ref(false)
 
-const year = new Date().getFullYear()
+let section3IO: IntersectionObserver | null = null
 
 const onScroll = () => {
   const scrollTop = window.scrollY
   const windowHeight = window.innerHeight
   const docHeight = document.documentElement.scrollHeight
-
-  // 전체 스크롤 가능 높이
-  const scrollable = docHeight - windowHeight
-  // 스크롤 진행률 (0~1)
-  const progress = scrollTop / scrollable
-
-  // 90% 이상 내려오면 footer 보이기
-  footerVisible.value = progress >= 0.95
+  const scrollable = docHeight - windowHeight     // 전체 스크롤 가능 높이
+  const progress = scrollTop / scrollable     // 스크롤 진행률 (0~1)
+  footerVisible.value = progress >= 0.95      // 90% 이상 내려오면 footer 보이기
 }
 
+
+
 onMounted(() => {
+  /* ===== (A) 기존: 히어로/데코 토글 IO ===== */
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
-  const HIDE_AT = 0.8  // 이 이하로 보이면 숨김(= 스크롤 ~20% 이상)
-  const SHOW_AT = 0.8  // 이 이상 보이면 다시 표시 (경계 흔들림 방지)
+  const HIDE_AT = 0.8
+  const SHOW_AT = 0.8
 
-  // 혹시 기존 io가 있으면 정리
-  io?.disconnect()
-
-  io = new IntersectionObserver(
+  heroIO?.disconnect()
+  heroIO = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0]
       if (!entry) return
 
       const r = entry.intersectionRatio
-
-      // 최초 1회는 레이아웃 안정 전 호출될 수 있으니 무시
       if (!initialized) { initialized = true; return }
 
-      // 현재 상태에 따라 서로 다른 임계값 적용(히스테리시스)
       let nextHidden = prevHidden
       if (!prevHidden && r < HIDE_AT) nextHidden = true
       else if (prevHidden && r > SHOW_AT) nextHidden = false
 
-      // 값이 실제로 바뀔 때만 반영 (불필요한 재렌더/토글 방지)
       if (nextHidden !== prevHidden) {
         decorHidden.value = nextHidden
         prevHidden = nextHidden
       }
     },
     {
-      threshold: [0, 0.5, 0.8, 0.9, 1], // 우리가 쓰는 경계 포함
+      threshold: [0, 0.5, 0.8, 0.9, 1],
       rootMargin: `-${headerH}px 0px 0px 0px`,
     }
   )
 
-  if (section1Ref.value) io.observe(section1Ref.value)
+  if (section1Ref.value) heroIO.observe(section1Ref.value)
   window.addEventListener('scroll', onScroll, { passive: true })
+
+  /* ===== (B) 신규: 타임라인(.section3) 1회 등장 IO ===== */
+  // 1) 항목별 스태거 지연 주입
+  document.querySelectorAll<HTMLElement>('.section3-div2 li')
+    .forEach((el, i) => el.style.setProperty('--d', `${i * 80}ms`))
+  document.querySelectorAll<HTMLElement>('.section3-div3 li')
+    .forEach((el, i) => el.style.setProperty('--d', `${i * 80}ms`))
+
+  // 2) 섹션 진입 시 한 번만 클래스 추가
+  const section3 = document.querySelector('.section3')
+  if (section3) {
+    section3IO?.disconnect()
+    section3IO = new IntersectionObserver((entries, obs) => {
+      const e = entries[0]
+      if (e?.isIntersecting) {
+        section3.classList.add('reveal-start')
+        obs.disconnect() // 한 번만 실행
+      }
+    }, {
+      threshold: 0.30,
+      rootMargin: '0px 0px -10% 0px',
+    })
+    section3IO.observe(section3)
+  }
 })
 
 onBeforeUnmount(() => {
-  io?.disconnect()
-  io = null
+  heroIO?.disconnect()
+  section3IO?.disconnect()
+  heroIO = null
+  section3IO = null
   window.removeEventListener('scroll', onScroll)
 })
 </script>
@@ -482,7 +501,8 @@ body {
 }
 
 .section2-div2 p {
-  font-weight: bold;
+  margin-top: 25px;
+  font-weight: 400;
   font-size: 1.1rem;
 }
 
@@ -493,6 +513,10 @@ body {
 }
 
 /*-------------------------------section3---------------------------------*/
+:root {
+  --d: 0ms; /* 기본값 지정 */
+}
+
 .section3 {
   background: linear-gradient(180deg, #f9fcff 0%, #ffffff 30%, #f0f7ff 100%);
   padding: 60px 20px;
@@ -576,6 +600,22 @@ body {
   margin-bottom: 30px;
   padding-left: 50px;
   position: relative;
+
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(2px);
+  transition:
+    opacity .6s ease,
+    transform .6s ease,
+    filter .6s ease;
+  transition-delay: var(--d, 0ms);
+}
+
+/* 트리거 후: 자연스럽게 나타남 */
+.section3.reveal-start li {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
 .section3 ul li::before {

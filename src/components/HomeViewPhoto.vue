@@ -14,7 +14,7 @@ defineProps<{
     </section>
 
   </section>
-  <div class="hero">
+  <div >
 
   </div>
 </template>
@@ -40,7 +40,7 @@ defineProps<{
   position: absolute;
   inset: 0;
   pointer-events: none;          /* 클릭 방해 X */
-  z-index: 0;
+  z-index: -1;
 
   /* 1) 얇은 격자  2) 굵은 보조선(5칸마다) */
   background-image:
@@ -56,7 +56,7 @@ defineProps<{
     calc(var(--cell) * 5) calc(var(--cell) * 5),
     calc(var(--cell) * 5) calc(var(--cell) * 5);
 
-  opacity: .9;                   /* 전체 격자 투명도 */
+  opacity: .7;                   /* 전체 격자 투명도 */
   mix-blend-mode: overlay;       /* 배경과 자연스럽게 섞임 (필요 없으면 지워도 됨) */
 
 }
@@ -80,7 +80,7 @@ defineProps<{
 
 }
 .section1 h1{
-  margin-top: 70px;
+  margin-top: 50px;
   font-weight: 600;
   font-size: 60px;
   position: relative;
