@@ -165,6 +165,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
+
 <template>
   <HomeViewPhoto/>
   <section class="section1" ref="section1Ref">
