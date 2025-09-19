@@ -40,7 +40,7 @@ export type DecorItem = {
 }
 
 const styleFor = (it: DecorItem, i: number) => {
-  let tx = '0px', ty = '0px'
+  let tx, ty
   if (it.fromVec) {
     const unit = it.fromVec.unit ?? 'px'
     tx = `${it.fromVec.x}${unit}`

@@ -75,12 +75,11 @@ const decorHidden = ref(false)
 const footerVisible = ref(false)
 const year = new Date().getFullYear()
 
-
-let heroIO: IntersectionObserver | null = null
-let prevHidden = decorHidden.value
-let initialized = false // 초기 1회 콜백 무시
+let section1IO: IntersectionObserver | null = null
 let section2IO: IntersectionObserver | null = null
 let section3IO: IntersectionObserver | null = null
+let prevHidden = decorHidden.value
+let initialized = false // 초기 1회 콜백 무시
 
 const onScroll = () => {
   const scrollTop = window.scrollY
@@ -101,8 +100,8 @@ onMounted(async () => {
 
   await nextTick() // DOM 렌더 보장
 
-  heroIO?.disconnect()
-  heroIO = new IntersectionObserver(
+  section1IO?.disconnect()
+  section1IO = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       const entry = entries[0]
       if (!entry) return
@@ -124,14 +123,13 @@ onMounted(async () => {
       rootMargin: `-${headerH}px 0px 0px 0px`,
     }
   )
-  if (section1Ref.value) heroIO.observe(section1Ref.value)
+  if (section1Ref.value) section1IO.observe(section1Ref.value)
   window.addEventListener('scroll', onScroll, { passive: true })
 
   /* ===== (B) 클립(.section2) 1회 등장 IO ===== */
   // (1) 스태거 지연값 주입
   section2Ref.value?.querySelectorAll<HTMLElement>('.clip')
     .forEach((el, i) => el.style.setProperty('--clip-d', `${i * 120}ms`))
-
   // (2) 이미 화면에 들어와 있으면 즉시 활성화 (폴백)
   const el = section2Ref.value
   if (el) {
@@ -139,10 +137,8 @@ onMounted(async () => {
     const soonVisible = rect.top < window.innerHeight * 0.8
     if (soonVisible) {
       el.classList.add('clip-start')
-      // 아래 옵저버는 생략해도 되지만, 스크롤 업/다운 재방문을 막기 위해 한 번만 등록해도 OK
     }
   }
-
   // (3) IO 등록 (1회만)
   if (section2Ref.value) {
     section2IO?.disconnect()
@@ -182,14 +178,13 @@ onMounted(async () => {
     })
     section3IO.observe(section3)
   }
-
 })
 
 onBeforeUnmount(() => {
-  heroIO?.disconnect()
+  section1IO?.disconnect()
   section2IO?.disconnect()
   section3IO?.disconnect()
-  heroIO = null
+  section1IO = null
   section2IO = null
   section3IO = null
   window.removeEventListener('scroll', onScroll)
@@ -200,7 +195,7 @@ onBeforeUnmount(() => {
   <HomeViewPhoto/>
   <section class="section1" ref="section1Ref">
     <div class="section1-div1">
-      <img src="@/assets/image/wyea-logo.png" width="300">
+      <img src="@/assets/image/wyea-logo.png" width="300" alt="wyea-logo">
       <h3>World Youth<br> Exchange Association</h3>
       <br>
       <p>세계 청년 교류회</p>
@@ -210,7 +205,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="section1-div2">
       <p>연합 지부</p>
-      <LogoMarquee :logos="logos" :duration="50" :gap="56" :repeat="4" :logoHeight="60"
+      <LogoMarquee :logos="logos" :duration="60" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="section1-div3">
@@ -481,12 +476,6 @@ body {
   font-size:12px;
 }
 
-.hr1 {
-  border: none;
-  border-top: 1px solid #ccc;   /* 두께/색상 */
-  width: 70%;
-  margin: 40px auto;  /* 위아래 여백 */
-}
 /*-------------------------------section2---------------------------------*/
 .section2 {
   background: linear-gradient(180deg, #f9fcff 0%, #ffffff 30%, #f0f7ff 100%);
@@ -496,10 +485,6 @@ body {
   gap: 4rem;        /* 카드 사이 간격 더 넓게 */
   padding: 4rem;    /* 화면 테두리와 카드 사이 여백 */
   font-family: 'PretendardFont', sans-serif;
-}
-
-.section2-div1 {
-
 }
 
 .section2-div1 h3 {
@@ -568,9 +553,9 @@ body {
 
 .section2-card1 img {
   position: absolute;
-  width: 160px;
-  top: -50px;
-  left: -40px;
+  width: 200px;
+  top: -70px;
+  left: -66px;
   z-index: 2;
   user-select: none;
   -webkit-user-drag: none;
@@ -637,9 +622,9 @@ body {
 
 .section2-card2 img {
   position: absolute;
-  width: 160px;
-  top: -53px;
-  left: -47px;
+  width: 200px;
+  top: -63px;
+  left: -57px;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -850,6 +835,13 @@ body {
   text-align:left;
   font-size: 17px;
   font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .section3 ul span {
+    font-size: 15px;
+    font-weight: 500;
+  }
 }
 
 /*-------------------------------section4---------------------------------*/
