@@ -179,7 +179,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="section1-div2">
       <p>연합 지부</p>
-      <LogoMarquee :logos="logos" :duration="15" :gap="56" :repeat="4" :logoHeight="60"
+      <LogoMarquee :logos="logos" :duration="40" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="section1-div3">
