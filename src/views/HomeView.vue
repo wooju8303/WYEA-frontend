@@ -237,7 +237,6 @@ onBeforeUnmount(() => {
         <p>
           이러한 글로벌 시대에 걸맞은 단체가 필요하다고 느껴, 세계청년교류연합을 설립하게 되었습니다.
         </p>
-
       </div>
       <div class="section2-card2">
         <img src="@/assets/image/clip.png" class="clip" alt="clip" style="--rot: 48deg;" />
@@ -288,7 +287,6 @@ onBeforeUnmount(() => {
             <span class="date">2025년 7월 5일</span>
             <span class="event">서울대학교 지부 설립</span>
           </li>
-
         </ul>
       </div>
       <div class="section3-div3">
@@ -327,7 +325,6 @@ onBeforeUnmount(() => {
   </section>
 
   <section class="section4">
-
   </section>
 
   <footer class="footer" :class="{ show: footerVisible }">
@@ -337,14 +334,12 @@ onBeforeUnmount(() => {
         회장 이창현 010-1234-1234
       </p>
     </div>
-
     <div class="footer-middle">
       <p>
         © {{ year }} WYEA · Icons by Freepik (flaticon.com)<br>
         대학 로고와 명칭은 각 대학의 자산이며, 식별 목적에 한해 사용됩니다.
       </p>
     </div>
-
     <div class="footer-bottom">
       <a href="https://www.instagram.com/wyea_official/" target="_blank" rel="noopener noreferrer">
         <img src="@/assets/image/instaricon.png" class="footer-logo" alt="instagram"/>
@@ -360,7 +355,6 @@ onBeforeUnmount(() => {
       </a>
     </div>
   </footer>
-
 
 </template>
 
@@ -451,6 +445,12 @@ body {
   margin-top: 60px;
 }
 
+@media (max-width: 1024px) {
+  .section1-div2 {
+    margin-top: 80px; /* 모바일에서 다른 크기 */
+  }
+}
+
 .section1-div2 > * {
   opacity: 0;
   transform: translateY(24px) scale(0.98);
@@ -463,6 +463,7 @@ body {
   font-size:16px;
   margin-bottom: 8px;
 }
+
 @media (max-width: 1024px) {
   .section1-div2 p {
     font-size: 15px; /* 모바일에서 다른 크기 */
@@ -675,6 +676,12 @@ body {
 
 @media (max-width: 1024px) {
   .section2-div2 p {
+    font-size: 14px; /* 모바일에서 다른 크기 */
+  }
+}
+
+@media (max-width: 1024px) {
+  .section2-div2 li {
     font-size: 14px; /* 모바일에서 다른 크기 */
   }
 }
