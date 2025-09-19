@@ -147,6 +147,9 @@ watch(() => [props.duration, props.gap, props.logos, props.repeat], () => start(
   /* ✅ padding은 컨테이너로 옮겨 측정 오차 제거 */
   padding-block: 20px;
   padding-inline: calc(var(--gap) / 2);
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* strip은 JS로 translateX만 */

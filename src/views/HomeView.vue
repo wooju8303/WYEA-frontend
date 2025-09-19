@@ -411,6 +411,8 @@ body {
 }
 .section1-div1 img {
   animation-delay: .10s;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .section1-div1 h3 {
   line-height: 1.5;
@@ -569,6 +571,8 @@ body {
   top: -50px;
   left: -40px;
   z-index: 2;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 @media (max-width: 1024px) {
@@ -635,6 +639,8 @@ body {
   width: 160px;
   top: -53px;
   left: -47px;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* ▶ 애니메이션 초기 상태: 위로 살짝 숨김 + 투명 */
@@ -895,6 +901,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 32px;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .footer .footer-logo {

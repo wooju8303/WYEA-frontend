@@ -100,6 +100,9 @@ defineProps<{
   z-index: 0;
   pointer-events: none;
   perspective: 1000px; /* 3D 틸트 깊이감 (rotX/rotY 쓸 때 유효) */
+
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* 공용(초기) 상태: 화면 밖/작게/블러(변수) */
