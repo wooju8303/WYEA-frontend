@@ -46,9 +46,9 @@ const imgStyle = (l: Logo) => ({
 const stripRef = ref<HTMLDivElement | null>(null)
 let rafId = 0
 let lastTs = 0
-let x = 0                  // 현재 translateX
-let pxPerSec = 0           // 초당 이동 픽셀
-const EPS = 0.5            // 서브픽셀/안티알리아싱 보정
+let x = 0 // 현재 translateX
+let pxPerSec = 0  // 초당 이동 픽셀
+const EPS = 0.5 // 서브픽셀/안티알리아싱 보정
 
 function measureFirstSetAdvance(): number {
   // 첫 세트가 완전히 빠져나가는 데 필요한 이동량 = 세트 폭 + 뒤쪽 gap
@@ -91,7 +91,7 @@ function tick(ts: number) {
 
   x -= pxPerSec * dt
 
-  // ✅ 세트 폭 + gap 만큼 완전히 지나간 시점에만 재배치
+  // 세트 폭 + gap 만큼 완전히 지나간 시점에만 재배치
   let advance = measureFirstSetAdvance()
   while (advance > 0 && x <= -advance + EPS) {
     x += advance
@@ -144,7 +144,7 @@ watch(() => [props.duration, props.gap, props.logos, props.repeat], () => start(
   mask-image: var(--fade);
   -webkit-mask-image: var(--fade);
 
-  /* ✅ padding은 컨테이너로 옮겨 측정 오차 제거 */
+  /* padding은 컨테이너로 옮겨 측정 오차 제거 */
   padding-block: 20px;
   padding-inline: calc(var(--gap) / 2);
 
@@ -159,7 +159,7 @@ watch(() => [props.duration, props.gap, props.logos, props.repeat], () => start(
   will-change: transform;
 }
 
-/* ✅ 세트 컨테이너: 세트 단위로 이동/재배치 */
+/* 세트 컨테이너: 세트 단위로 이동/재배치 */
 .set{
   display: inline-flex;
   gap: var(--gap);

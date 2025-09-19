@@ -33,10 +33,10 @@ export type DecorItem = {
   scale?: number  // 시작 크기
   blur?: number // 시작 블러
 
-  rotZ?: number           // Z축 회전(deg)
-  rotX?: number           // 3D 틸트 X(deg)
-  rotY?: number           // 3D 틸트 Y(deg)
-  origin?: string         // transform-origin (e.g. '30% 70%')
+  rotZ?: number // Z축 회전(deg)
+  rotX?: number // 3D 틸트 X(deg)
+  rotY?: number // 3D 틸트 Y(deg)
+  origin?: string // transform-origin (e.g. '30% 70%')
 }
 
 const styleFor = (it: DecorItem, i: number) => {
@@ -89,7 +89,7 @@ const styleFor = (it: DecorItem, i: number) => {
 
 defineProps<{
   items: DecorItem[]
-  hidden?: boolean   // ⬅️ 스크롤에 따라 토글할 플래그
+  hidden?: boolean  // 스크롤에 따라 토글할 플래그
 }>()
 </script>
 

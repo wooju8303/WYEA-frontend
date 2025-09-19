@@ -31,7 +31,7 @@ import masan from '@/assets/image/masan.png'
 
 import HomeViewPhoto from '@/components/HomeViewPhoto.vue'
 /**
- * 홈 메인 이미지 컴포넌트
+ * 홈 메인 이미지
  */
 const decorItems: DecorItem[] = [
   { src: coin, from: 'right', right: '0px', top: '30%', width: 140, rotZ:70, delay: .25 },
@@ -53,7 +53,7 @@ const decorItems: DecorItem[] = [
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
 /**
- * 협력 대학 이미지 컴포넌트
+ * 협력 대학 로고
  */
 const logos = [
   { src: busan },
@@ -66,9 +66,7 @@ const logos = [
   { src: seoul },
   { src: masan },
 ]
-/**
- * 홈 메인 이미지 컴포넌트 스크롤시 숨기기
- */
+
 const section1Ref = ref<HTMLElement | null>(null)
 const section2Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
@@ -85,13 +83,13 @@ const onScroll = () => {
   const scrollTop = window.scrollY
   const windowHeight = window.innerHeight
   const docHeight = document.documentElement.scrollHeight
-  const scrollable = docHeight - windowHeight     // 전체 스크롤 가능 높이
-  const progress = scrollTop / scrollable     // 스크롤 진행률 (0~1)
-  footerVisible.value = progress >= 0.95      // 90% 이상 내려오면 footer 보이기
+  const scrollable = docHeight - windowHeight // 전체 스크롤 가능 높이
+  const progress = scrollTop / scrollable // 스크롤 진행률 (0~1)
+  footerVisible.value = progress >= 0.95  // 95% 이상 내려오면 footer 보이기
 }
 
 onMounted(async () => {
-  /* ===== (A) 히어로/데코 토글 IO ===== */
+  /* ===== 배경데코 토글 IO ===== */
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
@@ -126,11 +124,11 @@ onMounted(async () => {
   if (section1Ref.value) section1IO.observe(section1Ref.value)
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  /* ===== (B) 클립(.section2) 1회 등장 IO ===== */
-  // (1) 스태거 지연값 주입
+  /* ===== (B) 클립1회 등장 IO ===== */
+  // 스태거 지연값 주입
   section2Ref.value?.querySelectorAll<HTMLElement>('.clip')
     .forEach((el, i) => el.style.setProperty('--clip-d', `${i * 120}ms`))
-  // (2) 이미 화면에 들어와 있으면 즉시 활성화 (폴백)
+  // 이미 화면에 들어와 있으면 즉시 활성화 (폴백)
   const el = section2Ref.value
   if (el) {
     const rect = el.getBoundingClientRect()
@@ -139,7 +137,7 @@ onMounted(async () => {
       el.classList.add('clip-start')
     }
   }
-  // (3) IO 등록 (1회만)
+  // IO 등록 (1회만)
   if (section2Ref.value) {
     section2IO?.disconnect()
     section2IO = new IntersectionObserver((entries, obs) => {
@@ -149,20 +147,20 @@ onMounted(async () => {
         obs.disconnect() // 한 번만
       }
     }, {
-      threshold: 0.4,                  // 진입 조건 완화
+      threshold: 0.4,
       rootMargin: '0px 0px -20% 0px' // 아래쪽 여유 주기
     })
     section2IO.observe(section2Ref.value)
   }
 
-  /* ===== (C) 타임라인(.section3) 1회 등장 IO ===== */
-  // 1) 항목별 스태거 지연 주입
+  /* ===== 타임라인 1회 등장 IO ===== */
+  // 항목별 스태거 지연 주입
   document.querySelectorAll<HTMLElement>('.section3-div2 li')
     .forEach((el, i) => el.style.setProperty('--d', `${i * 80}ms`))
   document.querySelectorAll<HTMLElement>('.section3-div3 li')
     .forEach((el, i) => el.style.setProperty('--d', `${i * 80}ms`))
 
-  // 2) 섹션 진입 시 한 번만 클래스 추가
+  // 섹션 진입 시 한 번만 클래스 추가
   const section3 = document.querySelector('.section3')
   if (section3) {
     section3IO?.disconnect()
@@ -398,11 +396,13 @@ body {
   transform: translateY(24px) scale(0.98);
   animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
 }
+
 .section1-div1 img {
   animation-delay: .10s;
   user-select: none;
   -webkit-user-drag: none;
 }
+
 .section1-div1 h3 {
   line-height: 1.5;
   animation-delay:  .12s;
@@ -413,6 +413,7 @@ body {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
 }
+
 .section1-div1 p {
   animation-delay: .24s;
   font-weight: 700;
@@ -423,6 +424,7 @@ body {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
 }
+
 .section1-div1 button {
   animation-delay: .36s;
   pointer-events: auto;
@@ -439,7 +441,6 @@ body {
 .section1-div2 {
   margin-top: 60px;
 }
-
 @media (max-width: 1024px) {
   .section1-div2 {
     margin-top: 80px; /* 모바일에서 다른 크기 */
@@ -458,7 +459,6 @@ body {
   font-size:16px;
   margin-bottom: 8px;
 }
-
 @media (max-width: 1024px) {
   .section1-div2 p {
     font-size: 15px; /* 모바일에서 다른 크기 */
@@ -468,6 +468,11 @@ body {
 .section1-div3 {
   margin-top: 60px;
   margin-bottom: 160px;
+}
+@media (max-width: 1024px) {
+  .section1-div3 {
+    margin-bottom: 10px;
+  }
 }
 
 .section1-div3 p{
@@ -487,6 +492,21 @@ body {
   font-family: 'PretendardFont', sans-serif;
 }
 
+.section2-card1 img {
+  position: absolute;
+  width: 200px;
+  top: -70px;
+  left: -66px;
+  z-index: 2;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (max-width: 1024px) {
+  .section2-card1 img {
+    display: none;
+  }
+}
+
 .section2-div1 h3 {
   font-weight: 700;
   margin-bottom: 60px;
@@ -500,32 +520,31 @@ body {
 .section2-div2 {
   display: flex;
   justify-content: center; /* 가운데 정렬 */
-  gap: 20px;               /* 카드 사이 간격 */
-  flex-wrap: wrap;         /* 화면이 좁으면 줄바꿈 */
+  gap: 20px;  /* 카드 사이 간격 */
+  flex-wrap: wrap;  /* 화면이 좁으면 줄바꿈 */
 }
 
 .section2-card1 {
-  flex: 1 1 450px;            /* 최소 300px, 공간 있으면 늘어남 */
-  max-width: 550px;           /* 카드 최대 폭 */
-  min-height: 400px; /* 세로 최소 높이 */
-  background: #ffffff;        /* 카드 배경색 */
-  border-radius: 12px;        /* 모서리 둥글게 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+  flex: 1 1 450px;  /* 최소 450px, 공간 있으면 늘어남 */
+  max-width: 550px; /* 카드 최대 폭 */
+  min-height: 400px;  /* 세로 최소 높이 */
+  background: #fff;  /* 카드 배경색 */
+  border-radius: 12px;  /* 모서리 둥글게 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);  /* 부드러운 그림자 */
   padding: 2rem;  /* 내부 여백 */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative; /* 이미지 겹치기 시 카드 기준으로도 가능 */
   z-index: 1;
 }
-
-.section2-card1:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
 @media (max-width: 1024px) {
   .section2-card1 {
     min-height: 300px; /* 세로 최소 높이 */
   }
+}
+
+.section2-card1:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .section2-card1 h4 {
@@ -551,34 +570,23 @@ body {
   line-height: 1.8;
 }
 
-.section2-card1 img {
-  position: absolute;
-  width: 200px;
-  top: -70px;
-  left: -66px;
-  z-index: 2;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-@media (max-width: 1024px) {
-  .section2-card1 img {
-    display: none;
-  }
-}
-
 .section2-card2 {
-  flex: 1 1 450px;            /* 최소 300px, 공간 있으면 늘어남 */
-  max-width: 550px;           /* 카드 최대 폭 */
-  min-height: 400px; /* 세로 최소 높이 */
-  background: #ffffff;        /* 카드 배경색 */
-  border-radius: 12px;        /* 모서리 둥글게 */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+  flex: 1 1 450px;  /* 최소 450px, 공간 있으면 늘어남 */
+  max-width: 550px; /* 카드 최대 폭 */
+  min-height: 400px;  /* 세로 최소 높이 */
+  background: #fff;  /* 카드 배경색 */
+  border-radius: 12px;  /* 모서리 둥글게 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);  /* 부드러운 그림자 */
   padding: 2rem;  /* 내부 여백 */
-  text-align: left;         /* 가운데 정렬 (원하면 left로 변경) */
+  text-align: left; /* 가운데 정렬 (원하면 left로 변경) */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative; /* 이미지 겹치기 시 카드 기준으로도 가능 */
   z-index: 1;
+}
+@media (max-width: 1024px) {
+  .section2-card2 {
+    min-height: 300px; /* 세로 최소 높이 */
+  }
 }
 
 .section2-card2:hover {
@@ -586,9 +594,17 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+.section2-card2 img {
+  position: absolute;
+  width: 200px;
+  top: -63px;
+  left: -57px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 @media (max-width: 1024px) {
-  .section2-card2 {
-    min-height: 300px; /* 세로 최소 높이 */
+  .section2-card2 img {
+    display: none;
   }
 }
 
@@ -620,16 +636,7 @@ body {
   font-size: 1.1rem;
 }
 
-.section2-card2 img {
-  position: absolute;
-  width: 200px;
-  top: -63px;
-  left: -57px;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* ▶ 애니메이션 초기 상태: 위로 살짝 숨김 + 투명 */
+/* 애니메이션 초기 상태: 위로 살짝 숨김 + 투명 */
 .section2 .clip {
   --clip-d: 0ms;
   opacity: 0;
@@ -641,17 +648,13 @@ body {
   will-change: transform, opacity;
 }
 
-/* ▶ 섹션2가 보이면 1회만 아래로 '툭' 내려오며 나타남 */
+/* 섹션2가 보이면 1회만 아래로 '툭' 내려오며 나타남 */
 .section2.clip-start .clip {
   opacity: 1;
   transform: rotate(var(--rot, 0deg)) translateY(0);
 }
 
-@media (max-width: 1024px) {
-  .section2-card2 img {
-    display: none;
-  }
-}
+
 
 @media (max-width: 1024px) {
   .section2-div2 h4 {
@@ -673,15 +676,15 @@ body {
 
 /*-------------------------------section3---------------------------------*/
 :root {
-  --d: 0ms; /* 기본값 지정 */
+  --d: 0ms;
 }
 
 .section3 {
   background: linear-gradient(180deg, #f9fcff 0%, #ffffff 30%, #f0f7ff 100%);
   padding: 60px 20px;
   text-align: center;
-  border-bottom-left-radius: 20px;   /* ⬅️ 왼쪽 아래만 둥글게 */
-  border-bottom-right-radius: 20px;  /* ⬅️ 오른쪽 아래만 둥글게 */
+  border-bottom-left-radius: 20px;   /* 왼쪽 아래만 둥글게 */
+  border-bottom-right-radius: 20px;  /* 오른쪽 아래만 둥글게 */
   box-shadow: 0 18px 32px rgba(0,0,0,.18);
   font-family: 'PretendardFont', sans-serif;
 }
@@ -692,12 +695,12 @@ body {
   margin-bottom: 60px;
   color: #0d47a1;
 }
-
 @media (max-width: 1024px) {
   .section3-div1 h1 {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
 }
+
 .section3-divcontainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -706,7 +709,6 @@ body {
   margin: 0 auto;
   text-align: left;
 }
-
 @media (max-width: 1024px) {
   .section3-divcontainer {
     grid-template-columns: 1fr;
@@ -728,6 +730,9 @@ body {
     transform .6s ease,
     filter .6s ease;
   transition-delay: var(--d, 0ms);
+  margin-bottom: 30px;
+  padding-left: 50px;
+  position: relative;
 }
 
 .section3-div2 h1 {
@@ -741,6 +746,11 @@ body {
   display: flex;
   align-items: center;  /* 세로 중앙 */
 }
+@media (max-width: 1024px) {
+  .section3-div3 {
+    padding-right: clamp(16px, 3vw, 200px); /* 오른쪽 여백 */
+  }
+}
 
 .section3-div3 ul li {
   opacity: 0;
@@ -751,12 +761,9 @@ body {
     transform .6s ease,
     filter .6s ease;
   transition-delay: calc(var(--d, 0ms) + 800ms);  /* 늦게 작동 */
-}
-
-@media (max-width: 1024px) {
-  .section3-div3 {
-    padding-right: clamp(16px, 3vw, 200px); /* 오른쪽 여백 */
-  }
+  margin-bottom: 30px;
+  padding-left: 50px;
+  position: relative;
 }
 
 .section3 ul {
@@ -776,12 +783,6 @@ body {
   bottom: 0;
   width: 2px;
   background: #d0e2f7;
-}
-
-.section3 ul li {
-  margin-bottom: 30px;
-  padding-left: 50px;
-  position: relative;
 }
 
 /* 트리거 후: 자연스럽게 나타남 */
@@ -836,7 +837,6 @@ body {
   font-size: 17px;
   font-weight: 500;
 }
-
 @media (max-width: 1024px) {
   .section3 ul span {
     font-size: 15px;
@@ -845,13 +845,11 @@ body {
 }
 
 /*-------------------------------section4---------------------------------*/
-
 .section4 {
   position: relative;
   min-height: calc(100vh - var(--header-h, 64px));
   pointer-events: none;
 }
-
 /*-------------------------------footer---------------------------------*/
 .footer {
   background: #fff;
@@ -862,15 +860,14 @@ body {
   line-height: 1.6;
 
   position: fixed;
-  bottom: -200px;        /* footer 높이보다 더 아래 */
+  bottom: -200px; /* footer 높이보다 더 아래 */
   left: 0;
   width: 100%;
-  transition: bottom 0.4s ease;  /* 애니메이션 */
+  transition: bottom 0.4s ease; /* 애니메이션 */
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   clip-path: inset(0 700px 0 700px round 64px 64px 0 0);
 }
-
 @media (max-width: 1024px) {
   .footer {
     clip-path: inset(0 0px 0 0px round 0px 0px 0 0);
@@ -878,7 +875,7 @@ body {
 }
 
 .footer.show {
-  bottom: 0;              /* show 클래스가 붙으면 나타남 */
+  bottom: 0;  /* show 클래스가 붙으면 나타남 */
 }
 
 .footer .footer-top p {
