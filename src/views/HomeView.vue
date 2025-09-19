@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import FloatingDecor, { type DecorItem } from '@/components/FloatingDecor.vue'
 
 import backpack from '@/assets/image/backpack.png'
@@ -30,8 +30,6 @@ import seoul from '@/assets/image/seoul.webp'
 import masan from '@/assets/image/masan.png'
 
 import HomeViewPhoto from '@/components/HomeViewPhoto.vue'
-
-
 /**
  * 홈 메인 이미지 컴포넌트
  */
@@ -54,7 +52,6 @@ const decorItems: DecorItem[] = [
   { src: sunglasses, from: 'left',  left: '10px', top: '65%',  width: 200, rotZ:-10, delay: .23 },
   { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
-
 /**
  * 협력 대학 이미지 컴포넌트
  */
@@ -69,20 +66,20 @@ const logos = [
   { src: seoul },
   { src: masan },
 ]
-
 /**
  * 홈 메인 이미지 컴포넌트 스크롤시 숨기기
  */
 const section1Ref = ref<HTMLElement | null>(null)
+const section2Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
 const footerVisible = ref(false)
 const year = new Date().getFullYear()
 
+
 let heroIO: IntersectionObserver | null = null
 let prevHidden = decorHidden.value
 let initialized = false // 초기 1회 콜백 무시
-//ref(false)
-
+let section2IO: IntersectionObserver | null = null
 let section3IO: IntersectionObserver | null = null
 
 const onScroll = () => {
@@ -94,15 +91,15 @@ const onScroll = () => {
   footerVisible.value = progress >= 0.95      // 90% 이상 내려오면 footer 보이기
 }
 
-
-
-onMounted(() => {
-  /* ===== (A) 기존: 히어로/데코 토글 IO ===== */
+onMounted(async () => {
+  /* ===== (A) 히어로/데코 토글 IO ===== */
   const rootStyles = getComputedStyle(document.documentElement)
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
   const HIDE_AT = 0.8
   const SHOW_AT = 0.8
+
+  await nextTick() // DOM 렌더 보장
 
   heroIO?.disconnect()
   heroIO = new IntersectionObserver(
@@ -127,11 +124,42 @@ onMounted(() => {
       rootMargin: `-${headerH}px 0px 0px 0px`,
     }
   )
-
   if (section1Ref.value) heroIO.observe(section1Ref.value)
   window.addEventListener('scroll', onScroll, { passive: true })
 
-  /* ===== (B) 신규: 타임라인(.section3) 1회 등장 IO ===== */
+  /* ===== (B) 클립(.section2) 1회 등장 IO ===== */
+  // (1) 스태거 지연값 주입
+  section2Ref.value?.querySelectorAll<HTMLElement>('.clip')
+    .forEach((el, i) => el.style.setProperty('--clip-d', `${i * 120}ms`))
+
+  // (2) 이미 화면에 들어와 있으면 즉시 활성화 (폴백)
+  const el = section2Ref.value
+  if (el) {
+    const rect = el.getBoundingClientRect()
+    const soonVisible = rect.top < window.innerHeight * 0.8
+    if (soonVisible) {
+      el.classList.add('clip-start')
+      // 아래 옵저버는 생략해도 되지만, 스크롤 업/다운 재방문을 막기 위해 한 번만 등록해도 OK
+    }
+  }
+
+  // (3) IO 등록 (1회만)
+  if (section2Ref.value) {
+    section2IO?.disconnect()
+    section2IO = new IntersectionObserver((entries, obs) => {
+      const e = entries[0]
+      if (e?.isIntersecting) {
+        section2Ref.value!.classList.add('clip-start')
+        obs.disconnect() // 한 번만
+      }
+    }, {
+      threshold: 0.4,                  // 진입 조건 완화
+      rootMargin: '0px 0px -20% 0px' // 아래쪽 여유 주기
+    })
+    section2IO.observe(section2Ref.value)
+  }
+
+  /* ===== (C) 타임라인(.section3) 1회 등장 IO ===== */
   // 1) 항목별 스태거 지연 주입
   document.querySelectorAll<HTMLElement>('.section3-div2 li')
     .forEach((el, i) => el.style.setProperty('--d', `${i * 80}ms`))
@@ -154,12 +182,15 @@ onMounted(() => {
     })
     section3IO.observe(section3)
   }
+
 })
 
 onBeforeUnmount(() => {
   heroIO?.disconnect()
+  section2IO?.disconnect()
   section3IO?.disconnect()
   heroIO = null
+  section2IO = null
   section3IO = null
   window.removeEventListener('scroll', onScroll)
 })
@@ -189,29 +220,35 @@ onBeforeUnmount(() => {
 
   <FloatingDecor class="decor" :items="decorItems" :hidden="decorHidden"/>
 
-  <section class="section2">
+  <section class="section2" ref="section2Ref">
     <div class="section2-div1">
-      <h3>WYEA는 무엇을 하나요?</h3>
+      <h3>WYEA에서는 무엇을 하나요?</h3>
     </div>
     <div class="section2-div2">
       <div class="section2-card1">
+        <img src="@/assets/image/clip.png" class="clip" alt="clip" style="--rot: 38deg;" />
         <h4>설립 배경</h4>
-        <p>현 21세기는 IT의 빠른 발달로 인해<br/>
-          국가내에서 개인간 이어지던 소통을 <br/>
-          전세계인을 대상으로 확대시켰습니다.<br/>
-          연락을 쉽게 나눌 수 있지만, 언어 장벽,<br/>
-          물리적으로 만나기 어렵다는 한계를 느꼈습니다.<br/>
-          이런 글로벌 시대에 알맞은 단체가 필요하다고 생각했고,<br/>
-          세계청년교류연합을 설립하게 되었습니다.
+        <p>
+          21세기는 IT 기술의 눈부신 발전으로 인해, 소통의 범위가 국가와 개인을 넘어 전 세계로 확대되었습니다.
         </p>
+        <p>
+          이제 우리는 언제 어디서든 쉽게 연락할 수 있지만, 여전히 언어 장벽과 물리적 거리라는 한계를 실감합니다.
+        </p>
+        <p>
+          이러한 글로벌 시대에 걸맞은 단체가 필요하다고 느껴, 세계청년교류연합을 설립하게 되었습니다.
+        </p>
+
       </div>
       <div class="section2-card2">
+        <img src="@/assets/image/clip.png" class="clip" alt="clip" style="--rot: 48deg;" />
         <h4>주요 활동</h4>
-        <p>해외 봉사 프로젝트<br/>
-          어학, 자격증, 취업 등 스터디와 튜터링<br/>
-          해외 취업 컨설팅<br/>
-          공동 프로젝트<br/>
-        </p>
+        <ul>
+          <li>해외 봉사 프로젝트</li>
+          <li>어학, 자격증, 취업 등 스터디와 튜터링</li>
+          <li>해외 취업 컨설팅</li>
+          <li>공동 프로젝트</li>
+          <li>정기 총회·오픈 포럼</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -488,6 +525,8 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
   padding: 2rem;  /* 내부 여백 */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative; /* 이미지 겹치기 시 카드 기준으로도 가능 */
+  z-index: 1;
 }
 
 .section2-card1:hover {
@@ -506,12 +545,36 @@ body {
   font-weight: 700;
 }
 
+.section2-card1 h4::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #0d47a1; /* 포인트 색상 */
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
 .section2-card1 p {
   text-align: left;
   margin-top: 25px;
   font-weight: 400;
   font-size: 1.1rem;
   line-height: 1.8;
+}
+
+.section2-card1 img {
+  position: absolute;
+  width: 160px;
+  top: -50px;
+  left: -40px;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .section2-card1 img {
+    display: none;
+  }
 }
 
 .section2-card2 {
@@ -524,6 +587,8 @@ body {
   padding: 2rem;  /* 내부 여백 */
   text-align: left;         /* 가운데 정렬 (원하면 left로 변경) */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative; /* 이미지 겹치기 시 카드 기준으로도 가능 */
+  z-index: 1;
 }
 
 .section2-card2:hover {
@@ -542,13 +607,58 @@ body {
   font-weight: 700;
 }
 
-.section2-card2 p {
-  text-align: left;
-  margin-top: 25px;
+.section2-card2 h4::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #0d47a1; /* 포인트 색상 */
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+.section2-card2 ul {
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+
+.section2-card2 li {
+  list-style: "✔ ";  /* 체크마크 스타일 */
+  color: #333;
+  margin-top: 15px;
   font-weight: 400;
   font-size: 1.1rem;
-  line-height: 2.0;
+}
 
+.section2-card2 img {
+  position: absolute;
+  width: 160px;
+  top: -53px;
+  left: -47px;
+}
+
+/* ▶ 애니메이션 초기 상태: 위로 살짝 숨김 + 투명 */
+.section2 .clip {
+  --clip-d: 0ms;
+  opacity: 0;
+  transform: rotate(var(--rot, 0deg)) translateY(-24px);
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    opacity   .7s cubic-bezier(.2,.8,.2,1);
+  transition-delay: var(--clip-d, 0ms);
+  will-change: transform, opacity;
+}
+
+/* ▶ 섹션2가 보이면 1회만 아래로 '툭' 내려오며 나타남 */
+.section2.clip-start .clip {
+  opacity: 1;
+  transform: rotate(var(--rot, 0deg)) translateY(0);
+}
+
+@media (max-width: 1024px) {
+  .section2-card2 img {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
