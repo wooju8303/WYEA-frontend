@@ -71,6 +71,7 @@ const section1Ref = ref<HTMLElement | null>(null)
 const section2Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
 const footerVisible = ref(false)
+
 const year = new Date().getFullYear()
 
 let section1IO: IntersectionObserver | null = null
@@ -171,7 +172,7 @@ onMounted(async () => {
         obs.disconnect() // 한 번만 실행
       }
     }, {
-      threshold: 0.30,
+      threshold: 0.3,
       rootMargin: '0px 0px -10% 0px',
     })
     section3IO.observe(section3)
