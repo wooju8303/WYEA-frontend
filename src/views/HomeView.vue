@@ -179,7 +179,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="section1-div2">
       <p>연합 지부</p>
-      <LogoMarquee :logos="logos" :duration="40" :gap="56" :repeat="4" :logoHeight="60"
+      <LogoMarquee :logos="logos" :duration="50" :gap="56" :repeat="4" :logoHeight="60"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="section1-div3">
@@ -197,7 +197,6 @@ onBeforeUnmount(() => {
       <div class="section2-card1">
         <h4>설립 배경</h4>
         <p>현 21세기는 IT의 빠른 발달로 인해<br/>
-
           국가내에서 개인간 이어지던 소통을 <br/>
           전세계인을 대상으로 확대시켰습니다.<br/>
           연락을 쉽게 나눌 수 있지만, 언어 장벽,<br/>
@@ -206,9 +205,12 @@ onBeforeUnmount(() => {
           세계청년교류연합을 설립하게 되었습니다.
         </p>
       </div>
-      <div class="section2-card1">
+      <div class="section2-card2">
         <h4>주요 활동</h4>
-        <p>WYEA강연회를 하드 <br/>
+        <p>해외 봉사 프로젝트<br/>
+          어학, 자격증, 취업 등 스터디와 튜터링<br/>
+          해외 취업 컨설팅<br/>
+          공동 프로젝트<br/>
         </p>
       </div>
     </div>
@@ -485,8 +487,12 @@ body {
   border-radius: 12px;        /* 모서리 둥글게 */
   box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
   padding: 2rem;  /* 내부 여백 */
-  text-align: center;         /* 가운데 정렬 (원하면 left로 변경) */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section2-card1:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 @media (max-width: 1024px) {
@@ -495,21 +501,60 @@ body {
   }
 }
 
-.section2-div2 h4 {
+.section2-card1 h4 {
+  text-align: center;
   font-weight: 700;
+}
+
+.section2-card1 p {
+  text-align: left;
+  margin-top: 25px;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.section2-card2 {
+  flex: 1 1 450px;            /* 최소 300px, 공간 있으면 늘어남 */
+  max-width: 550px;           /* 카드 최대 폭 */
+  min-height: 400px; /* 세로 최소 높이 */
+  background: #ffffff;        /* 카드 배경색 */
+  border-radius: 12px;        /* 모서리 둥글게 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+  padding: 2rem;  /* 내부 여백 */
+  text-align: left;         /* 가운데 정렬 (원하면 left로 변경) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section2-card2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 1024px) {
+  .section2-card2 {
+    min-height: 300px; /* 세로 최소 높이 */
+  }
+}
+
+.section2-card2 h4 {
+  text-align: center;
+  font-weight: 700;
+}
+
+.section2-card2 p {
+  text-align: left;
+  margin-top: 25px;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 2.0;
+
 }
 
 @media (max-width: 1024px) {
   .section2-div2 h4 {
     font-size: 28px; /* 모바일에서 다른 크기 */
   }
-}
-
-.section2-div2 p {
-  margin-top: 25px;
-  font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.8;
 }
 
 @media (max-width: 1024px) {
