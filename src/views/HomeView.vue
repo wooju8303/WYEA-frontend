@@ -325,7 +325,7 @@ onBeforeUnmount(() => {
     <div class="footer-top">
       <p>주소</p>
       <p>
-        회장 이창현 010-1234-1234
+        contact us: wyea@wyea.info
       </p>
     </div>
     <div class="footer-middle">
