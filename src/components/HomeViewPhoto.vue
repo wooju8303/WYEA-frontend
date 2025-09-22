@@ -12,11 +12,7 @@ defineProps<{
     <section class="section2">
       <h1>추후 추가</h1>
     </section>
-
   </section>
-  <div >
-
-  </div>
 </template>
 
 <style scoped>
@@ -112,6 +108,14 @@ defineProps<{
   .section2 h1 {
     font-size: 40px;
   }
+}
+
+.section2 img {
+  z-index: 0; /* 격자보다 위 */
+  background: #2d6a4f;
+  box-shadow: 0 0 30px 15px #2d6a4f;
+  padding: 0.5em 1em; /* 배경이 글자보다 약간 크게 */
+  display: inline-block;  /* 텍스트 길이에 맞게 박스 */
 }
 
 </style>

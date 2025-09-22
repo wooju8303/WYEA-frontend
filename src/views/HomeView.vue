@@ -867,9 +867,9 @@ body {
   transition: bottom 0.4s ease; /* 애니메이션 */
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  clip-path: inset(0 700px 0 700px round 64px 64px 0 0);
+  clip-path: inset(0 37% 0 37% round 64px 64px 0 0);
 }
-@media (max-width: 1024px) {
+@media (max-width: 1500px) {
   .footer {
     clip-path: inset(0 0px 0 0px round 0px 0px 0 0);
   }
