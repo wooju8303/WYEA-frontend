@@ -316,10 +316,6 @@ onBeforeUnmount(() => {
             <span class="event">부산대학교 지부 설립</span>
           </li>
           <li>
-            <span class="date">2025년 8월 2일</span>
-            <span class="event">국립창원대학교 지부 설립</span>
-          </li>
-          <li>
             <span class="date">2025년 9월 2일</span>
             <span class="event">우송정보대학교 지부 설립</span>
           </li>
@@ -837,12 +833,11 @@ body {
 .section3-div2 ul li:nth-child(7)::before { background: #64b5f6; }
 
 .section3-div3 ul li:nth-child(1)::before { background: #64b5f6; }
-.section3-div3 ul li:nth-child(2)::before { background: #56a3e8; }
-.section3-div3 ul li:nth-child(3)::before { background: #4790da; }
-.section3-div3 ul li:nth-child(4)::before { background: #387ecc; }
-.section3-div3 ul li:nth-child(5)::before { background: #2a6cbd; }
-.section3-div3 ul li:nth-child(6)::before { background: #1c59af; }
-.section3-div3 ul li:nth-child(7)::before { background: #0d47a1; }
+.section3-div3 ul li:nth-child(2)::before { background: #42a5f5; }
+.section3-div3 ul li:nth-child(3)::before { background: #2196f3; }
+.section3-div3 ul li:nth-child(4)::before { background: #1e88e5; }
+.section3-div3 ul li:nth-child(5)::before { background: #1976d2; }
+.section3-div3 ul li:nth-child(6)::before { background: #0d47a1; }
 
 
 .section3 ul .date {
