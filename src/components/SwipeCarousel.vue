@@ -79,7 +79,7 @@ onMounted(() => wrap.value?.focus())
   position: relative;
   width: 100%;
   outline: none;
-  padding-bottom: 37%; /* dot 영역 높이 */
+  padding-bottom: 37%;; /* dot 영역 높이 */
 }
 
 /* 수평 스와이프 영역 */
@@ -115,8 +115,8 @@ onMounted(() => wrap.value?.focus())
   z-index: 10;
   display: none; /* 모바일에선 숨기고 데스크톱에서 표시 */
 }
-.nav.prev { left: 8px; }
-.nav.next { right: 8px; }
+.nav.prev { left: -10px; }
+.nav.next { right: -10px; }
 .nav.disabled { opacity: .35; pointer-events: none; }
 @media (min-width: 1025px) {
   .nav { display: inline-flex; align-items: center; justify-content: center; }

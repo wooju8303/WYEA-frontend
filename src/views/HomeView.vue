@@ -580,12 +580,20 @@ body {
 .section2-card1 p {
   text-align: left;
   margin-top: 25px;
-  margin-left: 50px;
-  margin-right: 30px;
+  margin-left: 40px;
+  margin-right: 40px;
   font-weight: 400;
   font-size: 1.1rem;
   line-height: 1.8;
 }
+
+@media (max-width: 1024px) {
+  .section2-card1 p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
 
 .section2-card2 {
   flex: 1 1 450px;  /* 최소 450px, 공간 있으면 늘어남 */
