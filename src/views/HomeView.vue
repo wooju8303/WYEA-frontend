@@ -30,6 +30,7 @@ import seoul from '@/assets/image/seoul.webp'
 import masan from '@/assets/image/masan.png'
 
 import HomeViewPhoto from '@/components/HomeViewPhoto.vue'
+import SwipeCarousel from '@/components/SwipeCarousel.vue'
 /**
  * 홈 메인 이미지
  */
@@ -221,16 +222,29 @@ onBeforeUnmount(() => {
     <div class="section2-div2">
       <div class="section2-card1">
         <img src="@/assets/image/clip.png" class="clip" alt="clip" style="--rot: 38deg;" />
-        <h4>설립 배경</h4>
-        <p>
-          21세기는 IT 기술의 눈부신 발전으로 인해, 소통의 범위가 국가와 개인을 넘어 전 세계로 확대되었습니다.
-        </p>
-        <p>
-          이제 우리는 언제 어디서든 쉽게 연락할 수 있지만, 여전히 언어 장벽과 물리적 거리라는 한계를 실감합니다.
-        </p>
-        <p>
-          이러한 글로벌 시대에 걸맞은 단체가 필요하다고 느껴, 세계청년교류연합을 설립하게 되었습니다.
-        </p>
+          <h4>설립 배경</h4>
+        <SwipeCarousel>
+          <template #item-0>
+            <p>
+              21세기는 IT 기술의 눈부신 발전으로 인해,
+              소통의 범위가 국가와 개인을 넘어 전 세계로 확대되었습니다.
+            </p>
+          </template>
+
+          <template #item-1>
+            <p>
+              이제 우리는 언제 어디서든 쉽게 연락할 수 있지만,
+              여전히 언어 장벽과 물리적 거리라는 한계를 실감합니다.
+            </p>
+          </template>
+
+          <template #item-2>
+            <p>
+              이러한 글로벌 시대에 걸맞은 단체가 필요하다고 느껴,
+              세계청년교류연합을 설립하게 되었습니다.
+            </p>
+          </template>
+        </SwipeCarousel>
       </div>
       <div class="section2-card2">
         <img src="@/assets/image/clip.png" class="clip" alt="clip" style="--rot: 48deg;" />
@@ -566,6 +580,8 @@ body {
 .section2-card1 p {
   text-align: left;
   margin-top: 25px;
+  margin-left: 50px;
+  margin-right: 30px;
   font-weight: 400;
   font-size: 1.1rem;
   line-height: 1.8;
