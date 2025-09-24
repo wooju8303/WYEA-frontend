@@ -57,14 +57,14 @@ const decorItems: DecorItem[] = [
  * 협력 대학 로고
  */
 const logos = [
-  { src: busan },
-  { src: kyungnam },
-  { src: inje },
   { src: gyeongsang },
-  { src: yonsei },
+  { src: inje },
   { src: kyunghee },
-  { src: woosongcollege },
   { src: seoul },
+  { src: yonsei },
+  { src: kyungnam },
+  { src: busan },
+  { src: woosongcollege },
   { src: masan },
 ]
 
@@ -130,15 +130,6 @@ onMounted(async () => {
   // 스태거 지연값 주입
   section2Ref.value?.querySelectorAll<HTMLElement>('.clip')
     .forEach((el, i) => el.style.setProperty('--clip-d', `${i * 120}ms`))
-  // 이미 화면에 들어와 있으면 즉시 활성화 (폴백)
-  const el = section2Ref.value
-  if (el) {
-    const rect = el.getBoundingClientRect()
-    const soonVisible = rect.top < window.innerHeight * 0.8
-    if (soonVisible) {
-      el.classList.add('clip-start')
-    }
-  }
   // IO 등록 (1회만)
   if (section2Ref.value) {
     section2IO?.disconnect()
@@ -150,7 +141,7 @@ onMounted(async () => {
       }
     }, {
       threshold: 0.4,
-      rootMargin: '0px 0px -20% 0px' // 아래쪽 여유 주기
+      rootMargin: '0px 0px 0px 0px' // 아래쪽 여유 주기
     })
     section2IO.observe(section2Ref.value)
   }
@@ -674,7 +665,6 @@ body {
   opacity: 1;
   transform: rotate(var(--rot, 0deg)) translateY(0);
 }
-
 
 
 @media (max-width: 1024px) {
