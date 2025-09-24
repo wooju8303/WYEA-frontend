@@ -11,6 +11,11 @@ const routerInstance = createRouter({
       component: HomeView,
     },
     {
+      path: '/financialreport',
+      name: 'financialreport',
+      component: () => import('../views/FinancialReport.vue'),
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),

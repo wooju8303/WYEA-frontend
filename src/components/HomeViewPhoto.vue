@@ -74,6 +74,7 @@ defineProps<{
 
 .section1 {
   font-family: 'PretendardFont', sans-serif;
+  background: #2d6a4f;
 }
 .section1 h1{
   margin-top: 20px;

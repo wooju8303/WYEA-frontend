@@ -1,96 +1,164 @@
 <template>
   <div class="app">
-    <!-- 상단 네비게이션 (공통) 헤더 숨김-->
-<!--    <header class="header" id="site-header">-->
-<!--      <div class="logo">MyLogo</div>-->
-<!--      <nav class="nav">-->
-<!--        <RouterLink to="/">Home</RouterLink>-->
-<!--        <RouterLink to="/login">Login</RouterLink>-->
-<!--        <RouterLink to="/register">Register</RouterLink>-->
-<!--      </nav>-->
-<!--    </header>-->
-    <!-- 라우터 페이지 내용 -->
+    <header id="site-header" class="glass-header" :class="{ scrolled: isScrolled }">
+      <div class="inner">
+        <div class="brand">
+          <img src="@/assets/image/wyea-logo.png" alt="WYEA" height="24" />
+        </div>
+        <nav class="nav">
+<!--          <RouterLink to="/">Home</RouterLink>-->
+<!--          <RouterLink to="/about">About</RouterLink>-->
+<!--          <RouterLink to="/blog">Blog</RouterLink>-->
+<!--          <RouterLink to="/guides">Guides</RouterLink>-->
+        </nav>
+        <div class="actions">
+<!--          <RouterLink class="btn ghost" to="/login">Log in</RouterLink>-->
+<!--          <RouterLink class="btn solid" to="/register">Sign up</RouterLink>-->
+        </div>
+      </div>
+    </header>
     <main class="page" >
       <RouterView />
     </main>
   </div>
 </template>
 
+
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+const isScrolled = ref(false)
+const onScroll = () => (isScrolled.value = window.scrollY > 6)
 
-function setHeaderVar() {
-  const h = document.getElementById('site-header')?.offsetHeight ?? 64
-  document.documentElement.style.setProperty('--header-h', `${h}px`)
-}
-
-let ro: ResizeObserver | null = null
-
-onMounted(async () => {
-  await nextTick()
-  setHeaderVar()
-
-  // 헤더 높이가 변하면 즉시 CSS 변수 업데이트
-  const headerEl = document.getElementById('site-header')
-  if (headerEl && 'ResizeObserver' in window) {
-    ro = new ResizeObserver(() => setHeaderVar())
-    ro.observe(headerEl)
-  }
-
-  // 윈도 리사이즈 시에도 업데이트
-  window.addEventListener('resize', setHeaderVar)
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
 })
-
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', setHeaderVar)
-  ro?.disconnect()
-  ro = null
+  window.removeEventListener('scroll', onScroll)
 })
 </script>
 
 <style scoped>
-/* 전역 기본값: 커스텀 변수 미리 정의(경고 방지) */
 :global(:root){
   --header-h: 64px;
 }
 
-/* 레이아웃 기본 */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #fff;
 }
-:global(html), :global(body), :global(#app) { height: 100%; }
-:global(body) { margin: 0; }
+:global(html), :global(body), :global(#app) { height: 100%; margin: 0; }
 * { box-sizing: border-box; }
 
-/* 헤더 */
-.header {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 64px; padding: 0 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid #eee; background: #fff; z-index: 1000;
+/* ==== Glass Header ==== */
+.glass-header {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 28px));
+  z-index: 1000;
+
+  background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.6));
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.7);
+  transition: background .25s ease, box-shadow .25s ease;
 }
-.logo { font-weight: 800; font-size: 20px; }
-.nav { display: flex; gap: 20px; }
-.nav a { text-decoration: none; color: #333; font-weight: 500; }
+.glass-header.scrolled {
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 12px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.9);
+}
 
-/* 페이지 컨텐츠 (헤더만큼 아래에서 시작)
-.page {
-  position: relative;
-  z-index: 1;
-  padding-top: var(--header-h);
-  min-height: calc(100vh - var(--header-h));
-}*/
+.inner {
+  height: 56px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
 
-/* 라우터 뷰가 나오는 메인 영역 */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: #0d47a1;
+  text-decoration: none;
+}
+
+.brand img{
+  width: 60px;   /* 원하는 가로 크기 */
+  height: auto;   /* 세로 비율은 자동 */
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+.nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #1f2937;
+  opacity: .85;
+}
+.nav a.router-link-active {
+  color: #0d47a1;
+  opacity: 1;
+}
+.nav a:hover { opacity: 1; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+.btn.ghost {
+  background: rgba(255,255,255,.6);
+  border: 1px solid rgba(0,0,0,.08);
+  color: #1f2937;
+}
+.btn.ghost:hover { background: rgba(255,255,255,.9); }
+.btn.solid {
+  background: #111;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+}
+.btn.solid:hover {
+  background: #000;
+  box-shadow: 0 8px 20px rgba(0,0,0,.22);
+}
+
+/* Page content */
 .page {
   position: relative;
   z-index: 0;
   min-height: 120vh; /* 충분히 길게 */
-  background: #2d6a4f;
+  background: #fff;
 }
 
+/* 반응형 */
+@media (max-width: 768px) {
+  .glass-header { width: calc(100% - 16px); top: 8px; }
+  .inner { height: 52px; padding: 0 10px; }
+  .nav { display: none; } /* 모바일에선 햄버거로 교체하는 게 일반적 */
+}
 </style>

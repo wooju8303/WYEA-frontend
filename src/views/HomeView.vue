@@ -96,7 +96,7 @@ onMounted(async () => {
   const headerH = parseFloat(rootStyles.getPropertyValue('--header-h')) || 64
 
   const HIDE_AT = 0.8
-  const SHOW_AT = 0.8
+  const SHOW_AT = 0.7
 
   await nextTick() // DOM 렌더 보장
 
@@ -403,6 +403,7 @@ body {
   animation-delay: .10s;
   user-select: none;
   -webkit-user-drag: none;
+  margin-top: 50px;
 }
 
 .section1-div1 h3 {
@@ -469,7 +470,6 @@ body {
 
 .section1-div3 {
   margin-top: 60px;
-  margin-bottom: 160px;
 }
 @media (max-width: 1024px) {
   .section1-div3 {
