@@ -6,10 +6,10 @@ defineProps<{
 
 <template>
   <section class="hero" >
-    <section class="section1">
+    <section class="hvpsection1">
       <h1>활동 사진</h1>
     </section>
-    <section class="section2">
+    <section class="hvpsection2">>
       <h1>추후 추가</h1>
     </section>
   </section>
@@ -52,6 +52,13 @@ defineProps<{
     calc(var(--cell) * 5) calc(var(--cell) * 5),
     calc(var(--cell) * 5) calc(var(--cell) * 5);
 
+  /* ✅ 패턴 기준점을 중앙으로 맞추기 */
+  background-position:
+    50% 50%,
+    50% 50%,
+    50% 50%,
+    50% 50%;
+
   opacity: .9;  /* 전체 격자 투명도 */
   mix-blend-mode: overlay;  /* 배경과 자연스럽게 섞임 (필요 없으면 지워도 됨) */
 
@@ -72,11 +79,10 @@ defineProps<{
   mix-blend-mode: soft-light;
 }
 
-.section1 {
+.hvpsection1 {
   font-family: 'PretendardFont', sans-serif;
-  background: #2d6a4f;
 }
-.section1 h1{
+.hvpsection1 h1{
   margin-top: 20px;
   font-weight: 600;
   font-size: 60px;
@@ -89,12 +95,12 @@ defineProps<{
 }
 
 @media (max-width: 1024px) {
-  .section1 h1 {
+  .hvpsection1 h1 {
     font-size: 30px;
   }
 }
 
-.section2 h1 {
+.hvpsection2 h1 {
   margin-top: 70px;
   font-weight: 600;
   font-size: 100px;
@@ -106,12 +112,12 @@ defineProps<{
   display: inline-block;  /* 텍스트 길이에 맞게 박스 */
 }
 @media (max-width: 1024px) {
-  .section2 h1 {
+  .hvpsection2 h1 {
     font-size: 40px;
   }
 }
 
-.section2 img {
+.hvpsection2 img {
   z-index: 0; /* 격자보다 위 */
   background: #2d6a4f;
   box-shadow: 0 0 30px 15px #2d6a4f;

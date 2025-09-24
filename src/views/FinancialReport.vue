@@ -81,7 +81,7 @@ const centerSub = computed(() => {
 </script>
 
 <template>
-  <section class="section1">
+  <section class="frsection1">
     <header class="pageHead">
       <h1>재정보고</h1>
       <p class="sub">2025 재원 사용 보고 · <span class="accent">2025 수입</span></p>
@@ -164,9 +164,18 @@ const centerSub = computed(() => {
   </section>
 </template>
 
+<style>
+html, body, #app { background:#fff; }
+</style>
+
 <style scoped>
 :root { --bg:#ffffff; --ink:#0f172a; --muted:#667085; --line:#e7eef7; }
-.section1 { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+.frsection1 {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+}
 .pageHead h1 {
   font-size: 36px;
   margin: 100px 0 8px;

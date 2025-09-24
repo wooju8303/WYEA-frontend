@@ -95,7 +95,8 @@ onBeforeUnmount(() => {
 }
 
 .brand img{
-  width: 60px;   /* 원하는 가로 크기 */
+  margin-top: 10px;
+  width: 90px;   /* 원하는 가로 크기 */
   height: auto;   /* 세로 비율은 자동 */
 }
 
@@ -121,40 +122,12 @@ onBeforeUnmount(() => {
   gap: 10px;
 }
 
-.btn {
-  height: 34px;
-  padding: 0 14px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all .2s ease;
-}
-.btn.ghost {
-  background: rgba(255,255,255,.6);
-  border: 1px solid rgba(0,0,0,.08);
-  color: #1f2937;
-}
-.btn.ghost:hover { background: rgba(255,255,255,.9); }
-.btn.solid {
-  background: #111;
-  color: #fff;
-  box-shadow: 0 6px 16px rgba(0,0,0,.18);
-}
-.btn.solid:hover {
-  background: #000;
-  box-shadow: 0 8px 20px rgba(0,0,0,.22);
-}
-
 /* Page content */
 .page {
   position: relative;
   z-index: 0;
   min-height: 120vh; /* 충분히 길게 */
-  background: #fff;
+  background: #2d6a4f;
 }
 
 /* 반응형 */
