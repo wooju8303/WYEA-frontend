@@ -3,7 +3,9 @@
     <header id="site-header" class="glass-header" :class="{ scrolled: isScrolled }">
       <div class="inner">
         <div class="brand">
-          <img src="@/assets/image/wyea-logo.png" alt="WYEA" height="24" />
+          <RouterLink to="/">
+            <img src="@/assets/image/wyea-logo-home.png" alt="WYEA" height="24" />
+          </RouterLink>
         </div>
         <nav class="nav">
 <!--          <RouterLink to="/">Home</RouterLink>-->
