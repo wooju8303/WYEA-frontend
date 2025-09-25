@@ -25,7 +25,6 @@ defineProps<{
   inset: var(--header-h, 64px) 0 0 0;
   z-index: -1;
   pointer-events: none;
-
 }
 .hero::before {
   --cell: 32px; /* 칸 크기 */

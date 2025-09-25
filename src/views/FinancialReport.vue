@@ -164,17 +164,16 @@ const centerSub = computed(() => {
   </section>
 </template>
 
-<style>
-html, body, #app { background:#fff; }
-</style>
-
 <style scoped>
+:global(.financialreport.page) {   /* 이 뷰에서만 */
+  background: #fff !important;
+}
+:global(html), :global(body), :global(#app) { background:#fff; }
 :root { --bg:#ffffff; --ink:#0f172a; --muted:#667085; --line:#e7eef7; }
 .frsection1 {
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
-
 }
 .pageHead h1 {
   font-size: 36px;

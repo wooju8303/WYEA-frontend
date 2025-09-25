@@ -19,7 +19,11 @@
         </div>
       </div>
     </header>
-    <main class="page" >
+    <main
+      class="page"
+      :class="routeName"
+      :style="{ background: pageBg }"
+    >
       <RouterView />
     </main>
   </div>
@@ -27,7 +31,21 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useRoute } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount, computed  } from 'vue'
+
+
+const route = useRoute()
+
+// 라우트 이름 -> 기존처럼 class에 써서 페이지별 CSS도 가능
+const routeName = computed(() => String(route.name ?? ''))
+
+// ✅ 메타에 bg가 문자열이면 그대로, 없으면 기본값(#fff)
+type PageMeta = { bg?: string } // 배경은 문자열(단색/그라디언트 모두 가능)
+const pageBg = computed(() => {
+  const m = route.meta as PageMeta
+  return typeof m.bg === 'string' ? m.bg : '#2d6a4f'
+})
 
 const isScrolled = ref(false)
 const onScroll = () => (isScrolled.value = window.scrollY > 6)
@@ -127,7 +145,6 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 0;
   min-height: 120vh; /* 충분히 길게 */
-  background: #2d6a4f;
 }
 
 /* 반응형 */
