@@ -37,11 +37,11 @@ import SwipeCarousel from '@/components/SwipeCarousel.vue'
 const decorItems: DecorItem[] = [
   { src: coin, from: 'right', right: '0%', top: '30%', width: 140, rotZ:70, delay: .25 },
   { src: carrier, from: 'top-right', right: '-12%', top: '-30%', width: 710, rotZ:70, delay: .25 },
-  { src: passport, from: 'right',  right: '0%', top: '60%',  width: 200, rotZ:-60, delay: .25 },
+  { src: passport, from: 'right',  right: '7%', top: '40%',  width: 200, rotZ:20, delay: .25 },
   { src: charger, from: 'right',  right: '-3%', top: '34%', width: 300, rotZ:30, delay: .30 },
   { src: compass, from: 'down',  right: '20%', top: '0%',  width: 150, rotZ:30, delay: .25 },
-  { src: bill, from: 'bottom-right',  right: '-6%', top: '70%',  width: 200, rotZ:-20, delay: .25 },
-  { src: map, from: 'up',  right: '-3%', top: '60%',  width: 700, rotZ:100, delay: .25 },
+  { src: bill, from: 'up',  right: '6%', top: '80%',  width: 200, rotZ:30, delay: .25 },
+  { src: map, from: 'bottom-right',  right: '-17%', top: '40%',  width: 700, rotZ:100, delay: .25 },
 
   { src: coin, from: 'left', left: '0%', top: '50%', width: 100, rotZ:170, delay: .30 },
   { src: backpack, from: 'top-left',  left: '-6%', top: '-5%',  width: 400, rotZ:30, delay: .25 },
@@ -488,6 +488,7 @@ onBeforeUnmount(() => {
   gap: 4rem;        /* 카드 사이 간격 더 넓게 */
   padding: 4rem;    /* 화면 테두리와 카드 사이 여백 */
   font-family: 'PretendardFont', sans-serif;
+  z-index: 0;
 }
 
 .section2-card1 img {
