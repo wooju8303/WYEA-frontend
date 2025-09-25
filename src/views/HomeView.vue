@@ -496,8 +496,8 @@ onBeforeUnmount(() => {
 .section2-card1 img {
   position: absolute;
   width: 200px;
-  top: -70px;
-  left: -66px;
+  top: -16%;
+  left: -12%;
   z-index: 2;
   user-select: none;
   -webkit-user-drag: none;
@@ -609,7 +609,7 @@ onBeforeUnmount(() => {
   position: absolute;
   width: 200px;
   top: -16%;
-  left: -57px;
+  left: -11%;
   user-select: none;
   -webkit-user-drag: none;
 }
