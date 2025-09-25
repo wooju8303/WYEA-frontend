@@ -354,12 +354,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-
-body {
-  background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 50%, #f9fcff 100%);
-}
-
-* {
+* { 
   box-sizing: border-box;
 }
 
