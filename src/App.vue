@@ -44,7 +44,7 @@ const routeName = computed(() => String(route.name ?? ''))
 type PageMeta = { bg?: string } // 배경은 문자열(단색/그라디언트 모두 가능)
 const pageBg = computed(() => {
   const m = route.meta as PageMeta
-  return typeof m.bg === 'string' ? m.bg : '#2d6a4f'
+  return typeof m.bg === 'string' ? m.bg : '#fff'
 })
 
 const isScrolled = ref(false)

@@ -16,6 +16,10 @@ defineProps<{
 </template>
 
 <style scoped>
+:global(.homeviewphoto.page) {   /* 이 뷰에서만 */
+  background: #fff !important;
+}
+
 .hero > * { position: relative; z-index: 0; }
 .hero {
   position: fixed;

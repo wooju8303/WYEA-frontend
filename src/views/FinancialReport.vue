@@ -23,8 +23,9 @@ const arcPath = (cx: number, cy: number, r: number, start: number, end: number) 
 /**********************************수입**************************************/
 // 1) 데이터
 const items1 = ref<Item[]>([
-  { label: '보험 tw', amount: 2_000_000, color: '#5EB1FF' },
+  { label: '보험 tw', amount: 2_000_000, color: '#1C77F2' },
   { label: 'g팡 환불 tw', amount: 369_000, color: '#2D99FF' },
+  { label: '장학금', amount: 2_100_000, color: '#5EB1FF' },
 ])
 // #1C77F2 (진한 블루)
 // #2D99FF (중간 블루)
@@ -87,6 +88,7 @@ const remaining = computed(() => total.value - total2.value)
 const items2 = ref<Item[]>([
   { label: '행정사 tw', amount: 1_500_000, color: '#065F46' },
   { label: 'BB 파워에이드 tw', amount: 4_800, color: '#047857' },
+  { label: '비상주사무실 1년계약', amount: 259_000, color: '#10B981' },
 ])
 // #065F46 (딥 그린·짙은 초록)
 // #047857 (청록빛 중간 초록)
@@ -149,7 +151,7 @@ const centerSub2 = computed(() => {
   <section class="frsection1">
     <header class="pageHead">
       <h1>재정보고</h1>
-      <p class="sub">2025 재원 사용 보고 · <span class="accent">2025 수입</span></p>
+      <p class="sub">재원 사용 보고 · <span class="accent">2025 수입</span></p>
     </header>
 
     <div class="grid">
@@ -230,7 +232,7 @@ const centerSub2 = computed(() => {
   <!-- ▼▼ 섹션 2: 지출 (item2) ▼▼ -->
   <section class="frsection2">
     <header class="pageHead">
-      <p class="sub">2025 재원 사용 보고 · <span class="accent">2025 지출</span></p>
+      <p class="sub">재원 사용 보고 · <span class="accent">2025 지출</span></p>
     </header>
 
     <div class="grid">

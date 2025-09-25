@@ -11,6 +11,11 @@ const routerInstance = createRouter({
       component: HomeView,
     },
     {
+      path: '/SG9tZVZpZXdQaG90bw==',
+      name: 'homeviewphoto',
+      component: () => import('../components/HomeViewPhoto.vue'),
+    },
+    {
       path: '/financialreport',
       name: 'financialreport',
       component: () => import('../views/FinancialReport.vue'),
