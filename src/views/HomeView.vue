@@ -354,9 +354,6 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-:global(.home.page) {
-  background: #2d6a4f !important;
-}
 
 * {
   box-sizing: border-box;

@@ -9,7 +9,7 @@ const routerInstance = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: {footer: false}
+      meta: {footer: false, bg: '#2d6a4f'}
     },
     {
       path: '/SG9tZVZpZXdQaG90bw==',
@@ -20,6 +20,7 @@ const routerInstance = createRouter({
       path: '/financialreport',
       name: 'financialreport',
       component: () => import('../views/FinancialReport.vue'),
+      meta: {footer: false, bg: '#ffffff'}
     },
     {
       path: '/login',

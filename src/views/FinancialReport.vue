@@ -143,27 +143,23 @@ const centerSub2 = computed(() => {
 
 <template>
   <section class="frsection1">
-    <section class="frsection1">
-      <header class="pageHead">
-        <h1>재정보고</h1>
-        <p class="sub">
-          재원 사용 보고
-        </p>
-        <!-- 👇 연도 전환 탭 -->
-        <div class="year-tabs">
-          <button
-            :class="{ active: activeIncomeYear === '2025' }"
-            @click="activeIncomeYear = '2025'">
-            2025 수입
-          </button>
-<!--          <button-->
-<!--            :class="{ active: activeIncomeYear === '2026' }"-->
-<!--            @click="activeIncomeYear = '2026'">-->
-<!--            2026 수입-->
-<!--          </button>-->
-        </div>
-      </header>
-    </section>
+    <header class="pageHead">
+      <h1>재정보고</h1>
+      <p class="sub1">재원 사용 보고</p>
+      <!-- 👇 연도 전환 탭 -->
+      <div class="year-tabs">
+        <button
+          :class="{ active: activeIncomeYear === '2025' }"
+          @click="activeIncomeYear = '2025'">
+          2025 수입
+        </button>
+        <!--          <button-->
+        <!--            :class="{ active: activeIncomeYear === '2026' }"-->
+        <!--            @click="activeIncomeYear = '2026'">-->
+        <!--            2026 수입-->
+        <!--          </button>-->
+      </div>
+    </header>
 
     <div class="grid">
       <!-- 표 -->
@@ -243,7 +239,7 @@ const centerSub2 = computed(() => {
   <!-- ▼▼ 섹션 2: 지출 (item2) ▼▼ -->
   <section class="frsection2">
     <header class="pageHead">
-      <p class="sub">재원 사용 보고</p>
+      <p class="sub2">재원 사용 보고</p>
       <div class="year-tabs">
         <button
           :class="{ active: activeSpendingYear === '2025' }"
@@ -343,9 +339,6 @@ const centerSub2 = computed(() => {
 </template>
 
 <style scoped>
-:global(.financialreport.page) {   /* 이 뷰에서만 */
-  background: #fff !important;
-}
 :global(html), :global(body), :global(#app) { background:#fff; }
 :root { --bg:#ffffff; --ink:#0f172a; --muted:#667085; --line:#e7eef7; }
 .frsection1 {
@@ -353,6 +346,7 @@ const centerSub2 = computed(() => {
   margin: 40px auto;
   padding: 0 20px;
 }
+
 .frsection2 {
   max-width: 1100px;
   margin: 40px auto;
@@ -363,7 +357,19 @@ const centerSub2 = computed(() => {
   margin: 100px 0 8px;
   font-weight: 700;
 }
-.pageHead .sub { color: var(--muted); margin: 0 0 24px; }
+
+.pageHead .sub1 {
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.pageHead .sub2 {
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 80px;
+}
 
 .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; }
 .card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(15,23,42,.06); }
@@ -397,7 +403,7 @@ const centerSub2 = computed(() => {
 
 .centerTitle { font-size: 13px; font-weight: 600; fill: #64748b; }
 .centerSub { font-size: 14px; font-weight: 700; fill: #1C77F2; }
-@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
 
 .year-tabs {
   display: inline-flex;
