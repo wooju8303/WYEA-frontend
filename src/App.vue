@@ -26,6 +26,34 @@
     >
       <RouterView />
     </main>
+    <footer v-if="footerVisible" class="frfooter">
+      <div class="frfooter-top">
+        <p>주소</p>
+        <p>
+          contact us: wyea@wyea.info
+        </p>
+      </div>
+      <div class="frfooter-middle">
+        <p>
+          © {{ year }} WYEA · Icons by Freepik (flaticon.com)<br>
+          대학 로고와 명칭은 각 대학의 자산이며, 식별 목적에 한해 사용됩니다.
+        </p>
+      </div>
+      <div class="frfooter-bottom">
+        <a href="https://www.instagram.com/wyea_official/" target="_blank" rel="noopener noreferrer">
+          <img src="@/assets/image/instaricon.png" class="frfooter-logo" alt="instagram"/>
+        </a>
+        <a href="mailto:wyea@wyea.info" target="_blank" rel="noopener noreferrer">
+          <img src="@/assets/image/mailicon.png" class="frfooter-logo" alt="maili"/>
+        </a>
+        <a href="https://open.kakao.com/o/sFkgaWQh" target="_blank" rel="noopener noreferrer">
+          <img src="@/assets/image/kakaoicon.png" class="frfooter-logo" alt="kakao"/>
+        </a>
+        <a href="https://x.com/wyea_official" target="_blank" rel="noopener noreferrer">
+          <img src="@/assets/image/twitter.png" class="frfooter-logo" alt="kakao"/>
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -34,9 +62,8 @@
 import { useRoute } from 'vue-router'
 import { ref, onMounted, onBeforeUnmount, computed  } from 'vue'
 
-
+const year = new Date().getFullYear()
 const route = useRoute()
-
 // 라우트 이름 -> 기존처럼 class에 써서 페이지별 CSS도 가능
 const routeName = computed(() => String(route.name ?? ''))
 
@@ -46,6 +73,8 @@ const pageBg = computed(() => {
   const m = route.meta as PageMeta
   return typeof m.bg === 'string' ? m.bg : '#fff'
 })
+
+const footerVisible = computed(() => route.meta.footer !== false)
 
 const isScrolled = ref(false)
 const onScroll = () => (isScrolled.value = window.scrollY > 6)
@@ -153,4 +182,48 @@ onBeforeUnmount(() => {
   .inner { height: 52px; padding: 0 10px; }
   .nav { display: none; } /* 모바일에선 햄버거로 교체하는 게 일반적 */
 }
+
+.frfooter {
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.6;
+
+  position: static;   /* ← 기본 흐름 */
+  width: 100%;
+  margin-top: 100px;   /* 선택: 본문과 간격 */
+}
+@media (max-width: 1500px) {
+  .frfooter {
+    clip-path: inset(0 0 0 0 round 0 0 0 0);
+  }
+}
+
+.frfooter .frfooter-top p {
+  color: #000;
+  margin: 2px 0;
+  font-weight: bold; }
+.frfooter .frfooter-middle {
+  margin: 12px 0;
+  font-size: 13px;
+  color: #666;
+  line-height:1.6;
+}
+.frfooter .frfooter-bottom {
+  margin-top: 16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:32px;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.frfooter .frfooter-logo {
+  height: 30px;
+  filter:grayscale(100%);
+  opacity:.9;
+}
+
 </style>

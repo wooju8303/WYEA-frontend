@@ -9,6 +9,7 @@ const routerInstance = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: {footer: false}
     },
     {
       path: '/SG9tZVZpZXdQaG90bw==',

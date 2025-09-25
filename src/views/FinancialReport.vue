@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+
 type Item = { label: string; amount: number; color?: string }
 type ItemWithPct = Item & { pct: number }
 
@@ -318,7 +319,6 @@ const centerSub2 = computed(() => {
       </div>
     </div>
   </section>
-
 </template>
 
 <style scoped>
