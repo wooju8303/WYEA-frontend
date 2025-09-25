@@ -90,6 +90,7 @@ const items2 = ref<Item[]>([
   { label: '행정사 tw', amount: 1_500_000, color: '#065F46' },
   { label: 'BB 파워에이드 tw', amount: 4_800, color: '#047857' },
   { label: '비상주사무실 1년계약', amount: 259_000, color: '#10B981' },
+  { label: '애플워치 구매', amount: 409_000, color: '#34D399' },
 ])
 // #065F46 (딥 그린·짙은 초록)
 // #047857 (청록빛 중간 초록)
@@ -264,7 +265,6 @@ const centerSub2 = computed(() => {
             <td class="num">{{ fmtKRW(total2) }}</td>
             <td class="num">100.0%</td>
           </tr>
-          <!-- ▼ 남은금액 행 -->
           <tr>
             <th scope="row">남은금액</th>
             <td class="num" :class="{ neg: remaining < 0 }">
@@ -355,7 +355,6 @@ const centerSub2 = computed(() => {
 
 /* 음수면 색만 살짝 경고톤 */
 .neg { color: #b91c1c; }
-
 
 .tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
 .tbl th, .tbl td { padding: 10px 12px; border-bottom: 1px solid var(--line); }

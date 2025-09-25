@@ -35,23 +35,23 @@ import SwipeCarousel from '@/components/SwipeCarousel.vue'
  * 홈 메인 이미지
  */
 const decorItems: DecorItem[] = [
-  { src: coin, from: 'right', right: '0px', top: '30%', width: 140, rotZ:70, delay: .25 },
-  { src: carrier, from: 'top-right', right: '-250px', top: '-30%', width: 700, rotZ:70, delay: .25 },
-  { src: passport, from: 'right',  right: '0px', top: '60%',  width: 200, rotZ:-60, delay: .25 },
-  { src: charger, from: 'right',  right: '-40px', top: '34%', width: 300, rotZ:30, delay: .30 },
-  { src: compass, from: 'down',  right: '350px', top: '0%',  width: 150, rotZ:30, delay: .25 },
-  { src: bill, from: 'bottom-right',  right: '-120px', top: '70%',  width: 200, rotZ:-20, delay: .25 },
-  { src: map, from: 'up',  right: '-80px', top: '60%',  width: 700, rotZ:100, delay: .25 },
+  { src: coin, from: 'right', right: '0%', top: '30%', width: 140, rotZ:70, delay: .25 },
+  { src: carrier, from: 'top-right', right: '-12%', top: '-30%', width: 710, rotZ:70, delay: .25 },
+  { src: passport, from: 'right',  right: '0%', top: '60%',  width: 200, rotZ:-60, delay: .25 },
+  { src: charger, from: 'right',  right: '-3%', top: '34%', width: 300, rotZ:30, delay: .30 },
+  { src: compass, from: 'down',  right: '20%', top: '0%',  width: 150, rotZ:30, delay: .25 },
+  { src: bill, from: 'bottom-right',  right: '-6%', top: '70%',  width: 200, rotZ:-20, delay: .25 },
+  { src: map, from: 'up',  right: '-3%', top: '60%',  width: 700, rotZ:100, delay: .25 },
 
-  { src: coin, from: 'left', left: '0px', top: '50%', width: 100, rotZ:170, delay: .30 },
-  { src: backpack, from: 'top-left',  left: '-90px', top: '-5%',  width: 400, rotZ:30, delay: .25 },
-  { src: camera, from: 'down',  left: '140px', top: '0%',  width: 220, rotZ:110, delay: .25 },
-  { src: pens, from: 'left',  left: '100px', top: '55%',  width: 150, rotZ:0, delay: .23 },
-  { src: headphones, from: 'left',  left: '0px', top: '30%',  width: 250, rotZ:-50, delay: .27 },
-  { src: mobile, from: 'left',  left: '-80px', top: '55%',  width: 200, rotZ:45, delay: .25 },
-  { src: wallet, from: 'bottom-left',  left: '0px', top: '80%',  width: 150, rotZ:-10, delay: .27 },
-  { src: sunglasses, from: 'left',  left: '10px', top: '65%',  width: 200, rotZ:-10, delay: .23 },
-  { src: sticker, from: 'up',  left: '100px', top: '80%',  width: 300, rotZ:30, delay: .25 },
+  { src: coin, from: 'left', left: '0%', top: '50%', width: 100, rotZ:170, delay: .30 },
+  { src: backpack, from: 'top-left',  left: '-6%', top: '-5%',  width: 400, rotZ:30, delay: .25 },
+  { src: camera, from: 'down',  left: '8%', top: '0%',  width: 220, rotZ:110, delay: .25 },
+  { src: pens, from: 'left',  left: '6%', top: '55%',  width: 150, rotZ:0, delay: .23 },
+  { src: headphones, from: 'left',  left: '0%', top: '30%',  width: 250, rotZ:-50, delay: .27 },
+  { src: mobile, from: 'left',  left: '-4%', top: '55%',  width: 200, rotZ:45, delay: .25 },
+  { src: wallet, from: 'bottom-left',  left: '0%', top: '80%',  width: 150, rotZ:-10, delay: .27 },
+  { src: sunglasses, from: 'left',  left: '1%', top: '65%',  width: 200, rotZ:-10, delay: .23 },
+  { src: sticker, from: 'up',  left: '5%', top: '80%',  width: 300, rotZ:30, delay: .25 },
 ]
 /**
  * 협력 대학 로고
@@ -608,7 +608,7 @@ onBeforeUnmount(() => {
 .section2-card2 img {
   position: absolute;
   width: 200px;
-  top: -63px;
+  top: -16%;
   left: -57px;
   user-select: none;
   -webkit-user-drag: none;
