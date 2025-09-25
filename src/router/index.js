@@ -24,6 +24,12 @@ const routerInstance = createRouter({
       meta: {bg: '#ffffff'}
     },
     {
+      path: '/personalinformationprocessingpolicy',
+      name: 'personalinformationprocessingpolicy',
+      component: () => import('../views/PersonalInformationProcessingPolicy.vue'),
+      meta: {bg: '#ffffff'}
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue'),
