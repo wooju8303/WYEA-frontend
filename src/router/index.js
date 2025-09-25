@@ -15,12 +15,13 @@ const routerInstance = createRouter({
       path: '/SG9tZVZpZXdQaG90bw==',
       name: 'homeviewphoto',
       component: () => import('../components/HomeViewPhoto.vue'),
+      meta: {footer: false, bg: '#2d6a4f'}
     },
     {
       path: '/financialreport',
       name: 'financialreport',
       component: () => import('../views/FinancialReport.vue'),
-      meta: {footer: false, bg: '#ffffff'}
+      meta: {bg: '#ffffff'}
     },
     {
       path: '/login',
