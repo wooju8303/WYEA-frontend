@@ -21,12 +21,16 @@ const arcPath = (cx: number, cy: number, r: number, start: number, end: number) 
   return `M ${s.x} ${s.y} A ${r} ${r} 0 ${large} 0 ${e.x} ${e.y}`
 }
 
-/**********************************수입**************************************/
-// 1) 데이터
-const items1 = ref<Item[]>([
+const incomeitems2025 = ref<Item[]>([
   { label: '보험 tw', amount: 2_000_000, color: '#1C77F2' },
   { label: 'g팡 환불 tw', amount: 369_000, color: '#2D99FF' },
   { label: '장학금', amount: 2_100_000, color: '#5EB1FF' },
+])
+
+const incomeitems2026 = ref<Item[]>([
+  { label: '후원금',       amount: 1_200_000, color: '#1C77F2' },
+  { label: '행사 수익',    amount: 1_050_000, color: '#2D99FF' },
+  { label: '장학금',       amount: 2_400_000, color: '#5EB1FF' },
 ])
 // #1C77F2 (진한 블루)
 // #2D99FF (중간 블루)
@@ -39,58 +43,18 @@ const items1 = ref<Item[]>([
 // #9AA9B2 (밝은 그레이)
 // #E2E8F0 (연한 실버톤)
 
-// 2) 합계/비율
-const total = computed(() => items1.value.reduce((sum, i) => sum + i.amount, 0))
-const withPct = computed<ItemWithPct[]>(() =>
-  items1.value.map((i) => ({
-    ...i,
-    pct: total.value ? (i.amount / total.value) * 100 : 0
-  }))
-)
-
-
-// 3) 도넛 누적각 (0~360)
-const accumAngles = computed<number[]>(() => {
-  const arr = withPct.value
-  const a: number[] = [0]
-  let acc = 0
-  for (const it of arr) {
-    acc += it.pct || 0
-    a.push((acc / 100) * 360)
-  }
-  return a
-})
-
-// 4) 세그먼트(템플릿 타입안정)
-const segments = computed(() =>
-  withPct.value.map((i, idx) => ({
-    item: i,
-    start: accumAngles.value[idx] ?? 0,
-    end: accumAngles.value[idx + 1] ?? 0
-  }))
-)
-
-// 5) 차트 인터랙션 (호버 시 중앙 라벨 변경/강조)
-const hoverIdx = ref<number | null>(null)
-const centerTitle = computed(() =>
-  hoverIdx.value == null ? '총 수입' : segments.value[hoverIdx.value]?.item.label ?? '총 수입'
-)
-
-const centerSub = computed(() => {
-  if (hoverIdx.value == null) return fmtKRW(total.value)
-  const seg = segments.value[hoverIdx.value]
-  return seg ? `${fmtPct(seg.item.pct)} · ${fmtKRW(seg.item.amount)}` : ''
-})
-/**********************************지출**************************************/
-// 수입 - 지출
-const remaining = computed(() => total.value - total2.value)
-
-// 1) 데이터
-const items2 = ref<Item[]>([
+const spendingitems2025 = ref<Item[]>([
   { label: '행정사 tw', amount: 1_500_000, color: '#065F46' },
   { label: 'BB 파워에이드 tw', amount: 4_800, color: '#047857' },
   { label: '비상주사무실 1년계약', amount: 259_000, color: '#10B981' },
   { label: '애플워치 구매', amount: 409_000, color: '#34D399' },
+  { label: 'BB 사이다팥빙수 tw', amount: 4_900, color: '#34D399' },
+])
+const spendingitems2026 = ref<Item[]>([
+  { label: '행사 운영비',   amount: 780_000, color: '#065F46' },
+  { label: '장비 구입',     amount: 520_000, color: '#047857' },
+  { label: '사무용 소모품', amount: 86_000,  color: '#10B981' },
+  { label: '광고/홍보',     amount: 160_000, color: '#34D399' },
 ])
 // #065F46 (딥 그린·짙은 초록)
 // #047857 (청록빛 중간 초록)
@@ -103,58 +67,104 @@ const items2 = ref<Item[]>([
 // #4ADE80 (라이트 그린)
 // #BBF7D0 (연한 실버톤 그린)
 
+/**********************************수입**************************************/
+// 1) 합계/비율
+const activeIncomeYear = ref<'2025' | '2026'>('2025')
 
-// 2) 합계/비율
-const total2 = computed(() => items2.value.reduce((sum, i) => sum + i.amount, 0))
-const withPct2 = computed<ItemWithPct[]>(() =>
-  items2.value.map((i) => ({
-    ...i,
-    pct: total2.value ? (i.amount / total2.value) * 100 : 0
-  }))
+/* 선택된 연도의 수입 아이템 */
+const incomeItems = computed<Item[]>(() =>
+  activeIncomeYear.value === '2025' ? incomeitems2025.value : incomeitems2026.value
 )
 
-// 3) 도넛 누적각 (0~360)
+/* === (수입) 합계/비율/세그먼트 등은 incomeItems 기준으로 재계산 === */
+const total = computed(() => incomeItems.value.reduce((s, i) => s + i.amount, 0))
+const withPct = computed<ItemWithPct[]>(() =>
+  incomeItems.value.map(i => ({ ...i, pct: total.value ? (i.amount / total.value) * 100 : 0 }))
+)
+const accumAngles = computed<number[]>(() => {
+  const a: number[] = [0]; let acc = 0
+  for (const it of withPct.value) { acc += it.pct || 0; a.push((acc / 100) * 360) }
+  return a
+})
+const segments = computed(() =>
+  withPct.value.map((i, idx) => ({
+    item: i,
+    start: accumAngles.value[idx] ?? 0,
+    end:   accumAngles.value[idx + 1] ?? 0,
+  }))
+)
+const hoverIdx = ref<number | null>(null)
+const centerTitle = computed(() =>
+  hoverIdx.value == null ? '총 수입' : (segments.value[hoverIdx.value]?.item.label ?? '총 수입')
+)
+const centerSub = computed(() => {
+  if (hoverIdx.value == null) return fmtKRW(total.value)
+  const seg = segments.value[hoverIdx.value]
+  return seg ? `${fmtPct(seg.item.pct)} · ${fmtKRW(seg.item.amount)}` : ''
+})
+/**********************************지출**************************************/
+const activeSpendingYear = ref<'2025' | '2026'>('2025')
+// 선택된 연도의 지출 아이템
+const spendingItems = computed<Item[]>(() =>
+  activeSpendingYear.value === '2025' ? spendingitems2025.value : spendingitems2026.value
+)
+// 남은금액은 "선택된 수입 합계 - 선택된 지출 합계"
+const total2 = computed(() => spendingItems.value.reduce((sum, i) => sum + i.amount, 0))
+const remaining = computed(() => total.value - total2.value)
+
+const withPct2 = computed<ItemWithPct[]>(() =>
+  spendingItems.value.map(i => ({ ...i, pct: total2.value ? (i.amount / total2.value) * 100 : 0 }))
+)
+
 const accumAngles2 = computed<number[]>(() => {
-  const arr = withPct2.value
-  const a: number[] = [0]
-  let acc = 0
-  for (const it of arr) {
-    acc += it.pct || 0
-    a.push((acc / 100) * 360)
-  }
+  const a: number[] = [0]; let acc = 0
+  for (const it of withPct2.value) { acc += it.pct || 0; a.push((acc / 100) * 360) }
   return a
 })
 
-// 4) 세그먼트
 const segments2 = computed(() =>
   withPct2.value.map((i, idx) => ({
     item: i,
     start: accumAngles2.value[idx] ?? 0,
-    end: accumAngles2.value[idx + 1] ?? 0
+    end:   accumAngles2.value[idx + 1] ?? 0,
   }))
 )
 
-// 5) 차트 인터랙션 (호버 시 중앙 라벨 변경/강조)
 const hoverIdx2 = ref<number | null>(null)
 const centerTitle2 = computed(() =>
-  hoverIdx2.value == null ? '총 지출' : segments2.value[hoverIdx2.value]?.item.label ?? '총 지출'
+  hoverIdx2.value == null ? '총 지출' : (segments2.value[hoverIdx2.value]?.item.label ?? '총 지출')
 )
-
 const centerSub2 = computed(() => {
   if (hoverIdx2.value == null) return fmtKRW(total2.value)
   const seg = segments2.value[hoverIdx2.value]
   return seg ? `${fmtPct(seg.item.pct)} · ${fmtKRW(seg.item.amount)}` : ''
 })
 
-
 </script>
 
 <template>
   <section class="frsection1">
-    <header class="pageHead">
-      <h1>재정보고</h1>
-      <p class="sub">재원 사용 보고 · <span class="accent">2025 수입</span></p>
-    </header>
+    <section class="frsection1">
+      <header class="pageHead">
+        <h1>재정보고</h1>
+        <p class="sub">
+          재원 사용 보고
+        </p>
+        <!-- 👇 연도 전환 탭 -->
+        <div class="year-tabs">
+          <button
+            :class="{ active: activeIncomeYear === '2025' }"
+            @click="activeIncomeYear = '2025'">
+            2025 수입
+          </button>
+          <button
+            :class="{ active: activeIncomeYear === '2026' }"
+            @click="activeIncomeYear = '2026'">
+            2026 수입
+          </button>
+        </div>
+      </header>
+    </section>
 
     <div class="grid">
       <!-- 표 -->
@@ -234,7 +244,19 @@ const centerSub2 = computed(() => {
   <!-- ▼▼ 섹션 2: 지출 (item2) ▼▼ -->
   <section class="frsection2">
     <header class="pageHead">
-      <p class="sub">재원 사용 보고 · <span class="accent">2025 지출</span></p>
+      <p class="sub">재원 사용 보고</p>
+      <div class="year-tabs">
+        <button
+          :class="{ active: activeSpendingYear === '2025' }"
+          @click="activeSpendingYear = '2025'">
+          2025 지출
+        </button>
+        <button
+          :class="{ active: activeSpendingYear === '2026' }"
+          @click="activeSpendingYear = '2026'">
+          2026 지출
+        </button>
+      </div>
     </header>
 
     <div class="grid">
@@ -343,7 +365,6 @@ const centerSub2 = computed(() => {
   font-weight: 700;
 }
 .pageHead .sub { color: var(--muted); margin: 0 0 24px; }
-.pageHead .accent { color:#1C77F2; font-weight:600; }
 
 .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; }
 .card { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(15,23,42,.06); }
@@ -378,4 +399,29 @@ const centerSub2 = computed(() => {
 .centerTitle { font-size: 13px; font-weight: 600; fill: #64748b; }
 .centerSub { font-size: 14px; font-weight: 700; fill: #1C77F2; }
 @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+.year-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin: 6px 0 0;
+}
+
+.year-tabs button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #334155;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.year-tabs button.active {
+  border-color: #1C77F2;
+  color: #1C77F2;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(28,119,242,.12);
+}
+
 </style>
