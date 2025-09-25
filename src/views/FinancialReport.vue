@@ -68,7 +68,6 @@ const spendingitems2026 = ref<Item[]>([
 // #BBF7D0 (연한 실버톤 그린)
 
 /**********************************수입**************************************/
-// 1) 합계/비율
 const activeIncomeYear = ref<'2025' | '2026'>('2025')
 
 /* 선택된 연도의 수입 아이템 */
@@ -157,11 +156,11 @@ const centerSub2 = computed(() => {
             @click="activeIncomeYear = '2025'">
             2025 수입
           </button>
-          <button
-            :class="{ active: activeIncomeYear === '2026' }"
-            @click="activeIncomeYear = '2026'">
-            2026 수입
-          </button>
+<!--          <button-->
+<!--            :class="{ active: activeIncomeYear === '2026' }"-->
+<!--            @click="activeIncomeYear = '2026'">-->
+<!--            2026 수입-->
+<!--          </button>-->
         </div>
       </header>
     </section>
@@ -170,7 +169,7 @@ const centerSub2 = computed(() => {
       <!-- 표 -->
       <div class="card">
         <h2>수입 내역</h2>
-        <table class="tbl" aria-label="2025 수입 내역">
+        <table class="tbl" :aria-label="`${activeIncomeYear} 수입 내역`">
           <thead>
           <tr>
             <th scope="col">구분</th>
@@ -251,11 +250,11 @@ const centerSub2 = computed(() => {
           @click="activeSpendingYear = '2025'">
           2025 지출
         </button>
-        <button
-          :class="{ active: activeSpendingYear === '2026' }"
-          @click="activeSpendingYear = '2026'">
-          2026 지출
-        </button>
+<!--        <button-->
+<!--          :class="{ active: activeSpendingYear === '2026' }"-->
+<!--          @click="activeSpendingYear = '2026'">-->
+<!--          2026 지출-->
+<!--        </button>-->
       </div>
     </header>
 
@@ -263,7 +262,7 @@ const centerSub2 = computed(() => {
       <!-- 표 -->
       <div class="card">
         <h2>지출 내역</h2>
-        <table class="tbl" aria-label="2025 지출 내역">
+        <table class="tbl" :aria-label="`${activeSpendingYear} 지출 내역`">
           <thead>
           <tr>
             <th scope="col">구분</th>
