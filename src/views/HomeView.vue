@@ -331,7 +331,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="footer-middle">
       <p>
-        © {{ year }} WYEA · Icons by Freepik (flaticon.com)<br>
+        © {{ year }} WYEA · Icons by Freepik (flaticon.com) · <RouterLink to="/personalinformationprocessingpolicy">개인정보 처리방침</RouterLink> <br>
         대학 로고와 명칭은 각 대학의 자산이며, 식별 목적에 한해 사용됩니다.
       </p>
     </div>
@@ -891,21 +891,57 @@ onBeforeUnmount(() => {
   font-weight: bold;
 }
 
-.footer .footer-middle {
-  margin: 12px 0;
-  font-size: 13px;
+.footer .footer-middle p {
+  margin: 4px 0;
+  font-size: 12px;
   color: #666;
-  line-height:1.6;
+  line-height: 1.6;
 }
 
+.footer .footer-middle a {
+  color: inherit;             /* 글자색 주변 텍스트와 같게 */
+  text-decoration: none;      /* 기본 밑줄 제거 */
+  position: relative;
+  padding: 0 2px;
+  transition: color 0.2s ease;
+}
+
+.footer .footer-middle a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+.footer .footer-middle a:hover {
+  color: #000;                /* hover 시 글자색 진하게 */
+}
+
+.footer .footer-middle a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
 .footer .footer-bottom {
-  margin-top: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;     /* 아이콘들을 진짜 가운데로 */
   gap: 32px;
   user-select: none;
   -webkit-user-drag: none;
+
+  position: relative;          /* 오른쪽 링크 absolute 기준 */
+  max-width: 720px;            /* 중앙의 보이는 밴드 안으로 제한 */
+  margin: 16px auto 0;         /* 가운데 정렬 */
+  padding: 0 20px;             /* 좌우 여백 */
+  z-index: 1;                  /* clip된 배경 위로 */
 }
 
 .footer .footer-logo {
@@ -913,5 +949,30 @@ onBeforeUnmount(() => {
   filter: grayscale(100%);  /* 흑백 변환 */
   opacity: 0.9; /* 투명도 */
 }
+
+.footer .footer-links {
+  position: absolute;
+  right: 130px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.footer .footer-links a {
+  color: #444;                /* 기본 글자색 */
+  text-decoration: none;      /* 밑줄 제거 */
+}
+
+.footer .footer-links a:hover {
+  text-decoration: underline; /* hover 시만 밑줄 */
+}
+
+.footer .footer-links a:visited {
+  color: #444;                /* 방문해도 색 안 바뀌게 */
+}
+
 
 </style>

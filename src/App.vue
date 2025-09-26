@@ -35,7 +35,7 @@
       </div>
       <div class="frfooter-middle">
         <p>
-          © {{ year }} WYEA · Icons by Freepik (flaticon.com)<br>
+          © {{ year }} WYEA · Icons by Freepik (flaticon.com) · <RouterLink to="/personalinformationprocessingpolicy">개인정보 처리방침</RouterLink> <br>
           대학 로고와 명칭은 각 대학의 자산이며, 식별 목적에 한해 사용됩니다.
         </p>
       </div>
@@ -205,12 +205,43 @@ onBeforeUnmount(() => {
   color: #000;
   margin: 2px 0;
   font-weight: bold; }
-.frfooter .frfooter-middle {
-  margin: 12px 0;
-  font-size: 13px;
+.frfooter .frfooter-middle p {
+  margin: 4px 0;
+  font-size: 12px;
   color: #666;
-  line-height:1.6;
+  line-height: 1.6;
 }
+
+.frfooter .frfooter-middle a {
+  color: inherit;             /* 글자색 주변 텍스트와 같게 */
+  text-decoration: none;      /* 기본 밑줄 제거 */
+  position: relative;
+  padding: 0 2px;
+  transition: color 0.2s ease;
+}
+
+.frfooter .frfooter-middle a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+.frfooter .frfooter-middle a:hover {
+  color: #000;                /* hover 시 글자색 진하게 */
+}
+
+.frfooter .frfooter-middle a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .frfooter .frfooter-bottom {
   margin-top: 16px;
   display:flex;
