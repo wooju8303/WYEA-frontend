@@ -400,7 +400,11 @@ onBeforeUnmount(() => {
   -webkit-user-drag: none;
   margin-top: 50px;
 }
+@media (min-width: 1920px) and (max-width: 2559px) {  /*qhd 전용*/
+  .section1-div1 img {
 
+  }
+}
 .section1-div1 h3 {
   line-height: 1.5;
   animation-delay:  .12s;
