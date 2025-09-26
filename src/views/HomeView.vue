@@ -187,8 +187,7 @@ onBeforeUnmount(() => {
   <section class="section1" ref="section1Ref">
     <div class="section1-div1">
       <img src="@/assets/image/wyea-logo.png" width="300" alt="wyea-logo">
-      <h3>World Youth<br> Exchange Association</h3>
-      <br>
+      <h3>World Youth<br>Exchange Association</h3>
       <p>세계 청년 교류회</p>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSddVMd4CovJdhX6IbOXtXcjhXRsrSNJkXXqRtY3RuvOF-HrWA/viewform?pli=1" target="_blank" rel="noopener noreferrer">
         <button>가입하러 가기</button>
@@ -406,6 +405,7 @@ onBeforeUnmount(() => {
   line-height: 1.5;
   animation-delay:  .12s;
   font-weight: 700;
+  margin-bottom: 5%;
 }
 @media (max-width: 1024px) {
   .section1-div1 h3 {
