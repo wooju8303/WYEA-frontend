@@ -153,11 +153,11 @@ const centerSub2 = computed(() => {
           @click="activeIncomeYear = '2025'">
           2025 수입
         </button>
-        <!--          <button-->
-        <!--            :class="{ active: activeIncomeYear === '2026' }"-->
-        <!--            @click="activeIncomeYear = '2026'">-->
-        <!--            2026 수입-->
-        <!--          </button>-->
+                  <button
+                    :class="{ active: activeIncomeYear === '2026' }"
+                    @click="activeIncomeYear = '2026'">
+                    2026 수입
+                  </button>
       </div>
     </header>
 
