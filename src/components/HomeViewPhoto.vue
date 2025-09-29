@@ -66,7 +66,9 @@ defineProps<{
   mix-blend-mode: overlay;  /* 배경과 자연스럽게 섞임 (필요 없으면 지워도 됨) */
 
 }
-
+@media (min-width: 2560px) {
+  .hero::before { --cell: 42.5px; }
+}
 .hero::after {
   content: "";
   position: absolute;
@@ -101,7 +103,7 @@ defineProps<{
     font-size: 30px;
   }
 }
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
   .hvpsection1 h1 {
     margin-top: 26.6px;
     font-size: 79.8px;
@@ -125,7 +127,7 @@ defineProps<{
     font-size: 40px;
   }
 }
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
   .hvpsection2 h1 {
     margin-top: 93.1px;
     font-size: 133px;

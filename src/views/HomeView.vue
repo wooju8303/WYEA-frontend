@@ -1059,7 +1059,7 @@ onBeforeUnmount(() => {
   margin: 2px 0;
   font-weight: bold;
 }
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
   .footer .footer-top p {
     font-size: 18.62px;
   }
@@ -1070,7 +1070,7 @@ onBeforeUnmount(() => {
   color: #666;
   line-height: 1.6;
 }
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
   .footer .footer-middle p {
     font-size: 16px;
   }
@@ -1126,7 +1126,7 @@ onBeforeUnmount(() => {
   filter: grayscale(100%);  /* 흑백 변환 */
   opacity: 0.9; /* 투명도 */
 }
-@media (max-width: 2560px) {
+@media (min-width: 2560px) {
   .footer .footer-logo {
     height: 40px;
   }
