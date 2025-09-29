@@ -944,17 +944,11 @@ onBeforeUnmount(() => {
 .section3 ul::before {
   content: '';
   position: absolute;
-  left: 20px;
+  left: 19px;
   top: 0;
   bottom: 0;
   width: 2px;
   background: #d0e2f7;
-}
-@media (min-width: 2560px) {
-  /* 섹션 자체 여백/높이 축소 */
-  .section3 ul::before {
-    left: 19px;
-  }
 }
 
 /* 트리거 후: 자연스럽게 나타남 */

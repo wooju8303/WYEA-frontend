@@ -78,9 +78,60 @@
   margin-bottom: 1rem;
   font-weight: 700;
 }
+@media (max-width: 1000px) {
+  .privacy-policy h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+}
 .privacy-policy h2 {
   margin-top: 1.5rem;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+@media (max-width: 1000px) {
+  .privacy-policy {
+    margin: 3rem 1rem; /* 양옆 여백 줄이기 */
+    font-size: 0.95rem; /* 본문 글자 조금 축소 */
+  }
+
+  .privacy-policy h1 {
+    font-size: 1.5rem;  /* 메인 제목 조금 축소 */
+    margin-bottom: 0.8rem;
+  }
+
+  .privacy-policy h2 {
+    font-size: 1.05rem; /* 섹션 제목 조금 축소 */
+    margin-top: 1.2rem;
+  }
+
+  .privacy-policy p {
+    font-size: 0.95rem; /* 본문 글씨 크기 */
+    line-height: 1.5;   /* 줄간격 살짝 줄임 */
+  }
+}
+
+@media (min-width: 2560px) {
+  .privacy-policy {
+    max-width: 1064px;   /* 800px × 1.33 */
+    margin: 9.3rem auto; /* 7rem × 1.33 */
+    font-size: 1.27rem;  /* 본문 기본 글씨도 약간 키움 */
+  }
+
+  .privacy-policy h1 {
+    font-size: 2.4rem;      /* 1.8rem × 1.33 */
+    margin-bottom: 1.3rem;  /* 1rem × 1.33 */
+  }
+
+  .privacy-policy h2 {
+    font-size: 1.6rem;    /* 1.2rem × 1.33 */
+    margin-top: 2rem;     /* 1.5rem × 1.33 */
+  }
+
+  .privacy-policy p {
+    font-size: 1.27rem;   /* 본문 글씨 키움 */
+    line-height: 1.7;     /* 줄간격 약간 넓힘 */
+  }
 }
 </style>
