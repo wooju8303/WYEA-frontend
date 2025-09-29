@@ -118,6 +118,12 @@ onBeforeUnmount(() => {
   box-shadow: 0 10px 30px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.7);
   transition: background .25s ease, box-shadow .25s ease;
 }
+@media (min-width: 2560px) {
+  .glass-header {
+    width: min(1463px, calc(100% - 28px));
+  }
+}
+
 .glass-header.scrolled {
   background: rgba(255,255,255,.9);
   box-shadow: 0 12px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.9);
@@ -130,6 +136,11 @@ onBeforeUnmount(() => {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 12px;
+}
+@media (min-width: 2560px) {
+  .inner {
+    height: 90px;  /* 세로 길이 늘리기 */
+  }
 }
 
 .brand {
@@ -145,6 +156,11 @@ onBeforeUnmount(() => {
   margin-top: 10px;
   width: 90px;   /* 원하는 가로 크기 */
   height: auto;   /* 세로 비율은 자동 */
+}
+@media (min-width: 2560px) {
+  .brand img {
+    width: 119px;
+  }
 }
 
 .nav {

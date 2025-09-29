@@ -96,10 +96,16 @@ defineProps<{
   padding: 0.5em 1em; /* 배경이 글자보다 약간 크게 */
   display: inline-block;  /* 텍스트 길이에 맞게 박스 */
 }
-
 @media (max-width: 1024px) {
   .hvpsection1 h1 {
     font-size: 30px;
+  }
+}
+@media (max-width: 2560px) {
+  .hvpsection1 h1 {
+    margin-top: 26.6px;
+    font-size: 79.8px;
+    padding: 0.665em 1.33em; /* 배경이 글자보다 약간 크게 */
   }
 }
 
@@ -117,6 +123,13 @@ defineProps<{
 @media (max-width: 1024px) {
   .hvpsection2 h1 {
     font-size: 40px;
+  }
+}
+@media (max-width: 2560px) {
+  .hvpsection2 h1 {
+    margin-top: 93.1px;
+    font-size: 133px;
+    padding: 0.665em 1.33em; /* 배경이 글자보다 약간 크게 */
   }
 }
 

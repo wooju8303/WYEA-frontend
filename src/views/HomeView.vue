@@ -34,7 +34,7 @@ import SwipeCarousel from '@/components/SwipeCarousel.vue'
 /**
  * 홈 메인 이미지
  */
-const decorItems: DecorItem[] = [
+const BASE_DECOR: DecorItem[] = [
   { src: coin, from: 'right', right: '0%', top: '30%', width: 140, rotZ:70, delay: .25 },
   { src: carrier, from: 'top-right', right: '-12%', top: '-30%', width: 710, rotZ:70, delay: .25 },
   { src: passport, from: 'right',  right: '7%', top: '40%',  width: 200, rotZ:20, delay: .25 },
@@ -52,6 +52,27 @@ const decorItems: DecorItem[] = [
   { src: wallet, from: 'bottom-left',  left: '0%', top: '80%',  width: 150, rotZ:-10, delay: .27 },
   { src: sunglasses, from: 'left',  left: '1%', top: '65%',  width: 200, rotZ:-10, delay: .23 },
   { src: sticker, from: 'up',  left: '5%', top: '80%',  width: 300, rotZ:30, delay: .25 },
+]
+
+const QHD_DECOR: DecorItem[] = [
+  { src: coin,     from: 'right',       right: '0%',   top: '30%', width: 186, rotZ: 70,  delay: .25 },
+  { src: carrier,  from: 'top-right',   right: '-12%', top: '-30%', width: 944, rotZ: 70,  delay: .25 },
+  { src: passport, from: 'right',       right: '7%',   top: '40%',  width: 266, rotZ: 20,  delay: .25 },
+  { src: charger,  from: 'right',       right: '-3%',  top: '34%',  width: 399, rotZ: 30,  delay: .30 },
+  { src: compass,  from: 'down',        right: '20%',  top: '0%',   width: 199, rotZ: 30,  delay: .25 },
+  { src: bill,     from: 'up',          right: '6%',   top: '80%',  width: 266, rotZ: 30,  delay: .25 },
+  { src: map,      from: 'bottom-right',right: '-17%', top: '40%',  width: 931, rotZ: 100, delay: .25 },
+
+  { src: coin,     from: 'left',        left: '0%',    top: '50%',  width: 133, rotZ: 170, delay: .30 },
+  { src: backpack, from: 'top-left',    left: '-6%',   top: '-5%',  width: 532, rotZ: 30,  delay: .25 },
+  { src: camera,   from: 'down',        left: '8%',    top: '0%',   width: 292, rotZ: 110, delay: .25 },
+  { src: pens,     from: 'left',        left: '6%',    top: '55%',  width: 199, rotZ: 0,   delay: .23 },
+  { src: headphones,from:'left',        left: '0%',    top: '30%',  width: 332, rotZ: -50, delay: .27 },
+  { src: mobile,   from: 'left',        left: '-4%',   top: '55%',  width: 266, rotZ: 45,  delay: .25 },
+  { src: wallet,   from: 'bottom-left', left: '0%',    top: '80%',  width: 199, rotZ: -10, delay: .27 },
+  { src: sunglasses,from:'left',        left: '1%',    top: '65%',  width: 266, rotZ: -10, delay: .23 },
+  { src: sticker,  from: 'up',          left: '5%',    top: '80%',  width: 399, rotZ: 30,  delay: .25 },
+
 ]
 /**
  * 협력 대학 로고
@@ -72,6 +93,9 @@ const section1Ref = ref<HTMLElement | null>(null)
 const section2Ref = ref<HTMLElement | null>(null)
 const decorHidden = ref(false)
 const footerVisible = ref(false)
+const logoHeight = ref(60)
+const marqueeGap = ref(56)
+const decorItems = ref<DecorItem[]>(BASE_DECOR)
 
 const year = new Date().getFullYear()
 
@@ -80,6 +104,14 @@ let section2IO: IntersectionObserver | null = null
 let section3IO: IntersectionObserver | null = null
 let prevHidden = decorHidden.value
 let initialized = false // 초기 1회 콜백 무시
+let mql: MediaQueryList
+
+const apply = () => {
+  const isQHD = mql.matches
+  decorItems.value = isQHD ? QHD_DECOR : BASE_DECOR
+  logoHeight.value = isQHD ? 100 : 60  // QHD에서 크게
+  marqueeGap.value = isQHD ? 90 : 56
+}
 
 const onScroll = () => {
   const scrollTop = window.scrollY
@@ -144,6 +176,10 @@ onMounted(async () => {
       rootMargin: '0px 0px 0px 0px' // 아래쪽 여유 주기
     })
     section2IO.observe(section2Ref.value)
+
+    mql = window.matchMedia('(min-width: 2560px)')
+    apply()
+    mql.addEventListener('change', apply)
   }
 
   /* ===== 타임라인 1회 등장 IO ===== */
@@ -179,6 +215,7 @@ onBeforeUnmount(() => {
   section2IO = null
   section3IO = null
   window.removeEventListener('scroll', onScroll)
+  mql?.removeEventListener('change', apply)
 })
 </script>
 
@@ -195,7 +232,7 @@ onBeforeUnmount(() => {
     </div>
     <div class="section1-div2">
       <p>연합 지부</p>
-      <LogoMarquee :logos="logos" :duration="60" :gap="56" :repeat="4" :logoHeight="60"
+      <LogoMarquee class="university-logo" :logos="logos" :duration="60" :gap="marqueeGap" :repeat="4" :logoHeight="logoHeight" :key="`${logoHeight}-${marqueeGap}`"
                    style="max-width: 800px; width: 100%; margin: 10px auto 0;"/>
     </div>
     <div class="section1-div3">
@@ -393,18 +430,20 @@ onBeforeUnmount(() => {
   transform: translateY(24px) scale(0.98);
   animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
 }
-
+/* 섹센1 로고 이미지 */
 .section1-div1 img {
   animation-delay: .10s;
   user-select: none;
   -webkit-user-drag: none;
   margin-top: 50px;
 }
-@media (min-width: 1920px) and (max-width: 2559px) {  /*qhd 전용*/
+@media (min-width: 2560px) {
   .section1-div1 img {
-
+    width: 50%;
   }
 }
+
+/* 섹션1 World Youth Exchange Association */
 .section1-div1 h3 {
   line-height: 1.5;
   animation-delay:  .12s;
@@ -416,7 +455,13 @@ onBeforeUnmount(() => {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
 }
+@media (min-width: 2560px) {
+  .section1-div1 h3 {
+    font-size: 500%;
+  }
+}
 
+/* 섹션1 세계 청년 교류회 */
 .section1-div1 p {
   animation-delay: .24s;
   font-weight: 700;
@@ -427,7 +472,13 @@ onBeforeUnmount(() => {
     font-size: 20px; /* 모바일에서 다른 크기 */
   }
 }
+@media (min-width: 2560px) {
+  .section1-div1 p {
+    font-size: 225%;
+  }
+}
 
+/* 섹션1 가입하러 가기 버튼 */
 .section1-div1 button {
   animation-delay: .36s;
   pointer-events: auto;
@@ -440,7 +491,17 @@ onBeforeUnmount(() => {
   cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,.12);
 }
+@media (min-width: 2560px) {
+  .section1-div1 button {
+    font-size: 150%;
+  }
+}
 
+.section1-div2 > * {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
 .section1-div2 {
   margin-top: 60px;
 }
@@ -450,12 +511,7 @@ onBeforeUnmount(() => {
   }
 }
 
-.section1-div2 > * {
-  opacity: 0;
-  transform: translateY(24px) scale(0.98);
-  animation: slidePop .6s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
+/* 섹션2 연합 지부*/
 .section1-div2 p {
   color:#7a7a7a;
   font-weight: 700;
@@ -465,6 +521,17 @@ onBeforeUnmount(() => {
 @media (max-width: 1024px) {
   .section1-div2 p {
     font-size: 15px; /* 모바일에서 다른 크기 */
+  }
+}
+@media (min-width: 2560px) {
+  .section1-div2 p {
+    font-size: 150%;
+  }
+}
+@media (min-width: 2560px) {
+  .university-logo {
+    width: 200% !important;
+    max-width: 1200px !important; /* max-width 때문에 안 늘어나면 제거 */
   }
 }
 
@@ -477,10 +544,16 @@ onBeforeUnmount(() => {
   }
 }
 
+/* 섹션3 스크롤 해서 계속 보기*/
 .section1-div3 p{
   color: #afafaf;
   font-weight: 500;
   font-size:12px;
+}
+@media (min-width: 2560px) {
+  .section1-div3 p {
+    font-size: 125%;
+  }
 }
 
 /*-------------------------------section2---------------------------------*/
@@ -493,6 +566,36 @@ onBeforeUnmount(() => {
   padding: 4rem;    /* 화면 테두리와 카드 사이 여백 */
   font-family: 'PretendardFont', sans-serif;
   z-index: 0;
+}
+@media (min-width: 2560px) {
+  .section2 {
+    min-height: calc(80vh - var(--header-h, 64px));
+    gap: 5.32rem;        /* 카드 사이 간격 더 넓게 */
+    padding: 5.32rem;    /* 화면 테두리와 카드 사이 여백 */
+  }
+}
+.section2-div1 h3 {
+  font-weight: 700;
+  margin-bottom: 60px;
+}
+@media (max-width: 1024px) {
+  .section2-div1 h3 {
+    font-size: 28px; /* 모바일에서 다른 크기 */
+  }
+}
+@media (min-width: 2560px) {
+  .section2-div1 h3 {
+    font-size: 63px;
+    margin-bottom: 80px;
+    margin-top: 60px;
+  }
+}
+
+.section2-div2 {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  gap: 20px;  /* 카드 사이 간격 */
+  flex-wrap: wrap;  /* 화면이 좁으면 줄바꿈 */
 }
 
 .section2-card1 img {
@@ -509,22 +612,10 @@ onBeforeUnmount(() => {
     display: none;
   }
 }
-
-.section2-div1 h3 {
-  font-weight: 700;
-  margin-bottom: 60px;
-}
-@media (max-width: 1024px) {
-  .section2-div1 h3 {
-    font-size: 28px; /* 모바일에서 다른 크기 */
+@media (min-width: 2560px) {
+  .section2-card1 img {
+    width: 266px;
   }
-}
-
-.section2-div2 {
-  display: flex;
-  justify-content: center; /* 가운데 정렬 */
-  gap: 20px;  /* 카드 사이 간격 */
-  flex-wrap: wrap;  /* 화면이 좁으면 줄바꿈 */
 }
 
 .section2-card1 {
@@ -544,7 +635,14 @@ onBeforeUnmount(() => {
     min-height: 300px; /* 세로 최소 높이 */
   }
 }
-
+@media (min-width: 2560px) {
+  .section2-card1 {
+    flex: 1 1 598px;  /* 최소 450px, 공간 있으면 늘어남 */
+    max-width: 731px; /* 카드 최대 폭 */
+    min-height: 532px;  /* 세로 최소 높이 */
+    padding: 2.66rem;  /* 내부 여백 */
+  }
+}
 .section2-card1:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -554,15 +652,25 @@ onBeforeUnmount(() => {
   text-align: center;
   font-weight: 700;
 }
+@media (min-width: 2560px) {
+  .section2-card1 h4 {
+    font-size: 45px;
+  }
+}
 
 .section2-card1 h4::after {
   content: '';
   display: block;
   width: 40px;
-  height: 3px;
+  height: 4px;
   background: #0d47a1; /* 포인트 색상 */
-  margin: 0.5rem auto 0;
+  margin: 0.665rem auto 0;
   border-radius: 2px;
+}
+@media (min-width: 2560px) {
+  .section2-card1 h4::after {
+    width: 53.2px;
+  }
 }
 
 .section2-card1 p {
@@ -574,14 +682,36 @@ onBeforeUnmount(() => {
   font-size: 1.1rem;
   line-height: 1.8;
 }
-
 @media (max-width: 1024px) {
   .section2-card1 p {
     margin-left: 10px;
     margin-right: 10px;
   }
 }
+@media (min-width: 2560px) {
+  .section2-card1 p {
+    font-size: 1.463rem;
+  }
+}
 
+.section2-card2 img {
+  position: absolute;
+  width: 200px;
+  top: -16%;
+  left: -11%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (max-width: 1024px) {
+  .section2-card2 img {
+    display: none;
+  }
+}
+@media (min-width: 2560px) {
+  .section2-card2 img{
+    width: 266px;
+  }
+}
 
 .section2-card2 {
   flex: 1 1 450px;  /* 최소 450px, 공간 있으면 늘어남 */
@@ -601,39 +731,41 @@ onBeforeUnmount(() => {
     min-height: 300px; /* 세로 최소 높이 */
   }
 }
-
+@media (min-width: 2560px) {
+  .section2-card2 {
+    flex: 1 1 598px;  /* 최소 450px, 공간 있으면 늘어남 */
+    max-width: 731px; /* 카드 최대 폭 */
+    min-height: 532px;  /* 세로 최소 높이 */
+    padding: 2.66rem;  /* 내부 여백 */
+  }
+}
 .section2-card2:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.section2-card2 img {
-  position: absolute;
-  width: 200px;
-  top: -16%;
-  left: -11%;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-@media (max-width: 1024px) {
-  .section2-card2 img {
-    display: none;
-  }
 }
 
 .section2-card2 h4 {
   text-align: center;
   font-weight: 700;
 }
-
+@media (min-width: 2560px) {
+  .section2-card2 h4 {
+    font-size: 45px;
+  }
+}
 .section2-card2 h4::after {
   content: '';
   display: block;
   width: 40px;
-  height: 3px;
+  height: 4px;
   background: #0d47a1; /* 포인트 색상 */
-  margin: 0.5rem auto 0;
+  margin: 0.665rem auto 0;
   border-radius: 2px;
+}
+@media (min-width: 2560px) {
+  .section2-card2 h4::after {
+    width: 53px;
+  }
 }
 
 .section2-card2 ul {
@@ -648,7 +780,11 @@ onBeforeUnmount(() => {
   font-weight: 400;
   font-size: 1.1rem;
 }
-
+@media (min-width: 2560px) {
+  .section2-card2 li {
+    font-size: 1.463rem;
+  }
+}
 /* 애니메이션 초기 상태: 위로 살짝 숨김 + 투명 */
 .section2 .clip {
   --clip-d: 0ms;
@@ -712,7 +848,12 @@ onBeforeUnmount(() => {
     font-size: 30px; /* 모바일에서 다른 크기 */
   }
 }
-
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3-div1 h1 {
+    font-size: 5.32rem;
+  }
+}
 .section3-divcontainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -724,6 +865,12 @@ onBeforeUnmount(() => {
 @media (max-width: 1024px) {
   .section3-divcontainer {
     grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3-divcontainer {
+    max-width: 1596px;
   }
 }
 
@@ -746,12 +893,12 @@ onBeforeUnmount(() => {
   padding-left: 50px;
   position: relative;
 }
-
-.section3-div2 h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 60px;
-  color: #0d47a1;
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3-div2 ul li {
+    margin-bottom: 40px;
+    padding-left: 66px;
+  }
 }
 
 .section3-div3 {
@@ -777,6 +924,13 @@ onBeforeUnmount(() => {
   padding-left: 50px;
   position: relative;
 }
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3-div3 ul li {
+    margin-bottom: 40px;
+    padding-left: 66px;
+  }
+}
 
 .section3 ul {
   list-style: none;
@@ -795,6 +949,12 @@ onBeforeUnmount(() => {
   bottom: 0;
   width: 2px;
   background: #d0e2f7;
+}
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3 ul::before {
+    left: 19px;
+  }
 }
 
 /* 트리거 후: 자연스럽게 나타남 */
@@ -854,7 +1014,12 @@ onBeforeUnmount(() => {
     font-weight: 500;
   }
 }
-
+@media (min-width: 2560px) {
+  /* 섹션 자체 여백/높이 축소 */
+  .section3 ul span {
+    font-size: 22px;
+  }
+}
 /*-------------------------------section4---------------------------------*/
 .section4 {
   position: relative;
@@ -894,14 +1059,22 @@ onBeforeUnmount(() => {
   margin: 2px 0;
   font-weight: bold;
 }
-
+@media (max-width: 2560px) {
+  .footer .footer-top p {
+    font-size: 18.62px;
+  }
+}
 .footer .footer-middle p {
   margin: 4px 0;
   font-size: 12px;
   color: #666;
   line-height: 1.6;
 }
-
+@media (max-width: 2560px) {
+  .footer .footer-middle p {
+    font-size: 16px;
+  }
+}
 .footer .footer-middle a {
   color: inherit;             /* 글자색 주변 텍스트와 같게 */
   text-decoration: none;      /* 기본 밑줄 제거 */
@@ -952,6 +1125,11 @@ onBeforeUnmount(() => {
   height: 30px; /* 로고 크기 조절 */
   filter: grayscale(100%);  /* 흑백 변환 */
   opacity: 0.9; /* 투명도 */
+}
+@media (max-width: 2560px) {
+  .footer .footer-logo {
+    height: 40px;
+  }
 }
 
 .footer .footer-links {
