@@ -221,11 +221,22 @@ onBeforeUnmount(() => {
   color: #000;
   margin: 2px 0;
   font-weight: bold; }
+@media (min-width: 2560px) {
+  .frfooter .frfooter-top p {
+    font-size: 18.62px;
+  }
+}
+
 .frfooter .frfooter-middle p {
   margin: 4px 0;
   font-size: 12px;
   color: #666;
   line-height: 1.6;
+}
+@media (min-width: 2560px) {
+  .frfooter .frfooter-middle p {
+    font-size: 16px;
+  }
 }
 
 .frfooter .frfooter-middle a {
@@ -272,5 +283,9 @@ onBeforeUnmount(() => {
   filter:grayscale(100%);
   opacity:.9;
 }
-
+@media (min-width: 2560px) {
+  .frfooter .frfooter-logo {
+    height: 40px;
+  }
+}
 </style>

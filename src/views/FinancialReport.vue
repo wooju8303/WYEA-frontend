@@ -429,4 +429,62 @@ const centerSub2 = computed(() => {
   box-shadow: 0 2px 6px rgba(28,119,242,.12);
 }
 
+@media (min-width: 2560px) {
+  .frsection1,
+  .frsection2 {
+    max-width: 1463px;   /* 1100px × 1.33 */
+    margin: 53px auto;   /* 40px × 1.33 */
+    padding: 0 27px;     /* 20px × 1.33 */
+  }
+
+  .pageHead h1 {
+    font-size: 48px;     /* 36px × 1.33 */
+    margin: 133px 0 11px;/* 100px × 1.33 */
+  }
+
+  .pageHead .sub1,
+  .pageHead .sub2 {
+    font-size: 26px;     /* 20px × 1.33 */
+  }
+  .pageHead .sub2 {
+    margin-top: 106px;   /* 80px × 1.33 */
+  }
+
+  .card h2 {
+    font-size: 24px;     /* 18px × 1.33 */
+    margin-bottom: 21px; /* 16px × 1.33 */
+  }
+
+  .tbl {
+    font-size: 18px;     /* 14px × 1.33 */
+  }
+  .tbl th, .tbl td {
+    padding: 13px 16px;  /* 10×1.33 / 12×1.33 */
+  }
+
+  .legend {
+    gap: 10px 16px;      /* 8×1.33 / 12×1.33 */
+    margin-top: 11px;    /* 8px × 1.33 */
+  }
+  .legend li {
+    padding: 8px 0;      /* 6px × 1.33 */
+  }
+  .legend .name {
+    font-size: 1.2rem;   /* 글씨 조금 키움 */
+  }
+
+  .centerTitle {
+    font-size: 17px;     /* 13px × 1.33 */
+  }
+  .centerSub {
+    font-size: 19px;     /* 14px × 1.33 */
+  }
+
+  .year-tabs button {
+    padding: 8px 13px;   /* 6×1.33 / 10×1.33 */
+    font-size: 17px;     /* 13px × 1.33 */
+    border-radius: 13px; /* 10px × 1.33 */
+  }
+}
+
 </style>
