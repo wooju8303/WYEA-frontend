@@ -405,7 +405,7 @@ const centerSub2 = computed(() => {
 .year-tabs {
   display: inline-flex;
   gap: 8px;
-  margin: 6px 0 0;
+  margin: 6px 0 10px;
 }
 
 .year-tabs button {
