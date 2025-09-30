@@ -40,14 +40,16 @@ const incomeitems2026 = ref<Item[]>([
 // #E2E8F0 (연한 실버톤)
 
 const spendingitems2025 = ref<Item[]>([
-  { label: '도메인 구매', amount: 18_543, color: '#065F46' },
+  { label: '형광 안전조끼', amount: 8_270, color: '#6EE7B7' },
+  { label: '안전 신호봉', amount: 3_250, color: '#065F46' },
+  { label: '전자호루라기', amount: 12_510, color: '#34D399' },
+  { label: '도메인 구매', amount: 18_543, color: '#BBF7D0' },
   { label: '구글 워크스페이스', amount: 47_592, color: '#047857' },
-  { label: '교통 지도 옷', amount: 8_270, color: '#10B981' },
-  { label: '형광봉', amount: 7_300, color: '#34D399' },
-  { label: '서류 발급 수수료', amount: 4_900, color: '#6EE7B7' },
-  { label: '어도비 결제', amount: 105_600, color: '#A7F3D0' },
-  { label: '비상주 사무실 계약', amount: 396_000, color: '#064E3B' },
+  { label: '서류 발급 수수료', amount: 0, color: '#10B981' },
+  { label: '어도비 결제', amount: 0, color: '#A7F3D0' },
+  { label: '비상주 사무실 계약', amount: 396_000, color: '#15803D' },
 ])
+
 const spendingitems2026 = ref<Item[]>([
 
 ])
