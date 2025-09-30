@@ -36,25 +36,47 @@ const slideNames = computed(() =>
     .sort((a, b) => Number(a.split('-')[1]) - Number(b.split('-')[1]))
 )
 
-const track = ref<HTMLDivElement|null>(null)
-const wrap  = ref<HTMLDivElement|null>(null)
+const track = ref<HTMLDivElement | null>(null)
+const wrap  = ref<HTMLDivElement | null>(null)
 const index = ref(0)
 let animating = false  // 스무스 스크롤 중 onScroll 무시용
 
-const scrollTo = (i:number) => {
+/** ===== 전역 DOM 타입명을 쓰지 않는 로컬 타입 ===== */
+type Listener =
+  | ((evt: Event) => void)
+  | { handleEvent: (evt: Event) => void }
+
+type AddOpts = {
+  capture?: boolean
+  once?: boolean
+  passive?: boolean
+  signal?: AbortSignal
+}
+
+type ScrollEndTarget = EventTarget & {
+  addEventListener(type: 'scrollend', listener: Listener, options?: boolean | AddOpts): void
+}
+/** ============================================== */
+
+const scrollTo = (i: number) => {
   const el = track.value!
-  const child = el.children[i] as HTMLElement
+  const child = el.children[i] as HTMLElement | undefined
   if (!child) return
 
   animating = true
   index.value = i // 점 즉시 갱신
   el.scrollTo({ left: child.offsetLeft, behavior: 'smooth' })
 
+  // 스크롤 종료 처리
   const end = () => { animating = false }
-  // 지원되면 scrollend 사용
-  el.addEventListener?.('scrollend', end as any, { once: true } as any)
+
+    // 지원되면 scrollend 사용(타입 안전, any 불필요)
+  ;(el as unknown as ScrollEndTarget).addEventListener?.('scrollend', end, { once: true })
+
   // 폴백 타임아웃
-  setTimeout(() => { if (animating) end() }, 600)
+  window.setTimeout(() => {
+    if (animating) end()
+  }, 600)
 }
 
 const onScroll = () => {
@@ -64,14 +86,16 @@ const onScroll = () => {
   index.value = Math.round(el.scrollLeft / w)
 }
 
-const go = (dir:number) => {
+const go = (dir: number) => {
   const last = slideNames.value.length - 1
   const next = Math.max(0, Math.min(index.value + dir, last))
   scrollTo(next)
 }
 
-onMounted(() => wrap.value?.focus())
+onMounted(() => { wrap.value?.focus?.() })
 </script>
+
+
 
 <style scoped>
 /* 카드 내부 배치 기준 + dot 공간 확보 */
@@ -140,4 +164,24 @@ onMounted(() => wrap.value?.focus())
   cursor: pointer;
 }
 .dots > button.active { background: #0d47a1; }
+@media (min-width: 2560px) {
+  /* 좌우 네비 버튼 확대 */
+  .nav {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* 도트 크기 확대 */
+  .dots > button {
+    width: 11px;
+    height: 11px;
+  }
+
+  /* 도트 간격도 살짝 늘려주면 자연스러움 */
+  .dots {
+    gap: 0.75rem; /* 기본 .5rem → 약간 넓게 */
+  }
+}
+
+
 </style>

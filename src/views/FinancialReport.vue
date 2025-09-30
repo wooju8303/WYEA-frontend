@@ -22,15 +22,11 @@ const arcPath = (cx: number, cy: number, r: number, start: number, end: number) 
 }
 
 const incomeitems2025 = ref<Item[]>([
-  { label: '보험 tw', amount: 2_000_000, color: '#1C77F2' },
-  { label: 'g팡 환불 tw', amount: 369_000, color: '#2D99FF' },
-  { label: '장학금', amount: 2_100_000, color: '#5EB1FF' },
+  { label: '지원금', amount: 0, color: '#1C77F2' },
 ])
 
 const incomeitems2026 = ref<Item[]>([
-  { label: '후원금',       amount: 1_200_000, color: '#1C77F2' },
-  { label: '행사 수익',    amount: 1_050_000, color: '#2D99FF' },
-  { label: '장학금',       amount: 2_400_000, color: '#5EB1FF' },
+  { label: '지원금', amount: 0, color: '#1C77F2' },
 ])
 // #1C77F2 (진한 블루)
 // #2D99FF (중간 블루)
@@ -44,17 +40,16 @@ const incomeitems2026 = ref<Item[]>([
 // #E2E8F0 (연한 실버톤)
 
 const spendingitems2025 = ref<Item[]>([
-  { label: '행정사 tw', amount: 1_500_000, color: '#065F46' },
-  { label: 'BB 파워에이드 tw', amount: 4_800, color: '#047857' },
-  { label: '비상주사무실 1년계약', amount: 259_000, color: '#10B981' },
-  { label: '애플워치 구매', amount: 409_000, color: '#34D399' },
-  { label: 'BB 사이다팥빙수 tw', amount: 4_900, color: '#34D399' },
+  { label: '도메인 구매', amount: 18_543, color: '#065F46' },
+  { label: '구글 워크스페이스', amount: 47_592, color: '#047857' },
+  { label: '교통 지도 옷', amount: 8_270, color: '#10B981' },
+  { label: '형광봉', amount: 7_300, color: '#34D399' },
+  { label: '서류 발급 수수료', amount: 4_900, color: '#6EE7B7' },
+  { label: '어도비 결제', amount: 105_600, color: '#A7F3D0' },
+  { label: '비상주 사무실 계약', amount: 396_000, color: '#064E3B' },
 ])
 const spendingitems2026 = ref<Item[]>([
-  { label: '행사 운영비',   amount: 780_000, color: '#065F46' },
-  { label: '장비 구입',     amount: 520_000, color: '#047857' },
-  { label: '사무용 소모품', amount: 86_000,  color: '#10B981' },
-  { label: '광고/홍보',     amount: 160_000, color: '#34D399' },
+
 ])
 // #065F46 (딥 그린·짙은 초록)
 // #047857 (청록빛 중간 초록)
@@ -153,11 +148,11 @@ const centerSub2 = computed(() => {
           @click="activeIncomeYear = '2025'">
           2025 수입
         </button>
-                  <button
-                    :class="{ active: activeIncomeYear === '2026' }"
-                    @click="activeIncomeYear = '2026'">
-                    2026 수입
-                  </button>
+<!--        <button
+          :class="{ active: activeIncomeYear === '2026' }"
+          @click="activeIncomeYear = '2026'">
+          2026 수입
+        </button>-->
       </div>
     </header>
 
@@ -246,11 +241,11 @@ const centerSub2 = computed(() => {
           @click="activeSpendingYear = '2025'">
           2025 지출
         </button>
-<!--        <button-->
-<!--          :class="{ active: activeSpendingYear === '2026' }"-->
-<!--          @click="activeSpendingYear = '2026'">-->
-<!--          2026 지출-->
-<!--        </button>-->
+<!--        <button
+          :class="{ active: activeSpendingYear === '2026' }"
+          @click="activeSpendingYear = '2026'">
+          2026 지출
+        </button>-->
       </div>
     </header>
 

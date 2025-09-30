@@ -360,7 +360,7 @@ onBeforeUnmount(() => {
 
   <footer class="footer" :class="{ show: footerVisible }">
     <div class="footer-top">
-      <p>주소</p>
+      <p>대구광역시 중구 명덕로 179, 2층 202-J153호</p>
       <p>
         contact us: wyea@wyea.info
       </p>
@@ -664,12 +664,13 @@ onBeforeUnmount(() => {
   width: 40px;
   height: 4px;
   background: #0d47a1; /* 포인트 색상 */
-  margin: 0.665rem auto 0;
+  margin: 0.5rem auto 0;
   border-radius: 2px;
 }
 @media (min-width: 2560px) {
   .section2-card1 h4::after {
-    width: 53.2px;
+    width: 53px;
+    margin: 0.665rem auto 0;
   }
 }
 
@@ -759,12 +760,13 @@ onBeforeUnmount(() => {
   width: 40px;
   height: 4px;
   background: #0d47a1; /* 포인트 색상 */
-  margin: 0.665rem auto 0;
+  margin: 0.5rem auto 0;
   border-radius: 2px;
 }
 @media (min-width: 2560px) {
   .section2-card2 h4::after {
     width: 53px;
+    margin: 0.665rem auto 0;
   }
 }
 
@@ -782,6 +784,7 @@ onBeforeUnmount(() => {
 }
 @media (min-width: 2560px) {
   .section2-card2 li {
+    margin-top: 20px;
     font-size: 1.463rem;
   }
 }
@@ -1055,7 +1058,7 @@ onBeforeUnmount(() => {
 }
 @media (min-width: 2560px) {
   .footer .footer-top p {
-    font-size: 18.62px;
+    font-size: 19px;
   }
 }
 .footer .footer-middle p {
@@ -1124,17 +1127,6 @@ onBeforeUnmount(() => {
   .footer .footer-logo {
     height: 40px;
   }
-}
-
-.footer .footer-links {
-  position: absolute;
-  right: 130px;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0;
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 500;
 }
 
 .footer .footer-links a {

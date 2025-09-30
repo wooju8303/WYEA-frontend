@@ -67,7 +67,7 @@ defineProps<{
 
 }
 @media (min-width: 2560px) {
-  .hero::before { --cell: 42.5px; }
+  .hero::before { --cell: 42px; }
 }
 .hero::after {
   content: "";
@@ -105,8 +105,8 @@ defineProps<{
 }
 @media (min-width: 2560px) {
   .hvpsection1 h1 {
-    margin-top: 26.6px;
-    font-size: 79.8px;
+    margin-top: 27px;
+    font-size: 80px;
     padding: 0.665em 1.33em; /* 배경이 글자보다 약간 크게 */
   }
 }
@@ -129,7 +129,7 @@ defineProps<{
 }
 @media (min-width: 2560px) {
   .hvpsection2 h1 {
-    margin-top: 93.1px;
+    margin-top: 93px;
     font-size: 133px;
     padding: 0.665em 1.33em; /* 배경이 글자보다 약간 크게 */
   }

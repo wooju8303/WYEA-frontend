@@ -8,7 +8,7 @@
           </RouterLink>
         </div>
         <nav class="nav">
-<!--          <RouterLink to="/">Home</RouterLink>-->
+          <RouterLink to="/FinancialReport">재정보고</RouterLink>
 <!--          <RouterLink to="/about">About</RouterLink>-->
 <!--          <RouterLink to="/blog">Blog</RouterLink>-->
 <!--          <RouterLink to="/guides">Guides</RouterLink>-->
@@ -165,20 +165,33 @@ onBeforeUnmount(() => {
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 22px;
 }
 .nav a {
-  text-decoration: none;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;          /* 데스크톱 폰트 */
+  line-height: 1;
+  height: 40px;             /* 클릭 영역 높이 */
+  padding: 0 14px;          /* 좌우 여백 */
+  border-radius: 12px;
+  font-weight: 700;         /* 헤더 대비 살짝 두껍게 */
   color: #1f2937;
-  opacity: .85;
+  opacity: .95;
+  letter-spacing: .01em;
 }
 .nav a.router-link-active {
   color: #0d47a1;
+  background: rgba(13,71,161,.08);
+  box-shadow: inset 0 0 0 1px rgba(13,71,161,.12);
   opacity: 1;
 }
-.nav a:hover { opacity: 1; }
+.nav a:hover {
+  opacity: 1;
+  background: rgba(13,71,161,.06);
+}
 
 .actions {
   display: flex;
