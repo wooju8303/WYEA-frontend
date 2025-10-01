@@ -360,9 +360,9 @@ onBeforeUnmount(() => {
 
   <footer class="footer" :class="{ show: footerVisible }">
     <div class="footer-top">
-      <p>대구광역시 중구 명덕로 179, 2층 202-J153호</p>
+      <p>Address: 중구 명덕로 179, 2층 202-J153호</p>
       <p>
-        contact us: wyea@wyea.info
+        Contact us: wyea@wyea.info
       </p>
     </div>
     <div class="footer-middle">

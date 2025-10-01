@@ -28,7 +28,7 @@
     </main>
     <footer v-if="footerVisible" class="frfooter">
       <div class="frfooter-top">
-        <p>주소</p>
+        <p>Address: 중구 명덕로 179, 2층 202-J153호</p>
         <p>
           contact us: wyea@wyea.info
         </p>
