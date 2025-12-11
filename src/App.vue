@@ -8,7 +8,7 @@
           </RouterLink>
         </div>
         <nav class="nav">
-          <RouterLink to="/FinancialReport">재정보고</RouterLink>
+          <RouterLink class="report-menu" to="/FinancialReport">재정보고</RouterLink>
 <!--          <RouterLink to="/about">About</RouterLink>-->
 <!--          <RouterLink to="/blog">Blog</RouterLink>-->
 <!--          <RouterLink to="/guides">Guides</RouterLink>-->
@@ -29,9 +29,7 @@
     <footer v-if="footerVisible" class="frfooter">
       <div class="frfooter-top">
         <p>Address: 중구 명덕로 179, 2층 202-J153호</p>
-        <p>
-          contact us: wyea@wyea.info
-        </p>
+        <p>contact us: wyea@wyea.info · Fex: 053-289-2625</p>
       </div>
       <div class="frfooter-middle">
         <p>
@@ -88,19 +86,26 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-:global(:root){
+:global(:root) {
   --header-h: 64px;
 }
-
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-:global(html), :global(body), :global(#app) { height: 100%; margin: 0; }
-* { box-sizing: border-box; }
 
-/* ==== Glass Header ==== */
+:global(html),
+:global(body),
+:global(#app) {
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .glass-header {
   position: fixed;
   top: 12px;
@@ -118,11 +123,6 @@ onBeforeUnmount(() => {
   box-shadow: 0 10px 30px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.7);
   transition: background .25s ease, box-shadow .25s ease;
 }
-@media (min-width: 2560px) {
-  .glass-header {
-    width: min(1463px, calc(100% - 28px));
-  }
-}
 
 .glass-header.scrolled {
   background: rgba(255,255,255,.9);
@@ -137,11 +137,6 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 12px;
 }
-@media (min-width: 2560px) {
-  .inner {
-    height: 90px;  /* 세로 길이 늘리기 */
-  }
-}
 
 .brand {
   display: flex;
@@ -152,15 +147,10 @@ onBeforeUnmount(() => {
   text-decoration: none;
 }
 
-.brand img{
+.brand img {
   margin-top: 10px;
-  width: 90px;   /* 원하는 가로 크기 */
-  height: auto;   /* 세로 비율은 자동 */
-}
-@media (min-width: 2560px) {
-  .brand img {
-    width: 119px;
-  }
+  width: 90px;
+  height: auto;
 }
 
 .nav {
@@ -168,26 +158,29 @@ onBeforeUnmount(() => {
   justify-content: flex-end;
   gap: 22px;
 }
+
 .nav a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;          /* 데스크톱 폰트 */
+  font-size: 16px;   /* 데스크톱 폰트 */
   line-height: 1;
-  height: 40px;             /* 클릭 영역 높이 */
-  padding: 0 14px;          /* 좌우 여백 */
+  height: 40px;      /* 클릭 영역 높이 */
+  padding: 0 14px;
   border-radius: 12px;
-  font-weight: 700;         /* 헤더 대비 살짝 두껍게 */
+  font-weight: 700;
   color: #1f2937;
   opacity: .95;
   letter-spacing: .01em;
 }
+
 .nav a.router-link-active {
   color: #0d47a1;
   background: rgba(13,71,161,.08);
   box-shadow: inset 0 0 0 1px rgba(13,71,161,.12);
   opacity: 1;
 }
+
 .nav a:hover {
   opacity: 1;
   background: rgba(13,71,161,.06);
@@ -198,20 +191,16 @@ onBeforeUnmount(() => {
   gap: 10px;
 }
 
-/* Page content */
+/* 페이지 컨텐츠 영역 */
 .page {
   position: relative;
   z-index: 0;
   min-height: 120vh; /* 충분히 길게 */
 }
 
-/* 반응형 */
-@media (max-width: 768px) {
-  .glass-header { width: calc(100% - 16px); top: 8px; }
-  .inner { height: 52px; padding: 0 10px; }
-  .nav { display: none; } /* 모바일에선 햄버거로 교체하는 게 일반적 */
-}
-
+/* =========================
+   Footer (Financial Report)
+   ========================= */
 .frfooter {
   background: #fff;
   padding: 20px;
@@ -220,24 +209,15 @@ onBeforeUnmount(() => {
   font-size: 14px;
   line-height: 1.6;
 
-  position: static;   /* ← 기본 흐름 */
+  position: static;
   width: 100%;
-  margin-top: 100px;   /* 선택: 본문과 간격 */
-}
-@media (max-width: 1500px) {
-  .frfooter {
-    clip-path: inset(0 0 0 0 round 0 0 0 0);
-  }
+  margin-top: 100px;   /* 본문과 간격 */
 }
 
 .frfooter .frfooter-top p {
   color: #000;
   margin: 2px 0;
-  font-weight: bold; }
-@media (min-width: 2560px) {
-  .frfooter .frfooter-top p {
-    font-size: 18.62px;
-  }
+  font-weight: bold;
 }
 
 .frfooter .frfooter-middle p {
@@ -246,15 +226,10 @@ onBeforeUnmount(() => {
   color: #666;
   line-height: 1.6;
 }
-@media (min-width: 2560px) {
-  .frfooter .frfooter-middle p {
-    font-size: 16px;
-  }
-}
 
 .frfooter .frfooter-middle a {
-  color: inherit;             /* 글자색 주변 텍스트와 같게 */
-  text-decoration: none;      /* 기본 밑줄 제거 */
+  color: inherit;
+  text-decoration: none;
   position: relative;
   padding: 0 2px;
   transition: color 0.2s ease;
@@ -274,7 +249,7 @@ onBeforeUnmount(() => {
 }
 
 .frfooter .frfooter-middle a:hover {
-  color: #000;                /* hover 시 글자색 진하게 */
+  color: #000;
 }
 
 .frfooter .frfooter-middle a:hover::after {
@@ -284,21 +259,57 @@ onBeforeUnmount(() => {
 
 .frfooter .frfooter-bottom {
   margin-top: 16px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:32px;
-  user-select:none;
-  -webkit-user-drag:none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  user-select: none;
+  -webkit-user-drag: none;
 }
+
 .frfooter .frfooter-logo {
   height: 30px;
-  filter:grayscale(100%);
-  opacity:.9;
+  filter: grayscale(100%);
+  opacity: .9;
 }
+
+/* ===== QHD 이상 (2560px 이상) ===== */
 @media (min-width: 2560px) {
+  .glass-header {
+    width: min(1463px, calc(100% - 28px));
+  }
+
+  .nav .report-menu {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+  }
+
+  .inner {
+    height: 90px;  /* 세로 길이 늘리기 */
+  }
+
+  .brand img {
+    width: 119px;
+  }
+
+  .frfooter .frfooter-top p {
+    font-size: 18.62px;
+  }
+
+  .frfooter .frfooter-middle p {
+    font-size: 16px;
+  }
+
   .frfooter .frfooter-logo {
     height: 40px;
   }
 }
+
+/* ===== 모바일 (1500px 이하) ===== */
+@media (max-width: 1500px) {
+  .frfooter {
+    clip-path: inset(0 0 0 0 round 0 0 0 0);
+  }
+}
 </style>
+

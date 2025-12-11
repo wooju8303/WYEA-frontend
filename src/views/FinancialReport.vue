@@ -43,6 +43,7 @@ const spendingitems2025 = ref<Item[]>([
   { label: '봉사활동 장비', amount: 29_530, color: '#6EE7B7' },
   { label: '운영비', amount: 83_228, color: '#065F46' },
   { label: '비상주 사무실 계약', amount: 396_000, color: '#15803D' },
+  { label: '행사참가비', amount: 332_397, color: '#34D399' },
 ])
 
 const spendingitems2026 = ref<Item[]>([
