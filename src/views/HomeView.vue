@@ -226,7 +226,7 @@ onBeforeUnmount(() => {
       <img src="@/assets/image/wyea-logo.png" width="300" alt="wyea-logo">
       <h3>World Youth<br>Exchange Association</h3>
       <p>세계 청년 교류회</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSddVMd4CovJdhX6IbOXtXcjhXRsrSNJkXXqRtY3RuvOF-HrWA/viewform?pli=1" target="_blank" rel="noopener noreferrer">
+      <a href="https://docs.google.com/forms/d/1hiR6G3eOuM7Ytx6ksI5VIW_4rrTz9FG2ee5IPoU6OgQ/edit" target="_blank" rel="noopener noreferrer">
         <button>가입하러 가기</button>
       </a>
     </div>
