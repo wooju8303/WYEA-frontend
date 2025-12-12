@@ -29,7 +29,7 @@
     <footer v-if="footerVisible" class="frfooter">
       <div class="frfooter-top">
         <p>Address: 중구 명덕로 179, 2층 202-J153호</p>
-        <p>contact us: wyea@wyea.info · Fex: 053-289-2625</p>
+        <p>contact us: wyea@wyea.info · Fax: 053-289-2625</p>
       </div>
       <div class="frfooter-middle">
         <p>
