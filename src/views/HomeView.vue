@@ -362,7 +362,7 @@ onBeforeUnmount(() => {
     <div class="footer-top">
       <p>Address: 중구 명덕로 179, 2층 202-J153호</p>
       <p>
-        Contact us: wyea@wyea.info · Fex: 053-289-2625
+        Contact us: wyea@wyea.info · Fax: 053-289-2625
       </p>
     </div>
     <div class="footer-middle">

@@ -98,11 +98,7 @@ const photos = [
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
-    <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 0 0 .06 .08 .1 .12 .14'/></feComponentTransfer></filter>\
-    <rect width='120' height='120' filter='url(%23n)'/>\
-  </svg>");
+  background-image: url('@/assets/noise.svg');
   opacity: .4;
   mix-blend-mode: soft-light;
 }
