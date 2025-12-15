@@ -56,23 +56,10 @@ const routerInstance = createRouter({
       component: () => import('../views/PostView.vue'),
     },
   ],
-  scrollBehavior(to, from, savedPosition) {
-    // 뒤로/앞으로 버튼 사용 시 이전 위치 복원
-    if (savedPosition) {
-      return savedPosition
-    }
-    // 비동기 컴포넌트 로딩 대기 후 맨 위로 스크롤
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ top: 0, behavior: 'instant' })
-      }, 50)
-    })
+  scrollBehavior() {
+    // 항상 맨 위로 스크롤
+    return { top: 0 }
   }
-})
-
-// 추가 안전장치: 라우트 변경 완료 후 스크롤을 맨 위로
-routerInstance.afterEach(() => {
-  window.scrollTo({ top: 0, behavior: 'instant' })
 })
 
 routerInstance.beforeEach((to, from, next) => {
