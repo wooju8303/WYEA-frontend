@@ -169,7 +169,7 @@ const centerSub2 = computed(() => {
           <tbody>
           <tr v-for="i in withPct" :key="i.label">
             <th scope="row">
-              <span class="dot" :style="{ background: i.color ?? '#999' }" aria-hidden="true" />
+              <span class="dot" :style="{ background: i.color ?? '#999' }" aria-hidden="true" ></span>
               {{ i.label }}
             </th>
             <td class="num">{{ fmtKRW(i.amount) }}</td>
@@ -195,18 +195,16 @@ const centerSub2 = computed(() => {
           <circle cx="150" cy="150" r="75" fill="#fff" />
 
           <!-- 세그먼트 -->
-          <g>
-            <template v-for="(seg, idx) in segments" :key="seg.item.label">
-              <path
-                :d="arcPath(150,150,110, seg.start, seg.end)"
-                :stroke="seg.item.color ?? '#999'"
-                :stroke-width="hoverIdx === idx ? 40 : 30"
-                fill="none"
-                class="seg"
-                @mouseenter="hoverIdx = idx"
-                @mouseleave="hoverIdx = null"
-              />
-            </template>
+          <g v-for="(seg, idx) in segments" :key="seg.item.label">
+            <path
+              :d="arcPath(150,150,110, seg.start, seg.end)"
+              :stroke="seg.item.color ?? '#999'"
+              :stroke-width="hoverIdx === idx ? 40 : 30"
+              fill="none"
+              class="seg"
+              @mouseenter="hoverIdx = idx"
+              @mouseleave="hoverIdx = null"
+            />
           </g>
 
           <!-- 중앙 라벨 -->
@@ -294,18 +292,16 @@ const centerSub2 = computed(() => {
           <circle cx="150" cy="150" r="75" fill="#fff" />
 
           <!-- 세그먼트 -->
-          <g>
-            <template v-for="(seg, idx) in segments2" :key="`${seg.item.label}-${idx}`">
-              <path
-                :d="arcPath(150,150,110, seg.start, seg.end)"
-                :stroke="seg.item.color ?? '#999'"
-                :stroke-width="hoverIdx2 === idx ? 40 : 30"
-                fill="none"
-                class="seg"
-                @mouseenter="hoverIdx2 = idx"
-                @mouseleave="hoverIdx2 = null"
-              />
-            </template>
+          <g v-for="(seg, idx) in segments2" :key="`${seg.item.label}-${idx}`">
+            <path
+              :d="arcPath(150,150,110, seg.start, seg.end)"
+              :stroke="seg.item.color ?? '#999'"
+              :stroke-width="hoverIdx2 === idx ? 40 : 30"
+              fill="none"
+              class="seg"
+              @mouseenter="hoverIdx2 = idx"
+              @mouseleave="hoverIdx2 = null"
+            />
           </g>
 
           <!-- 중앙 라벨 -->
